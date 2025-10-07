@@ -1,0 +1,12 @@
+{
+  "name": "synapse-netlify",
+  "private": true,
+  "scripts": {
+    "build:noop": "echo \"No build step required\""
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "firebase-admin": "^12.5.0",
+    "node-fetch": "^2.7.0"
+  }
+}
