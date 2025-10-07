@@ -1,8 +1,3 @@
-# from repo root
-git rm --cached netlify.toml 2>/dev/null || true
-rm -f netlify.toml
-
-cat > netlify.toml <<'TOML'
 [build]
   publish = "."
   functions = "netlify/functions"
@@ -19,8 +14,3 @@ cat > netlify.toml <<'TOML'
   from = "/*"
   to = "/index.html"
   status = 200
-TOML
-
-git add netlify.toml
-git commit -m "Fix: replace netlify.toml with minimal valid config"
-git push
