@@ -1,0 +1,21 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+  command = "npm run build:noop"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["firebase-admin", "@google/generative-ai", "node-fetch"]
+  included_files = []
+  timeout = 25
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Keep 'unsafe-eval' because we use in-browser Babel. If you remove Babel, you can drop it.
+    Content-Security-Policy = "default-src 'self' https: data: blob:; connect-src 'self' https: data: blob:; script-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data: blob:; style-src 'self' https: 'unsafe-inline'; worker-src 'self' blob:"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
