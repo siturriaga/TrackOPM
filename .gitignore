@@ -1,0 +1,9 @@
+# Node/Netlify
+node_modules
+.netlify
+.DS_Store
+
+# Never commit secrets
+*.env
+.env.*
+service-account.json
