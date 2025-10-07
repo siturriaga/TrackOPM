@@ -1,16 +1,14 @@
-[build]
-  publish = "."
-  functions = "netlify/functions"
-  command = "npm run build:noop"
-
-[build.environment]
-  NODE_VERSION = "20"
-
-[functions]
-  node_bundler = "esbuild"
-  timeout = 25
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+{
+  "name": "synapse-netlify",
+  "private": true,
+  "scripts": {
+    "build:noop": "echo 'No build step required'"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "firebase-admin": "^12.5.0"
+  },
+  "engines": {
+    "node": ">=20 <21"
+  }
+}
