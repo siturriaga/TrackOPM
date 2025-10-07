@@ -20,9 +20,9 @@ const MODEL_WHITELIST = new Set([
   'gemini-1.5-pro-latest'
 ]);
 
-function enforceCaps({systemPrompt='', userPrompt=''}) {
-  const MAX_CHARS = 20000; // ~20K chars cap
-  if (systemPrompt.length > MAX_CHARS || userPrompt.length > MAX_CHARS) {
+function enforceCaps({systemPrompt = '', userPrompt = ''}) {
+  const MAX = 20000;
+  if (systemPrompt.length > MAX || userPrompt.length > MAX) {
     throw new Error('Prompt too large');
   }
 }
@@ -50,13 +50,16 @@ exports.handler = async (event) => {
     const decoded = await getAuth().verifyIdToken(idToken);
     checkEmailDomain(decoded);
 
-    const { model, systemPrompt, userPrompt, responseSchema } = JSON.parse(event.body || '{}');
+    let body = {};
+    try { body = JSON.parse(event.body || '{}'); } catch {}
+    const { model, systemPrompt = '', userPrompt = '', responseSchema } = body;
+
     if (!model || !userPrompt) return { statusCode: 400, body: 'model and userPrompt are required' };
     if (!MODEL_WHITELIST.has(model)) return { statusCode: 400, body: 'Model not allowed' };
 
-    enforceCaps({systemPrompt, userPrompt});
+    enforceCaps({ systemPrompt, userPrompt });
 
-    const apiKey = process.env.GOOGLE_API_KEY;
+    const apiKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
     if (!apiKey) return { statusCode: 500, body: 'Server missing GOOGLE_API_KEY' };
 
     const genAI = new GoogleGenerativeAI(apiKey);
@@ -67,13 +70,10 @@ exports.handler = async (event) => {
       responseSchema
     } : {};
 
-    const prompt = [
-      (systemPrompt || '').trim(),
-      (userPrompt || '').trim()
-    ].filter(Boolean).join('\n\n');
+    const prompt = [systemPrompt.trim(), userPrompt.trim()].filter(Boolean).join('\n\n');
 
     const result = await gModel.generateContent({
-      contents:[{ role:'user', parts:[{ text: prompt }]}],
+      contents: [{ role: 'user', parts: [{ text: prompt }]}],
       generationConfig
     });
 
