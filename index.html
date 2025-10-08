@@ -3,47 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Synapse — bridging the gap in education</title>
+  <title>Synapse Co-Pilot — Bridging the Gap in Education</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com" defer crossorigin="anonymous"></script>
 
-  <!-- Tailwind (load early; include safelist for arbitrary vars) -->
-  <script>
-    window.tailwind = {
-      safelist: [
-        'bg-[var(--brand-bg)]','text-[var(--brand-ink)]',
-        'bg-[var(--brand-blue)]','bg-[var(--brand-gold)]',
-        'border-[var(--brand-blue)]','from-[var(--brand-blue)]','to-[var(--brand-gold)]'
-      ]
-    };
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React 18 + ReactDOM UMD + Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" defer crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" defer crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js" defer crossorigin></script>
 
-  <!-- React 18 + ReactDOM + Babel -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
+  <!-- SheetJS (XLSX) -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer crossorigin="anonymous"></script>
 
-  <!-- SheetJS, PDF.js, Mammoth, Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.7.1/mammoth.browser.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+  <!-- PDF.js (text extraction) -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js" defer crossorigin="anonymous"></script>
+
+  <!-- Mammoth (DOCX to text) -->
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.7.1/mammoth.browser.min.js" defer crossorigin="anonymous"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer crossorigin="anonymous"></script>
 
   <!-- Firebase compat SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js" crossorigin="anonymous"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js" crossorigin="anonymous"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js" crossorigin="anonymous"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js" defer crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js" defer crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js" defer crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js" defer crossorigin="anonymous"></script>
 
   <!-- SEO & Icons -->
-  <meta name="description" content="Synapse Co-Pilot: plan faster, differentiate smarter, and track growth—without the busywork." />
+  <meta name="description" content="Synapse Co-Pilot: standards-aware AI for teachers — generate lessons, form differentiated groups, and track progress securely." />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon.ico">
+  <link rel="icon" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-  <meta property="og:title" content="Synapse — bridging the gap in education">
-  <meta property="og:description" content="Generate standards-aware lessons, form DI groups, and track progress—securely.">
+  <meta name="theme-color" content="#1e40af">
+  <meta property="og:title" content="Synapse Co-Pilot — Bridging the Gap in Education">
+  <meta property="og:description" content="Standards-aware AI teaching tools: generate lessons, form DI groups, track progress — securely.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://synapsecopilot.com/">
   <meta property="og:image" content="https://synapsecopilot.com/og-image.png">
@@ -53,32 +50,30 @@
       --brand-blue:#1e40af;      /* Indigo-800 */
       --brand-blue-600:#2563eb;  /* Blue-600  */
       --brand-gold:#d4af37;      /* Gold      */
-      --brand-ink:#0b1020;       /* deep slate */
-      --brand-bg:#f7f8fc;        /* subtle paper */
-      --card:#ffffff;
+      --brand-ink:#0f172a;       /* Slate-900 */
+      --brand-bg:#0b1220;        /* Deep bg   */
+      --card:#0f172a;            /* Card bg   */
+      --muted:#94a3b8;          /* Slate-400 */
     }
-    html,body{height:100%}
-    body{
-      background: radial-gradient(1200px 800px at 80% -10%, rgba(30,64,175,.08), transparent 60%),
-                  radial-gradient(900px 600px at -10% 20%, rgba(212,175,55,.06), transparent 60%),
-                  var(--brand-bg);
-      color: var(--brand-ink);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    }
-    .font-display{ font-family: Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial }
     @media print{ .no-print{display:none!important} .printable{box-shadow:none!important; background:#fff!important} body{background:#fff!important} }
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }
     .prose{ white-space: pre-wrap }
-    .card{ background: rgba(255,255,255,.8); backdrop-filter: blur(8px); }
+    /* Nice gradient header backdrop */
+    .hero-bg{
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(37,99,235,.25), transparent 60%),
+        radial-gradient(1000px 500px at 10% -20%, rgba(212,175,55,.18), transparent 55%),
+        linear-gradient(180deg, #0b1220 0%, #0c1424 100%);
+    }
   </style>
 </head>
-<body>
+<body class="bg-[var(--brand-bg)] text-white antialiased">
   <div id="root"></div>
 
   <script type="text/babel" data-presets="env,react">
-/* =========================================================
- * DIAGNOSTICS
- * =======================================================*/
+/* =========================================================================
+ *  DIAGNOSTICS
+ * ========================================================================= */
 window.addEventListener('error', e => console.error('[window.onerror]', e.message, e.filename, e.lineno, e.colno, e.error));
 window.addEventListener('unhandledrejection', e => console.error('[unhandledrejection]', e.reason));
 const REQUIRED = ['React','ReactDOM','XLSX','firebase','Chart','pdfjsLib','mammoth'];
@@ -86,16 +81,16 @@ function ready(){ return REQUIRED.every(k => window[k]); }
 function waitForLibs(i=40){ if(ready()) return boot(); if(i<=0) return diag(); setTimeout(()=>waitForLibs(i-1),150); }
 function diag(){
   document.getElementById('root').innerHTML = `
-  <div class="max-w-xl mx-auto my-12 bg-white border rounded-xl p-6">
+  <div class="max-w-xl mx-auto my-12 bg-white/5 border border-white/10 rounded-xl p-6">
     <h2 class="text-lg font-semibold mb-2">Could not load required scripts</h2>
-    <p class="text-sm text-slate-600">Check network and reload. (Tailwind/React/Babel/CDNs)</p>
+    <p class="text-sm text-slate-300">Check network and reload.</p>
   </div>`;
 }
 
-/* =========================================================
- * CONFIG
- * =======================================================*/
-// Firebase client config — okay to expose.
+/* =========================================================================
+ *  CONFIG
+ * ========================================================================= */
+// Firebase client config (public)
 const FB_CONFIG = {
   apiKey: "AIzaSyBT95w8fzJr9J5WCYe8iwFkvSrwXds5sms",
   authDomain: "trackopmn.firebaseapp.com",
@@ -110,29 +105,27 @@ const FB_CONFIG = {
 const GEMINI_PROXY_URL = "/.netlify/functions/synapseGemini";
 const SEARCH_PROXY_URL = "/.netlify/functions/searchStandard";
 
-// Single fixed model (server-side enforces too)
+// Single fixed model name (sent server-side; no dropdown in UI)
 const GEMINI_MODEL = 'gemini-2.5-flash-preview-05-20';
 
-/* =========================================================
- * HELPERS
- * =======================================================*/
-function debounce(fn, ms=600){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; }
+/* =========================================================================
+ *  HELPERS
+ * ========================================================================= */
 const ls = { get(k,f){ try{ return JSON.parse(localStorage.getItem(k)) ?? f }catch{ return f } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch{} } };
 function coerceNum(v){ if(v==null||v==="") return 0; const n=Number(v); return Number.isFinite(n)? n:0; }
 function perfBand(s){ if(s>=80) return 'high'; if(s>=60) return 'mid'; return 'low'; }
-const PERF = { high:'bg-emerald-100 text-emerald-700', mid:'bg-amber-100 text-amber-700', low:'bg-rose-100 text-rose-700' };
-function withTimeout(p,ms=22000){ return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('Timed out')),ms))]); }
-function safePick(obj, shape){ const out={}; for(const [k,t] of Object.entries(shape)){ const v=obj?.[k]; if(t==='string') out[k]=typeof v==='string'?v:''; else if(Array.isArray(t)) out[k]=Array.isArray(v)?v:[]; else if(typeof t==='object') out[k]=typeof v==='object'&&v? safePick(v,t): safePick({},t); } return out; }
+const PERF = { high:'bg-emerald-500/15 text-emerald-300', mid:'bg-amber-500/15 text-amber-300', low:'bg-rose-500/15 text-rose-300' };
+function withTimeout(p,ms=25000){ return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('Timed out')),ms))]); }
+function safePick(obj, shape){ const out = {}; for(const [k,t] of Object.entries(shape)){ const v=obj?.[k]; if(t==='string') out[k]=typeof v==='string'?v:''; else if(Array.isArray(t)) out[k]=Array.isArray(v)?v:[]; else if(typeof t==='object') out[k]=typeof v==='object'&&v? safePick(v,t): safePick({},t); } return out; }
+function debounce(fn, ms){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), ms); }; }
 
-/* =========================================================
- * BOOT
- * =======================================================*/
+/* =========================================================================
+ *  BOOT
+ * ========================================================================= */
 function boot(){
   const {useEffect,useMemo,useRef,useState} = React;
-
-  // Firebase init
   try{ firebase.apps.length? firebase.app(): firebase.initializeApp(FB_CONFIG); }catch(e){ console.warn('Firebase init:', e.message); }
-  const auth = firebase.auth(); const db = firebase.firestore(); const storage = firebase.storage();
+  const auth = firebase.auth(); const db = firebase.firestore();
 
   // Server callers (require Firebase ID token)
   async function callGemini({systemPrompt,userPrompt,responseSchema}){
@@ -147,20 +140,20 @@ function boot(){
     if(!res.ok) throw new Error(text||`Gemini proxy ${res.status}`);
     return JSON.parse(text);
   }
-  async function callSearch({q,subject}){
+  async function callSearch({q,subject,grade}){
     if(!auth.currentUser) throw new Error('Not signed in');
     const idToken = await auth.currentUser.getIdToken();
     const res = await fetch(SEARCH_PROXY_URL, {
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':`Bearer ${idToken}`},
-      body: JSON.stringify({q,subject})
+      body: JSON.stringify({q,subject,grade})
     });
     const text = await res.text();
     if(!res.ok) throw new Error(text||`Search proxy ${res.status}`);
     return JSON.parse(text);
   }
 
-  /* ---------------- Site Shell ---------------- */
+  /* ---------------- Site Shell (Option A) ---------------- */
   function SiteShell({children,active,setActive,savingState}){
     const tabs = [
       {key:'home',label:'Home'},
@@ -169,36 +162,37 @@ function boot(){
     ];
     return (
       <div className="min-h-screen">
-        <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur">
-          <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
-            <img src="/logo.svg" alt="Synapse" className="w-9 h-9 drop-shadow-sm" />
-            <div className="mr-auto">
-              <h1 className="font-display text-xl font-semibold tracking-tight">Synapse</h1>
-              <div className="text-[12px] text-slate-500 -mt-0.5">bridging the gap in education</div>
+        <header className="hero-bg border-b border-white/10 sticky top-0 z-40">
+          <div className="max-w-7xl mx-auto px-4 pt-6 pb-8">
+            <div className="flex items-center gap-4">
+              <img src="/favicon.svg" alt="Synapse" className="w-10 h-10 drop-shadow-lg" />
+              <div className="mr-auto">
+                <h1 className="text-2xl font-semibold tracking-tight">Synapse Co-Pilot</h1>
+                <p className="text-sm text-[var(--muted)]">Bridging the gap in education</p>
+              </div>
+              {/* Subtle autosave indicator */}
+              <div className="no-print text-xs">
+                {savingState==='saving' && <span className="text-amber-200 bg-amber-500/15 px-2 py-1 rounded">Saving…</span>}
+                {savingState==='saved'  && <span className="text-emerald-200 bg-emerald-500/15 px-2 py-1 rounded">All changes saved</span>}
+              </div>
             </div>
-            {/* Global autosave indicator */}
-            <div className="no-print text-xs">
-              {savingState==='saving' && <span className="text-amber-700 bg-amber-100 px-2 py-1 rounded">Saving…</span>}
-              {savingState==='saved'  && <span className="text-emerald-700 bg-emerald-100 px-2 py-1 rounded">All changes saved</span>}
-            </div>
+
+            <nav className="mt-6 flex gap-2">
+              {tabs.map(t=>(
+                <button key={t.key}
+                  onClick={()=>setActive(t.key)}
+                  className={`px-3 py-1.5 rounded border text-sm transition
+                    ${active===t.key
+                      ? 'bg-white/10 text-white border-white/20 shadow'
+                      : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10 hover:text-white'}`}>
+                  {t.label}
+                </button>
+              ))}
+            </nav>
           </div>
-          <nav className="max-w-7xl mx-auto px-4 pb-3 flex gap-2">
-            {tabs.map(t=>(
-              <button key={t.key}
-                onClick={()=>setActive(t.key)}
-                className={`px-3 py-1.5 rounded-lg text-sm transition
-                  ${active===t.key
-                    ? 'bg-[var(--brand-blue)] text-white shadow'
-                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'}`}>
-                {t.label}
-              </button>
-            ))}
-          </nav>
         </header>
-
         <main className="max-w-7xl mx-auto px-4 py-8">{children}</main>
-
-        <footer className="text-center text-xs text-slate-500 py-10">
+        <footer className="text-center text-xs text-slate-400 py-10">
           © <span id="y">{new Date().getFullYear()}</span> Synapse Co-Pilot
         </footer>
       </div>
@@ -283,43 +277,43 @@ function boot(){
 
     return (
       <div className="space-y-6">
-        <div className="card border rounded-xl p-6 shadow-sm no-print">
+        <div className="bg-[var(--card)] border border-white/10 rounded-xl p-6 no-print">
           <h2 className="text-lg font-semibold mb-2">Upload Roster</h2>
-          <p className="text-sm text-slate-600 mb-3">CSV/XLSX/PDF/DOCX supported. Missing values default to “N/A” or 0.</p>
-          <input type="file" accept=".xlsx,.xls,.ods,.csv,.tsv,.pdf,.docx" onChange={onUpload} />
-          {missingPeriod && <p className="text-xs mt-2 text-amber-700 bg-amber-100 border border-amber-200 rounded px-2 py-1 inline-block">No Period column found — set per row, or use “Apply to all”.</p>}
+          <p className="text-sm text-slate-300 mb-3">CSV/XLSX/PDF/DOCX supported. Missing values default to “N/A” or 0.</p>
+          <input type="file" accept=".xlsx,.xls,.ods,.csv,.tsv,.pdf,.docx" onChange={onUpload} className="text-sm" />
+          {missingPeriod && <p className="text-xs mt-2 text-amber-200 bg-amber-500/15 border border-amber-500/30 rounded px-2 py-1 inline-block">No Period column found — set per row, or use “Apply to all”.</p>}
         </div>
 
-        <div className="card border rounded-xl p-6 shadow-sm printable">
+        <div className="bg-[var(--card)] border border-white/10 rounded-xl p-6 printable">
           <div className="flex items-center gap-3 mb-3">
             <h3 className="text-base font-semibold mr-auto">Processed Roster</h3>
             {!!roster.length && (
               <div className="no-print flex items-center gap-2">
-                <span className="text-sm">Apply to all:</span>
-                <select className="border rounded px-2 py-1 text-sm" defaultValue="" onChange={e=>applyAll(e.target.value)}>
+                <span className="text-sm text-slate-300">Apply to all:</span>
+                <select className="border border-white/10 bg-white/5 text-white rounded px-2 py-1 text-sm" defaultValue="" onChange={e=>applyAll(e.target.value)}>
                   <option value="" disabled>Choose…</option>
-                  {suggestions.map(p=><option key={p}>{p}</option>)}
+                  {suggestions.map(p=><option key={p} value={p} className="bg-[var(--card)]">{p}</option>)}
                 </select>
-                <button className="px-3 py-2 bg-slate-200 rounded" onClick={()=>window.print()}>Print</button>
+                <button className="px-3 py-2 bg-white/10 hover:bg-white/15 border border-white/10 rounded" onClick={()=>window.print()}>Print Roster</button>
               </div>
             )}
           </div>
-          {!roster.length? <p className="text-sm text-slate-500">No roster yet.</p>:
+          {!roster.length? <p className="text-sm text-slate-400">No roster yet.</p>:
             <div className="overflow-auto">
               <table className="min-w-full text-sm">
-                <thead><tr className="bg-slate-100 text-left">
+                <thead><tr className="bg-white/5 text-left">
                   <th className="p-2">Name</th><th className="p-2">ID</th><th className="p-2">Period</th>
                   {Object.keys(roster[0]?.scores||{}).map(h=><th key={h} className="p-2">{h}</th>)}
                 </tr></thead>
                 <tbody>
                   {roster.map((s,i)=>(
-                    <tr key={i} className="odd:bg-white even:bg-slate-50">
+                    <tr key={i} className="odd:bg-white/0 even:bg-white/5">
                       <td className="p-2">{s.name}</td>
                       <td className="p-2">{s.id}</td>
                       <td className="p-2">
-                        <select className="border rounded px-2 py-1" value={s.period||''} onChange={e=>setRowPeriod(i,e.target.value)}>
+                        <select className="border border-white/10 bg-white/5 text-white rounded px-2 py-1" value={s.period||''} onChange={e=>setRowPeriod(i,e.target.value)}>
                           <option value="">—</option>
-                          {suggestions.map(p=><option key={p}>{p}</option>)}
+                          {suggestions.map(p=><option key={p} value={p} className="bg-[var(--card)]">{p}</option>)}
                         </select>
                       </td>
                       {Object.entries(s.scores).map(([k,v])=> <td key={k} className="p-2">{Number.isFinite(v)?v:0}</td>)}
@@ -350,18 +344,18 @@ function boot(){
           class_summary:{type:'string'},
           groups:{type:'array',items:{type:'object',properties:{
             name:{type:'string'}, criteria:{type:'string'}, members:{type:'array'}, strategy:{type:'string'}
-          },required:['name','criteria','members','strategy']}}
+          },required:['name','criteria','members','strategy']} }
         },required:['class_summary','groups']
       };
-      const systemPrompt = `You are an expert instructional coach. Use official FL standards clarifications as context. Output strict JSON.`;
-      const userPrompt = `Subject: ${subject}. Standard: ${standard}.
+      const systemPrompt = `You are an expert instructional coach. Use official state standards clarifications as context (e.g., CPALMS/FLDOE where relevant). Output strict JSON only.`;
+      const userPrompt = `Subject: ${subject||''}. Standard: ${standard||''}.
 Class data (JSON): ${JSON.stringify(classData)}
 Return JSON: {"class_summary": string, "groups":[{"name","criteria","members","strategy"}]}`;
       try{
-        const json = await withTimeout(callGemini({systemPrompt,userPrompt,responseSchema}), 22000);
+        const json = await withTimeout(callGemini({systemPrompt,userPrompt,responseSchema}), 25000);
         setCards(json);
       }catch(e){
-        console.warn('AI failed, fallback:', e.message);
+        console.warn('AI failed, falling back:', e.message);
         const s=[...classData].sort((a,b)=>(a.score??0)-(b.score??0));
         const n=s.length, t=Math.ceil(n/3);
         setCards({
@@ -377,27 +371,27 @@ Return JSON: {"class_summary": string, "groups":[{"name","criteria","members","s
 
     return (
       <div className="space-y-4">
-        <div className="card border rounded-xl p-4 flex flex-wrap gap-3 items-end shadow-sm no-print">
-          <div><label className="text-sm">Class Period</label>
-            <select className="mt-1 border rounded px-3 py-2" value={period} onChange={e=>setPeriod(e.target.value)}>{periods.map(p=><option key={p}>{p}</option>)}</select>
+        <div className="bg-[var(--card)] border border-white/10 rounded-xl p-4 flex flex-wrap gap-3 items-end no-print">
+          <div><label className="text-sm text-slate-300">Class Period</label>
+            <select className="mt-1 border border-white/10 bg-white/5 text-white rounded px-3 py-2" value={period} onChange={e=>setPeriod(e.target.value)}>{periods.map(p=><option key={p} value={p} className="bg-[var(--card)]">{p}</option>)}</select>
           </div>
-          <div><label className="text-sm">Standard</label>
-            <select className="mt-1 border rounded px-3 py-2" value={standard} onChange={e=>setStandard(e.target.value)}>{standards.map(s=><option key={s}>{s}</option>)}</select>
+          <div><label className="text-sm text-slate-300">Standard</label>
+            <select className="mt-1 border border-white/10 bg-white/5 text-white rounded px-3 py-2" value={standard} onChange={e=>setStandard(e.target.value)}>{standards.map(s=><option key={s} value={s} className="bg-[var(--card)]">{s}</option>)}</select>
           </div>
-          <button onClick={analyze} className="ml-auto px-4 py-2 rounded bg-[var(--brand-blue)] text-white shadow">Analyze & Create Groups</button>
-          <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-slate-200">Print</button>
+          <button onClick={analyze} className="ml-auto px-4 py-2 rounded bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-600)] transition text-white">Analyze & Create Groups</button>
+          <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-white/10 hover:bg-white/15 border border-white/10">Print</button>
         </div>
-        {loading && <p className="text-sm text-slate-600">Analyzing…</p>}
+        {loading && <p className="text-sm text-slate-300">Analyzing…</p>}
         {cards && (
           <div className="grid md:grid-cols-3 gap-4 printable">
-            <div className="md:col-span-3 card border rounded-xl p-4 shadow-sm">
+            <div className="md:col-span-3 bg-[var(--card)] border border-white/10 rounded-xl p-4">
               <h3 className="font-semibold mb-2">Class Analysis</h3>
-              <p className="text-sm whitespace-pre-wrap">{cards.class_summary}</p>
+              <p className="text-sm whitespace-pre-wrap text-slate-200">{cards.class_summary}</p>
             </div>
             {cards.groups?.map((g,i)=>(
-              <div key={i} className="card border rounded-xl p-4 shadow-sm">
+              <div key={i} className="bg-[var(--card)] border border-white/10 rounded-xl p-4">
                 <h4 className="font-semibold">{g.name}</h4>
-                <p className="text-xs text-slate-500 mb-2">Criteria: {g.criteria}</p>
+                <p className="text-xs text-slate-400 mb-2">Criteria: {g.criteria}</p>
                 <h5 className="text-sm font-medium">Members</h5>
                 <ul className="list-disc pl-5 text-sm mb-2">{g.members?.map((m,j)=><li key={j}>{m}</li>)}</ul>
                 <p className="text-sm"><span className="font-medium">Strategy:</span> {g.strategy}</p>
@@ -416,49 +410,44 @@ Return JSON: {"class_summary": string, "groups":[{"name","criteria","members","s
     const [difficulty,setDifficulty]=React.useState('On-Level');
     const [studentId,setStudentId]=React.useState('');
     const [modal,setModal]=React.useState(null);
-    const [fetching,setFetching]=React.useState(false);
+    const [stdStatus,setStdStatus]=React.useState('idle'); // idle|fetching|ready|error
     const selectedStudent = React.useMemo(()=> roster.find(s=>s.id===studentId), [studentId,roster]);
 
-    // NEW: auto-populate standards when Subject or Grade changes
-    const autoPopulate = React.useRef(debounce(async (subj, grd)=>{
-      if(!subj || !grd) return;
+    // Auto-populate standards whenever subject OR grade changes (debounced)
+    const doFetchStandards = React.useMemo(()=> debounce(async (subj,gr)=>{
+      if(!subj || !gr) return;
+      setStdStatus('fetching');
       try{
-        setFetching(true);
-        const query = `${subj} ${grd} Florida standards list`;
-        const res = await withTimeout(callSearch({ q: query, subject: `${subj} ${grd}` }), 20000);
-        const out = Array.isArray(res?.standards)? res.standards: [];
-        if(out.length){
-          setStandards(out);
-          setSelectedStandard(out[0]);
-        }else{
-          // fallback: keep previous standards if any
-          if(!standards.length) setStandards([]);
-        }
+        const q = `${subj} ${gr} standards list`;
+        const res = await withTimeout(callSearch({ q, subject: subj, grade: gr }), 15000);
+        const arr = Array.isArray(res?.codes)? res.codes: [];
+        if(arr.length){ setStandards(arr); setSelectedStandard(arr[0]); setStdStatus('ready'); }
+        else { setStandards([]); setSelectedStandard(''); setStdStatus('error'); }
       }catch(e){
         console.warn('Standards fetch failed:', e.message);
-      }finally{
-        setFetching(false);
+        setStdStatus('error');
       }
-    }, 800)).current;
+    }, 600), []);
 
-    React.useEffect(()=>{ autoPopulate(subject, grade); }, [subject, grade]);
+    React.useEffect(()=>{ doFetchStandards(subject, grade); }, [subject, grade]);
 
     async function run(kind){
       const standard = selectedStandard || standards[0] || 'Standard';
       const schema = { type:'object',properties:{title:{type:'string'},text:{type:'string'}},required:['title','text'] };
       const systemPrompt = `You are an expert curriculum designer. Use official clarifications/objectives/content focus when generating. Output strict JSON.`;
-      const base = (task)=>`Subject: ${subject}. Grade: ${grade}. Standard: ${standard}. Task: ${task}.
+      const base = (task)=>`Subject: ${subject||''}. Grade: ${grade||''}. Standard: ${standard||''}. Task: ${task}.
 Return JSON: {"title","text"}.`;
       let userPrompt='';
       if(kind==='explain') userPrompt = base('Explain the standard plainly with bullet points for key ideas.');
       if(kind==='lesson')  userPrompt = base('Design a 15-minute mini-lesson with objective, materials, sequence, and checks.');
       if(kind==='assign')  userPrompt = base(`Create a printable ${atype} at ${difficulty} difficulty with numbered items.`);
+
       try{
-        const ai = await withTimeout(callGemini({systemPrompt,userPrompt,responseSchema:schema}), 22000);
+        const ai = await withTimeout(callGemini({systemPrompt,userPrompt,responseSchema:schema}), 25000);
         const clean = safePick(ai,{title:'string',text:'string'});
         setModal({heading: clean.title||'Result', content: clean.text||''});
       }catch(e){
-        console.warn('AI failed, template fallback:', e.message);
+        console.warn('AI failed, showing template:', e.message);
         const templ = kind==='explain'? {title:`Overview of ${standard}`, text:`• Key ideas\n• What students should do\n• Common misconceptions`}
                    : kind==='lesson'?  {title:`15-minute Mini-lesson — ${standard}`, text:`Objective: show understanding of ${standard}\n1) Hook (2m)\n2) Model (5m)\n3) Guided practice (5m)\n4) Exit Ticket (3m)`}
                    : {title:`${standard} — ${atype} (${difficulty})`, text:`Directions: Complete all items.\n1) …\n2) …\n3) …`};
@@ -468,78 +457,77 @@ Return JSON: {"title","text"}.`;
 
     function saveScore(){
       const standard = selectedStandard || standards[0]; if(!standard) return alert('Pick a standard to store the score under.');
-      const selectedStudent = roster.find(s=>s.id===studentId); if(!selectedStudent) return alert('Select a student first.');
+      const student = selectedStudent; if(!student) return alert('Select a student first.');
       const val = Number(document.getElementById('score-input').value);
       if(!Number.isFinite(val) || val<0 || val>100) return alert('Enter a score 0–100');
-      const next = roster.map(s=> s.id===selectedStudent.id? {...s, scores:{...s.scores,[standard]:val}}: s);
+      const next = roster.map(s=> s.id===student.id? {...s, scores:{...s.scores,[standard]:val}}: s);
       setRoster(next);
     }
 
     return (
       <div className="space-y-4">
-        <div className="card border rounded-xl p-4 flex flex-wrap gap-3 items-end shadow-sm no-print">
-          <div className="flex-1 min-w-[18rem]">
-            <label className="block text-sm font-medium">Standards</label>
-            <div className="flex items-center gap-2">
-              <select className="mt-1 border rounded px-3 py-2 w-full" value={selectedStandard} onChange={e=>setSelectedStandard(e.target.value)}>
-                <option value="">{fetching? 'Fetching standards…' : (standards.length? '—' : 'No standards yet')}</option>
-                {standards.map(s=><option key={s}>{s}</option>)}
+        <div className="bg-[var(--card)] border border-white/10 rounded-xl p-4 flex flex-wrap gap-3 items-end no-print">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-slate-300">Standards</label>
+            <div className="flex gap-2">
+              <select className="mt-1 border border-white/10 bg-white/5 text-white rounded px-3 py-2 min-w-[18rem]" value={selectedStandard} onChange={e=>setSelectedStandard(e.target.value)}>
+                <option value="">{stdStatus==='fetching'?'Fetching standards…':'—'}</option>
+                {standards.map(s=><option key={s} value={s} className="bg-[var(--card)]">{s}</option>)}
               </select>
+              {stdStatus==='fetching' && <span className="text-xs text-slate-300 px-2 py-1 rounded bg-white/5 border border-white/10">Fetching…</span>}
+              {stdStatus==='error' && <span className="text-xs text-rose-200 px-2 py-1 rounded bg-rose-500/15 border border-rose-500/30">Couldn’t auto-load standards</span>}
             </div>
-            {!!fetching && <div className="text-xs text-slate-500 mt-1">Fetching standards…</div>}
           </div>
-
           <div>
-            <label className="block text-sm font-medium">Assignment Type</label>
-            <select className="mt-1 border rounded px-3 py-2" value={atype} onChange={e=>setAtype(e.target.value)}>
-              {['Worksheet','Exit Ticket','Short Essay','Multiple Choice','DBQ','Project Brief'].map(x=><option key={x}>{x}</option>)}
+            <label className="block text-sm font-medium text-slate-300">Assignment Type</label>
+            <select className="mt-1 border border-white/10 bg-white/5 text-white rounded px-3 py-2" value={atype} onChange={e=>setAtype(e.target.value)}>
+              {['Worksheet','Exit Ticket','Short Essay','Multiple Choice','DBQ','Project Brief'].map(x=><option key={x} value={x} className="bg-[var(--card)]">{x}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium">Difficulty</label>
-            <select className="mt-1 border rounded px-3 py-2" value={difficulty} onChange={e=>setDifficulty(e.target.value)}>
-              {['Below-Level','On-Level','Above-Level'].map(x=><option key={x}>{x}</option>)}
+            <label className="block text-sm font-medium text-slate-300">Difficulty</label>
+            <select className="mt-1 border border-white/10 bg-white/5 text-white rounded px-3 py-2" value={difficulty} onChange={e=>setDifficulty(e.target.value)}>
+              {['Below-Level','On-Level','Above-Level'].map(x=><option key={x} value={x} className="bg-[var(--card)]">{x}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium">Optional Student</label>
-            <select className="mt-1 border rounded px-3 py-2 min-w-[16rem]" value={studentId} onChange={e=>setStudentId(e.target.value)}>
+            <label className="block text-sm font-medium text-slate-300">Optional Student</label>
+            <select className="mt-1 border border-white/10 bg-white/5 text-white rounded px-3 py-2 min-w-[16rem]" value={studentId} onChange={e=>setStudentId(e.target.value)}>
               <option value="">—</option>
-              {roster.map(s=><option key={s.id} value={s.id}>{s.name} — {s.id}</option>)}
+              {roster.map(s=><option key={s.id} value={s.id} className="bg-[var(--card)]">{s.name} — {s.id}</option>)}
             </select>
           </div>
-
           <div className="ml-auto flex gap-2">
-            <button className="px-3 py-2 rounded bg-slate-200" onClick={()=>run('explain')}>Explain Standard</button>
-            <button className="px-3 py-2 rounded bg-[var(--brand-gold)] text-[var(--brand-ink)] font-medium" onClick={()=>run('lesson')}>Lesson Idea</button>
-            <button className="px-3 py-2 rounded bg-[var(--brand-blue)] text-white shadow" onClick={()=>run('assign')}>Generate Assignment</button>
+            <button className="px-3 py-2 rounded bg-white/10 hover:bg-white/15 border border-white/10" onClick={()=>run('explain')}>Explain Standard</button>
+            <button className="px-3 py-2 rounded bg-[var(--brand-gold)] text-[var(--brand-ink)] font-semibold hover:brightness-110 transition" onClick={()=>run('lesson')}>Lesson Idea</button>
+            <button className="px-3 py-2 rounded bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-600)] transition text-white" onClick={()=>run('assign')}>Generate Assignment</button>
           </div>
         </div>
 
         {/* Score input shows only when student selected */}
         {studentId && (
-          <div className="card border rounded-xl p-4 flex items-end gap-3 shadow-sm no-print">
+          <div className="bg-[var(--card)] border border-white/10 rounded-xl p-4 flex items-end gap-3 no-print">
             <div>
-              <label className="block text-sm font-medium">Score for {roster.find(s=>s.id===studentId)?.name} ({selectedStandard||'Standard'})</label>
-              <input id="score-input" type="number" min="0" max="100" className="mt-1 border rounded px-3 py-2 w-36"/>
+              <label className="block text-sm font-medium text-slate-300">Score for {selectedStudent?.name} ({selectedStandard||'Standard'})</label>
+              <input id="score-input" type="number" min="0" max="100" className="mt-1 border border-white/10 bg-white/5 text-white rounded px-3 py-2 w-36"/>
             </div>
-            <button onClick={saveScore} className="px-3 py-2 rounded bg-indigo-600 text-white">Save Score</button>
-            <button onClick={()=>window.print()} className="ml-auto px-3 py-2 rounded bg-slate-200">Print</button>
+            <button onClick={saveScore} className="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 transition text-white">Save Score</button>
+            <button onClick={()=>window.print()} className="ml-auto px-3 py-2 rounded bg-white/10 hover:bg-white/15 border border-white/10">Print</button>
           </div>
         )}
 
-        {/* Modal for AI/Template output (printable) */}
+        {/* Modal for AI output */}
         {modal && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-            <div className="bg-white rounded-xl p-6 w-full max-w-3xl printable">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+            <div className="bg-[var(--card)] border border-white/10 rounded-xl p-6 w-full max-w-3xl printable shadow-2xl">
               <div className="flex items-start justify-between mb-2">
                 <h3 className="text-lg font-semibold">{modal.heading}</h3>
-                <button className="no-print text-slate-500" onClick={()=>setModal(null)}>&times;</button>
+                <button className="no-print text-slate-300 hover:text-white" onClick={()=>setModal(null)}>&times;</button>
               </div>
-              <div className="prose">{modal.content}</div>
+              <div className="prose text-slate-100">{modal.content}</div>
               <div className="mt-4 flex justify-end gap-2 no-print">
-                <button onClick={()=>setModal(null)} className="px-3 py-2 rounded bg-slate-200">Close</button>
-                <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-[var(--brand-blue)] text-white">Print</button>
+                <button onClick={()=>setModal(null)} className="px-3 py-2 rounded bg-white/10 hover:bg-white/15 border border-white/10">Close</button>
+                <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-600)] transition text-white">Print</button>
               </div>
             </div>
           </div>
@@ -564,33 +552,33 @@ Return JSON: {"title","text"}.`;
     },[student]);
     return (
       <div className="space-y-4 printable">
-        <div className="card border rounded-xl p-4 shadow-sm no-print">
-          <label className="block text-sm font-medium">Student</label>
-          <select className="mt-1 border rounded px-3 py-2" value={studentId} onChange={e=>setStudentId(e.target.value)}>
-            {roster.map(s=><option key={s.id} value={s.id}>{s.name} — {s.id}</option>)}
+        <div className="bg-[var(--card)] border border-white/10 rounded-xl p-4 no-print">
+          <label className="block text-sm font-medium text-slate-300">Student</label>
+          <select className="mt-1 border border-white/10 bg-white/5 text-white rounded px-3 py-2" value={studentId} onChange={e=>setStudentId(e.target.value)}>
+            {roster.map(s=><option key={s.id} value={s.id} className="bg-[var(--card)]">{s.name} — {s.id}</option>)}
           </select>
         </div>
         {student && (
           <>
-            <div className="card border rounded-xl p-4 shadow-sm">
+            <div className="bg-[var(--card)] border border-white/10 rounded-xl p-4">
               <h3 className="font-semibold">{student.name}</h3>
-              <p className="text-sm text-slate-600">ID: {student.id} • Period: {student.period||'N/A'}</p>
+              <p className="text-sm text-slate-300">ID: {student.id} • Period: {student.period||'N/A'}</p>
             </div>
-            <div className="card border rounded-xl p-4 shadow-sm"><canvas ref={canvasRef} height="160"></canvas></div>
+            <div className="bg-[var(--card)] border border-white/10 rounded-xl p-4"><canvas ref={canvasRef} height="160"></canvas></div>
             <div className="grid md:grid-cols-3 gap-4">
               {Object.entries(student.scores||{}).map(([k,v])=>{
                 const band = perfBand(v); const cls = band==='high'?PERF.high: band==='mid'?PERF.mid:PERF.low;
                 return <div key={k} className={`rounded-xl p-4 ${cls}`}><div className="text-xs font-medium mb-1">{k}</div><div className="text-2xl font-semibold">{Number.isFinite(v)?v:0}</div></div>;
               })}
             </div>
-            <div className="no-print"><button className="px-3 py-2 rounded bg-slate-200" onClick={()=>window.print()}>Print</button></div>
+            <div className="no-print"><button className="px-3 py-2 rounded bg-white/10 hover:bg-white/15 border border-white/10" onClick={()=>window.print()}>Print</button></div>
           </>
         )}
       </div>
     );
   }
 
-  /* ---------------- Auth + App Section ---------------- */
+  /* ---------------- Login + App ---------------- */
   function Login(){
     const [busy,setBusy]=React.useState(false);
     async function go(){
@@ -598,22 +586,21 @@ Return JSON: {"title","text"}.`;
       catch(e){ alert(e.message); } finally{ setBusy(false); }
     }
     return (
-      <div className="max-w-md mx-auto mt-10 card border rounded-2xl shadow p-8 text-center">
-        <img src="/logo.svg" alt="" className="w-12 h-12 mx-auto mb-3" />
-        <h1 className="font-display text-2xl font-semibold mb-2">Sign in to Synapse</h1>
-        <p className="text-sm text-slate-600 mb-6">Use your Google account.</p>
-        <button onClick={go} disabled={busy} className="px-4 py-2 rounded bg-[var(--brand-blue)] text-white shadow">{busy?'Signing in…':'Continue with Google'}</button>
+      <div className="bg-[var(--card)] border border-white/10 rounded-2xl shadow p-8 w-full max-w-md text-center mx-auto mt-10">
+        <img src="/favicon.svg" alt="" className="w-12 h-12 mx-auto mb-3" />
+        <h1 className="text-2xl font-semibold mb-2">Sign in to Synapse</h1>
+        <p className="text-sm text-slate-300 mb-6">Use your Google account.</p>
+        <button onClick={go} disabled={busy} className="px-4 py-2 rounded bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-600)] transition text-white">{busy?'Signing in…':'Continue with Google'}</button>
       </div>
     );
   }
 
-  function SynapseApp(){
+  function SynapseApp({setSavingState}){
     const [subject,setSubject]=React.useState('');
     const [grade,setGrade]=React.useState('');
     const [roster,setRoster]=React.useState([]);
     const [standards,setStandards]=React.useState([]);
     const [periods,setPeriods]=React.useState([]);
-    const [savingState,setSavingState]=React.useState('saved');
 
     const [user,setUser]=React.useState(null);
     const isLoaded = React.useRef(false);
@@ -642,7 +629,7 @@ Return JSON: {"title","text"}.`;
         try{
           await db.collection('users').doc(user.uid).collection('synapse').doc('state').set({subject,grade,roster,standards,periods},{merge:true});
           setSavingState('saved');
-          setTimeout(()=> setSavingState('idle'), 1800);
+          setTimeout(()=> setSavingState('idle'), 2000);
         }catch(e){ console.warn('save state', e.message); setSavingState('idle'); }
       }, 600);
       return ()=>clearTimeout(t);
@@ -652,30 +639,22 @@ Return JSON: {"title","text"}.`;
 
     return (
       <div className="space-y-8">
-        {/* Hero Section for the App */}
-        <section className="relative overflow-hidden rounded-2xl border card shadow">
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-gold)] opacity-10"></div>
-          <div className="relative p-6">
-            <div className="flex flex-col md:flex-row md:items-end gap-4">
-              <div className="flex-1">
-                <h2 className="font-display text-2xl font-semibold">Synapse Co-Pilot</h2>
-                <p className="text-sm text-slate-600">Standards-aware generation • Intelligent groups • Visual progress</p>
-              </div>
-              <div className="flex items-end gap-3">
-                <div>
-                  <label className="block text-sm font-medium">Subject</label>
-                  <input className="mt-1 w-60 border rounded-lg px-3 py-2" value={subject} onChange={e=>setSubject(e.target.value)} placeholder="e.g., 7th Grade Florida Civics" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium">Grade</label>
-                  <input className="mt-1 w-32 border rounded-lg px-3 py-2" value={grade} onChange={e=>setGrade(e.target.value)} placeholder="7" />
-                </div>
-              </div>
-            </div>
+        <div className="bg-[var(--card)] border border-white/10 rounded-xl p-4 flex flex-col md:flex-row gap-3 items-start md:items-end justify-between no-print">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-slate-300">Subject</label>
+            <input className="mt-1 w-full border border-white/10 bg-white/5 text-white placeholder:text-slate-400 rounded px-3 py-2" value={subject} onChange={e=>setSubject(e.target.value)} placeholder="e.g., 7th Grade Florida Civics" />
           </div>
-        </section>
+          <div>
+            <label className="block text-sm font-medium text-slate-300">Grade</label>
+            <input className="mt-1 w-36 border border-white/10 bg-white/5 text-white placeholder:text-slate-400 rounded px-3 py-2" value={grade} onChange={e=>setGrade(e.target.value)} placeholder="7" />
+          </div>
+          <div className="text-sm text-slate-400 mt-6 md:mt-0">
+            <span className="opacity-70">Signed in: </span>
+            <span className="font-medium">{auth.currentUser?.displayName||'You'}</span>
+          </div>
+          <button onClick={()=>auth.signOut()} className="text-sm px-3 py-2 rounded bg-white/10 hover:bg-white/15 border border-white/10">Sign out</button>
+        </div>
 
-        {/* App Sections */}
         <div className="grid gap-8">
           <GeneratorTab subject={subject} grade={grade} standards={standards} setStandards={setStandards} roster={roster} setRoster={setRoster} />
           <RosterTab subject={subject} roster={roster} setRoster={setRoster} setStandards={setStandards} setPeriods={setPeriods} />
@@ -689,55 +668,17 @@ Return JSON: {"title","text"}.`;
   /* ---------------- Top-level site pages ---------------- */
   function Home(){
     return (
-      <section className="relative overflow-hidden rounded-2xl border card shadow">
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--brand-blue)] to-[var(--brand-gold)] opacity-10"></div>
-        <div className="relative p-8 md:p-12">
-          <div className="max-w-3xl">
-            <h2 className="font-display text-3xl md:text-4xl font-semibold leading-tight">Synapse — <span className="text-[var(--brand-blue)]">bridging the gap</span> in education</h2>
-            <p className="mt-3 text-slate-700 text-lg">Plan faster. Differentiate smarter. Track growth—without the busywork.</p>
-            <div className="mt-6 flex gap-3">
-              <a href="#synapse" className="px-5 py-2.5 rounded-lg bg-[var(--brand-blue)] text-white shadow hover:opacity-95 transition">Open Co-Pilot</a>
-              <a href="#resources" className="px-5 py-2.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 transition">Browse Resources</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  function Resources(){
-    return (
-      <div className="grid md:grid-cols-3 gap-6">
-        {['Planning templates','Best practices','Exemplar lessons'].map((t,i)=>(
-          <div key={i} className="card border rounded-xl p-6 shadow-sm">
-            <h3 className="font-semibold">{t}</h3>
-            <p className="text-sm text-slate-600 mt-1">Coming soon.</p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  function App(){
-    const [active,setActive]=React.useState((location.hash.replace('#','')||'home'));
-    const [savingState,setSavingState]=React.useState('idle');
-    React.useEffect(()=>{
-      const onHash=()=> setActive(location.hash.replace('#','')||'home');
-      window.addEventListener('hashchange',onHash);
-      return ()=>window.removeEventListener('hashchange',onHash);
-    },[]);
-    const page = active==='home'? <Home/> : active==='resources'? <Resources/> : <SynapseApp/>;
-    return (
-      <SiteShell active={active} setActive={(k)=>{ location.hash=k; setActive(k);} } savingState={savingState}>
-        {page}
-      </SiteShell>
-    );
-  }
-
-  const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(<App />);
-}
-waitForLibs();
-  </script>
-</body>
-</html>
+      <div className="grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-stretch">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-8 shadow-xl">
+          <h2 className="text-3xl font-semibold mb-3">Welcome to Synapse Co-Pilot</h2>
+          <p className="text-slate-300">Standards-aware AI that helps teachers plan faster and teach smarter — generate lessons, form DI groups, and track student progress in one place.</p>
+          <ul className="list-disc pl-6 mt-5 text-slate-200 space-y-2">
+            <li>Upload rosters (CSV/XLSX/PDF/DOCX)</li>
+            <li>Auto-populate standards from Subject + Grade</li>
+            <li>Generate standards-aligned materials</li>
+            <li>Intelligent, data-driven group formation</li>
+            <li>Progress tracking with charts</li>
+          </ul>
+          <div className="mt-6 flex gap-3">
+            <a href="#synapse" className="inline-block px-4 py-2 rounded bg-[var(--brand-blue)] hover:bg-[var(--brand-blue-600)] transition text-white">Open Synapse Co-Pilot</a>
+            <a href="#resources" className="inline-block px-4 py
