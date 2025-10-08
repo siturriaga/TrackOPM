@@ -1,31 +1,69 @@
-// POST with { q, subject? } -> returns normalized "results" (safe stub).
-// Verifies Firebase auth; rate limits; whitelists domains conceptually.
-const { requireUser, json, badRequest } = require("./_lib/auth");
-const { rateLimit } = require("./_lib/rateLimiter");
+// netlify/functions/searchStandard.js
+const admin = require('firebase-admin');
 
-const ALLOWED_DOMAINS = ["cpalms.org", "fldoe.org"];
+let init = false;
+function initAdmin(){
+  if (init) return;
+  const creds = process.env.FIREBASE_ADMIN_CREDENTIALS;
+  if (!creds) throw new Error('FIREBASE_ADMIN_CREDENTIALS missing');
+  const sa = JSON.parse(creds);
+  admin.initializeApp({ credential: admin.credential.cert(sa) });
+  init = true;
+}
+
+function extractCodesFromText(text=''){
+  // Naive detection e.g. "SS.7.CG.1.6", "MA.6.AR.1.1", etc.
+  const rx = /([A-Z]{1,3}\.\d{1,2}\.[A-Z]\w?\.\d(?:\.\d+)?)/g;
+  const set = new Set();
+  let m; while((m = rx.exec(text))){ set.add(m[1]); }
+  return [...set];
+}
 
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") return json({ error: "Method not allowed" }, 405);
-  const u = await requireUser(event);
-  if (u.error) return u.error;
+  try{
+    if (event.httpMethod !== 'POST') {
+      return { statusCode: 405, body: 'Method Not Allowed' };
+    }
+    initAdmin();
 
-  const { q = "", subject = "" } = safeParse(event.body);
-  if (!q) return badRequest("Missing q");
+    const auth = event.headers.authorization || '';
+    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
+    if (!token) return { statusCode: 401, body: 'Missing ID token' };
 
-  const rl = await rateLimit({ uid: u.uid, fn: "searchStandard", maxPerMinute: 60 });
-  if (!rl.allowed) return json({ error: "Rate limit exceeded" }, 429);
+    try{ await admin.auth().verifyIdToken(token); }
+    catch{ return { statusCode: 401, body: 'Invalid ID token' }; }
 
-  // NOTE: Without a paid search API configured, we return a safe stub.
-  // You can wire a Custom Search Engine here later and filter to ALLOWED_DOMAINS.
-  const results = [
-    // Example placeholder; keeps UI stable.
-    // { title: "CPALMS — Florida Standards", url: "https://www.cpalms.org/", snippet: "Official standards repository for Florida educators." }
-  ];
+    const body = JSON.parse(event.body || '{}');
+    const q = String(body.q||'');
+    const subject = String(body.subject||'');
 
-  return json({ query: q, subject, results });
+    // 1) Try Firestore catalog first (optional). Key can be normalized subject+grade
+    const db = admin.firestore();
+    const key = subject.trim().toLowerCase().replace(/\s+/g,'_'); // e.g., "7th_grade_florida_civics"
+    let standards = [];
+
+    try{
+      const snap = await db.collection('catalog').doc(key).get();
+      if (snap.exists && Array.isArray(snap.data()?.standards)) {
+        standards = snap.data().standards;
+      }
+    }catch(e){
+      console.warn('catalog read failed', e.message);
+    }
+
+    // 2) Fallback: regex extract from query+subject (best-effort)
+    if (!standards.length) {
+      standards = extractCodesFromText(q + ' ' + subject);
+    }
+
+    // 3) Return minimal structure
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ standards })
+    };
+  }catch(err){
+    console.error('searchStandard error', err);
+    return { statusCode: 500, body: err.message || 'Server error' };
+  }
 };
-
-function safeParse(body) {
-  try { return JSON.parse(body || "{}"); } catch { return {}; }
-}
