@@ -5,8 +5,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Synapse Co-Pilot — Teaching Tools</title>
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com" defer crossorigin="anonymous"></script>
+ <!-- Tailwind CSS (load early, no defer) -->
+<script>
+  window.tailwind = {
+    safelist: [
+      'bg-[var(--brand-bg)]','text-[var(--brand-ink)]',
+      'bg-[var(--brand-blue)]','bg-[var(--brand-gold)]',
+      'border-[var(--brand-blue)]'
+    ]
+  };
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
 
   <!-- React 18 + ReactDOM UMD + Babel -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" defer crossorigin></script>
