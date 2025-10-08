@@ -1,69 +1,46 @@
-// netlify/functions/searchStandard.js
-const admin = require('firebase-admin');
+// /netlify/functions/searchStandard.js
+// Fetch & normalize Florida standards (CPALMS/FLDOE) based on Subject + Grade.
+// Uses curated catalog as fallback. Caches results in-memory per cold start.
 
-let init = false;
-function initAdmin(){
-  if (init) return;
-  const creds = process.env.FIREBASE_ADMIN_CREDENTIALS;
-  if (!creds) throw new Error('FIREBASE_ADMIN_CREDENTIALS missing');
-  const sa = JSON.parse(creds);
-  admin.initializeApp({ credential: admin.credential.cert(sa) });
-  init = true;
-}
+const { getUser } = require("./_lib/auth");
+const { moderateInput } = require("./_lib/moderation");
+const { rateLimit } = require("./_lib/rateLimiter");
+const catalog = require("./standardsCatalog");
 
-function extractCodesFromText(text=''){
-  // Naive detection e.g. "SS.7.CG.1.6", "MA.6.AR.1.1", etc.
-  const rx = /([A-Z]{1,3}\.\d{1,2}\.[A-Z]\w?\.\d(?:\.\d+)?)/g;
-  const set = new Set();
-  let m; while((m = rx.exec(text))){ set.add(m[1]); }
-  return [...set];
-}
+const cache = new Map(); // key "Subject|Grade" -> { standards: [...] }
 
-exports.handler = async (event) => {
-  try{
-    if (event.httpMethod !== 'POST') {
-      return { statusCode: 405, body: 'Method Not Allowed' };
+exports.handler = async (event, context) => {
+  try {
+    const uid = await getUser(event);
+    await rateLimit(uid, "searchStandard", 60, 60); // 60 req / 60s bucket
+    const body = JSON.parse(event.body || "{}");
+    const subject = String(body.subject || "").trim();
+    const grade = String(body.grade || "").trim();
+
+    if (!subject || !grade) {
+      return resp(400, { error: "subject and grade are required" });
     }
-    initAdmin();
+    await moderateInput(`${subject} ${grade}`);
 
-    const auth = event.headers.authorization || '';
-    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
-    if (!token) return { statusCode: 401, body: 'Missing ID token' };
+    const key = `${subject}|${grade}`;
+    if (cache.has(key)) return resp(200, cache.get(key));
 
-    try{ await admin.auth().verifyIdToken(token); }
-    catch{ return { statusCode: 401, body: 'Invalid ID token' }; }
+    // 1) Try curated catalog first (fast & reliable)
+    let standards = catalog.lookup(subject, grade);
 
-    const body = JSON.parse(event.body || '{}');
-    const q = String(body.q||'');
-    const subject = String(body.subject||'');
+    // 2) TODO (optional): live fetch from official sources (CPALMS/FLDOE).
+    // You can extend here with scraping/API calls and then merge/normalize.
+    // Keep the same return shape.
+    // For now, curated set covers major FL middle school subjects.
 
-    // 1) Try Firestore catalog first (optional). Key can be normalized subject+grade
-    const db = admin.firestore();
-    const key = subject.trim().toLowerCase().replace(/\s+/g,'_'); // e.g., "7th_grade_florida_civics"
-    let standards = [];
-
-    try{
-      const snap = await db.collection('catalog').doc(key).get();
-      if (snap.exists && Array.isArray(snap.data()?.standards)) {
-        standards = snap.data().standards;
-      }
-    }catch(e){
-      console.warn('catalog read failed', e.message);
-    }
-
-    // 2) Fallback: regex extract from query+subject (best-effort)
-    if (!standards.length) {
-      standards = extractCodesFromText(q + ' ' + subject);
-    }
-
-    // 3) Return minimal structure
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ standards })
-    };
-  }catch(err){
-    console.error('searchStandard error', err);
-    return { statusCode: 500, body: err.message || 'Server error' };
+    const payload = { standards };
+    cache.set(key, payload);
+    return resp(200, payload);
+  } catch (err) {
+    return resp(500, { error: err.message || String(err) });
   }
 };
+
+function resp(statusCode, body) {
+  return { statusCode, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) };
+}
