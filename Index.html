@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Synapse Co-Pilot — Bridging the Gap in Education</title>
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com" defer crossorigin="anonymous"></script>
-
+  <!-- Tailwind CSS CDN (no defer; must execute immediately) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // optional: your theme tokens so Tailwind applies immediately
+  tailwind.config = {
+    theme: { extend: { colors: { brandBlue:'#1e40af', brandGold:'#d4af37' } } }
+  }
+</script>
   <!-- React 18 + ReactDOM UMD + Babel -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" defer crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" defer crossorigin></script>
