@@ -1,74 +1,114 @@
-// POST with { systemPrompt, userPrompt, responseSchema? }
-// Server-enforces single model; verifies Firebase auth; rate limits; moderates.
-const { requireUser, json, badRequest } = require("./_lib/auth");
+// /netlify/functions/synapseGemini.js
+// Single fixed model; guards with moderation + rate limiting.
+// Supports tasks: 'assignment' | 'lesson' | 'explain' | 'groups' (if needed).
+const { getUser } = require("./_lib/auth");
+const { moderateInput, moderateOutput } = require("./_lib/moderation");
 const { rateLimit } = require("./_lib/rateLimiter");
-const { moderatePrompt } = require("./_lib/moderation");
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const MODEL = "gemini-2.5-flash-preview-05-20";
 
-const MODEL = "gemini-2.5-flash-preview-05-20"; // locked server-side
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") return json({ error: "Method not allowed" }, 405);
-  const u = await requireUser(event);
-  if (u.error) return u.error;
-
-  const { systemPrompt = "", userPrompt = "", responseSchema } = safeParse(event.body);
-  if (!userPrompt || typeof userPrompt !== "string") return badRequest("Missing userPrompt");
-
-  const mod = moderatePrompt(`${systemPrompt}\n${userPrompt}`.slice(0, 8000));
-  if (!mod.allowed) return json({ error: "Prompt blocked by moderator" }, 400);
-
-  const rl = await rateLimit({ uid: u.uid, fn: "synapseGemini", maxPerMinute: 60 });
-  if (!rl.allowed) return json({ error: "Rate limit exceeded" }, 429);
-
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) return json({ error: "Missing GEMINI_API_KEY" }, 500);
-
-  const client = new GoogleGenerativeAI(key);
-  const model = client.getGenerativeModel({ model: MODEL });
-
   try {
-    // Use “JSON” style response via system steer
-    const steer = `
-You are a precise generator for K–12 teacher content.
-Return ONLY valid JSON matching the user's expected schema.
-If unsure, return {"title":"Unavailable","text":"Please try again."}.
-`.trim();
+    const uid = await getUser(event);
+    await rateLimit(uid, "synapseGemini", 60, 60);
 
-    const input = [steer, systemPrompt || "", `USER:\n${userPrompt}`].join("\n\n").slice(0, 24000);
+    const body = JSON.parse(event.body || "{}");
+    const { task, subject, grade, standard, studentContext, assignmentType, difficulty } = body;
 
-    const result = await withTimeout(model.generateContent({ contents: [{ role: "user", parts: [{ text: input }] }] }), 25000);
-    const text = result?.response?.text?.() || "";
-
-    const parsed = tryJson(text);
-    if (!parsed || typeof parsed !== "object") {
-      // Fallback minimal
-      return json({ title: "Result", text: text.slice(0, 4000) || "No content returned." });
+    if (!task || !subject || !grade || !standard?.code) {
+      return json(400, { error: "task, subject, grade, and standard.code are required" });
     }
 
-    // Optional schema “shape guard”
-    if (responseSchema && typeof responseSchema === "object") {
-      // very light shape check: ensure keys exist if provided
-      if (Array.isArray(responseSchema.required)) {
-        for (const k of responseSchema.required) {
-          if (!(k in parsed)) return json({ title: "Result", text: text.slice(0, 4000) }, 200);
-        }
-      }
-    }
+    // Safety
+    await moderateInput(`${task} ${subject} ${grade} ${standard.code} ${assignmentType||''} ${difficulty||''}`);
 
-    return json(parsed);
-  } catch (e) {
-    return json({ error: "Gemini error", detail: String(e.message || e) }, 500);
+    const sys = systemPrompt(task);
+    const user = userPrompt({ task, subject, grade, standard, studentContext, assignmentType, difficulty });
+
+    const model = genAI.getGenerativeModel({ model: MODEL, systemInstruction: sys });
+    const result = await model.generateContent(user);
+    const text = result?.response?.text() || "";
+
+    await moderateOutput(text);
+
+    // Normalize
+    return json(200, { title: extractTitle(text) || "Result", text });
+  } catch (err) {
+    return json(500, { error: err.message || String(err) });
   }
 };
 
-function safeParse(body) {
-  try { return JSON.parse(body || "{}"); } catch { return {}; }
+function systemPrompt(task){
+  if (task === 'assignment') {
+    return `You are a curriculum designer.
+Use ONLY the supplied official Florida standard, clarifications, and objectives.
+Embed Differentiated Instruction best practices (stations, learning circles, gradual release).
+Return teacher-ready content. Avoid unsafe or off-task material.`;
+  }
+  if (task === 'lesson') {
+    return `You design concise mini-lessons using gradual release (I/We/You), checks for understanding, and DI scaffolds.
+Use ONLY the supplied Florida standard details.`;
+  }
+  if (task === 'explain') {
+    return `You explain standards plainly for teachers and students, including key ideas, misconceptions, and quick checks.`;
+  }
+  return `You are a helpful teaching assistant.`;
 }
-function tryJson(s) {
-  try { return JSON.parse(s); } catch { return null; }
+
+function userPrompt({ task, subject, grade, standard, studentContext, assignmentType, difficulty }){
+  const header = [
+    `Subject: ${subject}`,
+    `Grade: ${grade}`,
+    `Standard: ${standard.code} — ${standard.title}`,
+    standard.clarifications?.length ? `Clarifications:\n- ${standard.clarifications.join("\n- ")}` : "",
+    standard.objectives?.length ? `Objectives:\n- ${standard.objectives.join("\n- ")}` : "",
+    studentContext ? `Student context (optional): ${JSON.stringify(studentContext)}` : ""
+  ].filter(Boolean).join("\n");
+
+  if (task === 'assignment') {
+    return `${header}
+
+Task: Create a ${assignmentType || 'Worksheet'} at ${difficulty || 'On-Level'}.
+Return sections:
+- Title
+- Directions
+- Items (numbered)
+- Differentiation Notes (for EL/IEP, extensions)`;
+  }
+
+  if (task === 'lesson') {
+    return `${header}
+
+Task: 15-minute mini-lesson.
+Return sections:
+- Objective
+- Materials
+- Sequence (I Do / We Do / You Do)
+- Checks for Understanding
+- Extension
+- EL & IEP Supports`;
+  }
+
+  if (task === 'explain') {
+    return `${header}
+
+Task: Explain in plain language. Then add:
+- Key ideas (bulleted)
+- Common misconceptions
+- Quick check questions`;
+  }
+
+  return header;
 }
-function withTimeout(p, ms) {
-  return Promise.race([p, new Promise((_, r) => setTimeout(() => r(new Error("Timed out")), ms))]);
+
+function extractTitle(text){
+  const m = text.match(/^#+\s*(.+)$/m) || text.match(/^Title:\s*(.+)$/m);
+  return m?.[1]?.trim();
+}
+
+function json(statusCode, body){
+  return { statusCode, headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) };
 }
