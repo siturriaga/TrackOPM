@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Synapse Co-Pilot — Bridging the Gap in Education</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com" defer crossorigin="anonymous"></script>
+
+  <!-- React 18 + ReactDOM UMD + Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" defer crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" defer crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js" defer crossorigin></script>
+
+  <!-- SheetJS (XLSX) -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer crossorigin="anonymous"></script>
+
+  <!-- PDF.js (text extraction) -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js" defer crossorigin="anonymous"></script>
+
+  <!-- Mammoth (DOCX to text) -->
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.7.1/mammoth.browser.min.js" defer crossorigin="anonymous"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer crossorigin="anonymous"></script>
+
+  <!-- Firebase compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js" defer crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js" defer crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js" defer crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js" defer crossorigin="anonymous"></script>
+
+  <!-- SEO & Icons -->
+  <meta name="description" content="Synapse Co-Pilot: standards-aware AI for teachers — generate lessons, form differentiated groups, and track progress securely." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="icon" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <meta name="theme-color" content="#1e40af">
+  <meta property="og:title" content="Synapse Co-Pilot — Bridging the Gap in Education">
+  <meta property="og:description" content="Standards-aware AI teaching tools: generate lessons, form DI groups, track progress — securely.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://synapsecopilot.com/">
+  <meta property="og:image" content="https://synapsecopilot.com/og-image.png">
+
+  <style>
+    :root{
+      --brand-blue:#1e40af;      /* Indigo-800 */
+      --brand-blue-600:#2563eb;  /* Blue-600  */
+      --brand-gold:#d4af37;      /* Gold      */
+      --brand-ink:#0f172a;       /* Slate-900 */
+      --brand-bg:#0b1220;        /* Deep bg   */
+      --card:#0f172a;            /* Card bg   */
+      --muted:#94a3b8;          /* Slate-400 */
+    }
+    @media print{ .no-print{display:none!important} .printable{box-shadow:none!important; background:#fff!important} body{background:#fff!important} }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }
+    .prose{ white-space: pre-wrap }
+    /* Nice gradient header backdrop */
+    .hero-bg{
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(37,99,235,.25), transparent 60%),
+        radial-gradient(1000px 500px at 10% -20%, rgba(212,175,55,.18), transparent 55%),
+        linear-gradient(180deg, #0b1220 0%, #0c1424 100%);
+    }
+  </style>
+</head>
+<body class="bg-[var(--brand-bg)] text-white antialiased">
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="env,react">
+/* =========================================================================
+ *  DIAGNOSTICS
+ * ========================================================================= */
+window.addEventListener('error', e => console.error('[window.onerror]', e.message, e.filename, e.lineno, e.colno, e.error));
+window.addEventListener('unhandledrejection', e => console.error('[unhandledrejection]', e.reason));
+const REQUIRED = ['React','ReactDOM','XLSX','firebase','Chart','pdfjsLib','mammoth'];
+function ready(){ return REQUIRED.every(k => window[k]); }
+function waitForLibs(i=40){ if(ready()) return boot(); if(i<=0) return diag(); setTimeout(()=>waitForLibs(i-1),150); }
+function diag(){
+  document.getElementById('root').innerHTML = `
+  <div class="max-w-xl mx-auto my-12 bg-white/5 border border-white/10 rounded-xl p-6">
+    <h2 class="text-lg font-semibold mb-2">Could not load required scripts</h2>
+    <p class="text-sm text-slate-300">Check network and reload.</p>
+  </div>`;
+}
+
+/* =========================================================================
+ *  CONFIG
+ * ========================================================================= */
+// Firebase client config (public)
+const FB_CONFIG = {
+  apiKey: "AIzaSyBT95w8fzJr9J5WCYe8iwFkvSrwXds5sms",
+  authDomain: "trackopmn.firebaseapp.com",
+  projectId: "trackopmn
