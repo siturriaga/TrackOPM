@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Synapse — AI Teaching Co-pilot</title>
+  <title>Synapse Co-Pilot — Teaching Tools</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com" defer crossorigin="anonymous"></script>
 
-  <!-- React 18 (PROD) + ReactDOM (PROD) + Babel for in-browser JSX -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" defer crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" defer crossorigin></script>
+  <!-- React 18 + ReactDOM UMD + Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" defer crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" defer crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js" defer crossorigin></script>
 
   <!-- SheetJS (XLSX) -->
@@ -31,42 +31,55 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js" defer crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js" defer crossorigin="anonymous"></script>
 
+  <!-- SEO & Icons -->
+  <meta name="description" content="Synapse Co-Pilot is an AI teaching suite: upload rosters, generate standards-aligned materials, form groups, and track progress — securely.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <meta property="og:title" content="Synapse Co-Pilot — Teaching Tools">
+  <meta property="og:description" content="Generate lessons, form DI groups, and track progress with secure AI tools for teachers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://synapsecopilot.com/">
+  <meta property="og:image" content="https://synapsecopilot.com/og-image.png">
+
   <style>
-    @media print { .no-print { display:none !important } .printable { box-shadow:none !important; background:#fff !important } }
+    :root{
+      --brand-blue:#1e40af;      /* Indigo-800 */
+      --brand-blue-600:#2563eb;  /* Blue-600  */
+      --brand-gold:#d4af37;      /* Gold      */
+      --brand-ink:#0f172a;       /* Slate-900 */
+      --brand-bg:#f8fafc;        /* Slate-50  */
+      --card:#ffffff;
+    }
+    @media print{ .no-print{display:none!important} .printable{box-shadow:none!important; background:#fff!important} body{background:#fff!important} }
     .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }
     .prose{ white-space: pre-wrap }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-[var(--brand-bg)] text-[var(--brand-ink)]">
   <div id="root"></div>
 
   <script type="text/babel" data-presets="env,react">
-/** =========================================================================
- *  SAFETY & DIAGNOSTICS
- *  ========================================================================= */
+/* =========================================================================
+ *  DIAGNOSTICS
+ * ========================================================================= */
 window.addEventListener('error', e => console.error('[window.onerror]', e.message, e.filename, e.lineno, e.colno, e.error));
 window.addEventListener('unhandledrejection', e => console.error('[unhandledrejection]', e.reason));
-
 const REQUIRED = ['React','ReactDOM','XLSX','firebase','Chart','pdfjsLib','mammoth'];
 function ready(){ return REQUIRED.every(k => window[k]); }
-function waitForLibs(i=40){ if(ready()) return boot(); if(i<=0){ return diag(); } setTimeout(()=>waitForLibs(i-1), 150); }
+function waitForLibs(i=40){ if(ready()) return boot(); if(i<=0) return diag(); setTimeout(()=>waitForLibs(i-1),150); }
 function diag(){
-  const miss = REQUIRED.filter(k => !window[k]);
   document.getElementById('root').innerHTML = `
   <div class="max-w-xl mx-auto my-12 bg-white border rounded-xl p-6">
     <h2 class="text-lg font-semibold mb-2">Could not load required scripts</h2>
-    <p class="text-sm text-slate-600">Missing: ${miss.join(', ')||'(unknown)'} — often shows as generic “Script error”.</p>
-    <ol class="list-decimal text-sm pl-5 mt-2 space-y-1">
-      <li>Serve over http(s) (avoid file://). Try <span class="mono">npx serve</span>.</li>
-      <li>Disable blockers, check network, reload.</li>
-    </ol>
+    <p class="text-sm text-slate-600">Check network and reload. This message is safe to show.</p>
   </div>`;
 }
 
-/** =========================================================================
- *  CONFIG (YOUR VALUES HERE)
- *  ========================================================================= */
-// Firebase client config — SAFE to expose in browser.
+/* =========================================================================
+ *  CONFIG
+ * ========================================================================= */
+// Firebase client config — this is fine to expose in the browser.
 const FB_CONFIG = {
   apiKey: "AIzaSyBT95w8fzJr9J5WCYe8iwFkvSrwXds5sms",
   authDomain: "trackopmn.firebaseapp.com",
@@ -77,71 +90,40 @@ const FB_CONFIG = {
   measurementId: "G-QX53NY1CJC"
 };
 
-// Netlify Functions (server-side keys live in env vars there)
+// Netlify Functions (server)
 const GEMINI_PROXY_URL = "/.netlify/functions/synapseGemini";
 const SEARCH_PROXY_URL = "/.netlify/functions/searchStandard";
 
-// Models
-const GEMINI_DEFAULT = 'gemini-2.5-flash-preview-05-20';
-const GEMINI_ALT     = 'gemini-2.5-flash';
+// Single fixed model (no dropdown)
+const GEMINI_MODEL = 'gemini-2.5-flash-preview-05-20';
 
-/** =========================================================================
- *  HELPERS & FALLBACKS
- *  ========================================================================= */
-const ls = {
-  get(k,f){ try{ const v = localStorage.getItem(k); return v? JSON.parse(v): f } catch{ return f } },
-  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)) } catch{} },
-};
-
+/* =========================================================================
+ *  HELPERS
+ * ========================================================================= */
+const ls = { get(k,f){ try{ return JSON.parse(localStorage.getItem(k)) ?? f }catch{ return f } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch{} } };
 function coerceNum(v){ if(v==null||v==="") return 0; const n=Number(v); return Number.isFinite(n)? n:0; }
 function perfBand(s){ if(s>=80) return 'high'; if(s>=60) return 'mid'; return 'low'; }
 const PERF = { high:'bg-emerald-100 text-emerald-700', mid:'bg-amber-100 text-amber-700', low:'bg-rose-100 text-rose-700' };
-
 function withTimeout(p,ms=25000){ return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('Timed out')),ms))]); }
-function safePick(obj, shape){
-  const out = {};
-  for(const [k,t] of Object.entries(shape)){
-    const v = obj?.[k];
-    if(t==='string') out[k] = typeof v==='string'? v: '';
-    else if(Array.isArray(t)) out[k] = Array.isArray(v)? v: [];
-    else if(typeof t==='object') out[k] = typeof v==='object'&&v? safePick(v,t): safePick({},t);
-  }
-  return out;
-}
+function safePick(obj, shape){ const out = {}; for(const [k,t] of Object.entries(shape)){ const v=obj?.[k]; if(t==='string') out[k]=typeof v==='string'?v:''; else if(Array.isArray(t)) out[k]=Array.isArray(v)?v:[]; else if(typeof t==='object') out[k]=typeof v==='object'&&v? safePick(v,t): safePick({},t); } return out; }
 
-function fallbackExplain({standard}){ return { title:`Overview of ${standard}`, text:`Template overview for ${standard}.\n• Key ideas\n• What students should do\n• Common misconceptions` }; }
-function fallbackLesson({standard}){ return { title:`15-minute Mini-lesson — ${standard}`, text:`Objective: show understanding of ${standard}\n1) Hook (2m)\n2) Model (5m)\n3) Guided practice (5m)\n4) Exit Ticket (3m)` }; }
-function fallbackAssignment({standard,atype,difficulty}){ return { title:`${standard} — ${atype} (${difficulty})`, text:`Directions: Complete all items.\n1) …\n2) …\n3) …` }; }
-function fallbackGroups({classData}){
-  const s=[...classData].sort((a,b)=> (a.score??0)-(b.score??0));
-  const n=s.length, t=Math.ceil(n/3);
-  return {
-    class_summary:`Auto groups (no AI). n=${n}. Median≈${s[Math.floor(n/2)]?.score??0}`,
-    groups:[
-      {name:'Remediation', criteria:'Lower third', members:s.slice(0,t).map(x=>x.name), strategy:'Re-teach, 2 guided items'},
-      {name:'Practice', criteria:'Middle third', members:s.slice(t,2*t).map(x=>x.name), strategy:'Mixed practice, pair-share'},
-      {name:'Enrichment', criteria:'Upper third', members:s.slice(2*t).map(x=>x.name), strategy:'Extension, explain reasoning'}
-    ]
-  };
-}
-
-/** =========================================================================
+/* =========================================================================
  *  BOOT
- *  ========================================================================= */
+ * ========================================================================= */
 function boot(){
   const {useEffect,useMemo,useRef,useState} = React;
   // Firebase init
   try{ firebase.apps.length? firebase.app(): firebase.initializeApp(FB_CONFIG); }catch(e){ console.warn('Firebase init:', e.message); }
   const auth = firebase.auth(); const db = firebase.firestore(); const storage = firebase.storage();
 
-  // Proxy callers
-  async function callGemini({model,systemPrompt,userPrompt,responseSchema}){
+  // Server callers (require Firebase ID token)
+  async function callGemini({systemPrompt,userPrompt,responseSchema}){
     if(!auth.currentUser) throw new Error('Not signed in');
     const idToken = await auth.currentUser.getIdToken();
     const res = await fetch(GEMINI_PROXY_URL, {
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':`Bearer ${idToken}`},
-      body: JSON.stringify({model,systemPrompt,userPrompt,responseSchema})
+      body: JSON.stringify({model:GEMINI_MODEL,systemPrompt,userPrompt,responseSchema})
     });
     const text = await res.text();
     if(!res.ok) throw new Error(text||`Gemini proxy ${res.status}`);
@@ -160,46 +142,42 @@ function boot(){
     return JSON.parse(text);
   }
 
-  /* ---------------- Shell ---------------- */
-  function Shell({children,active,setActive}){
-    const tabs=[{key:'generator',label:'Generator'},{key:'roster',label:'Roster'},{key:'groups',label:'Groups'},{key:'tracker',label:'Tracker'}];
+  /* ---------------- Site Shell (Option A) ---------------- */
+  function SiteShell({children,active,setActive,savingState}){
+    const tabs = [
+      {key:'home',label:'Home'},
+      {key:'resources',label:'Resources'},
+      {key:'synapse',label:'Synapse Co-Pilot'}
+    ];
     return (
       <div className="min-h-screen">
-        <header className="bg-white shadow-sm sticky top-0 z-40">
-          <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 className="text-xl font-semibold">Synapse — AI Teaching Co-pilot</h1>
-            <nav className="flex gap-1 rounded-xl bg-slate-100 p-1 no-print">
-              {tabs.map(t=>(
-                <button key={t.key} onClick={()=>setActive(t.key)}
-                  className={`px-4 py-2 rounded-lg text-sm ${active===t.key?'bg-white shadow':'text-slate-600 hover:text-slate-900'}`}>{t.label}</button>
-              ))}
-            </nav>
+        <header className="bg-white/90 backdrop-blur border-b sticky top-0 z-40">
+          <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
+            <img src="/logo.svg" alt="Synapse logo" className="w-8 h-8" />
+            <div className="mr-auto">
+              <h1 className="text-lg font-semibold tracking-tight">Synapse Co-Pilot</h1>
+              <div className="text-[11px] text-slate-500 -mt-0.5">Powered by Gemini</div>
+            </div>
+            {/* Global autosave indicator */}
+            <div className="no-print text-xs">
+              {savingState==='saving' && <span className="text-amber-700 bg-amber-100 px-2 py-1 rounded">Saving…</span>}
+              {savingState==='saved'  && <span className="text-emerald-700 bg-emerald-100 px-2 py-1 rounded">All changes saved</span>}
+            </div>
           </div>
+          <nav className="max-w-7xl mx-auto px-4 pb-3 flex gap-2">
+            {tabs.map(t=>(
+              <button key={t.key}
+                onClick={()=>setActive(t.key)}
+                className={`px-3 py-1.5 rounded border text-sm ${active===t.key ? 'bg-[var(--brand-blue)] text-white border-[var(--brand-blue)]' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'}`}>
+                {t.label}
+              </button>
+            ))}
+          </nav>
         </header>
         <main className="max-w-7xl mx-auto px-4 py-6">{children}</main>
-        <footer className="text-center text-xs text-slate-500 py-8">Google Sign-In • Firestore/Storage • Gemini via Netlify Functions • Print-ready</footer>
-      </div>
-    );
-  }
-
-  function ContextBar({subject,setSubject,grade,setGrade,model,setModel}){
-    return (
-      <div className="bg-white border rounded-xl p-4 flex flex-col md:flex-row gap-3 items-start md:items-end justify-between no-print">
-        <div className="flex-1">
-          <label className="block text-sm font-medium">Subject</label>
-          <input className="mt-1 w-full border rounded-lg px-3 py-2" value={subject} onChange={e=>setSubject(e.target.value)} placeholder="e.g., 7th Grade Florida Civics" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Grade</label>
-          <input className="mt-1 w-36 border rounded-lg px-3 py-2" value={grade} onChange={e=>setGrade(e.target.value)} placeholder="7" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Model</label>
-          <select className="mt-1 border rounded-lg px-3 py-2" value={model} onChange={e=>setModel(e.target.value)}>
-            <option value={GEMINI_DEFAULT}>{GEMINI_DEFAULT}</option>
-            <option value={GEMINI_ALT}>{GEMINI_ALT}</option>
-          </select>
-        </div>
+        <footer className="text-center text-xs text-slate-500 py-10">
+          © <span id="y">{new Date().getFullYear()}</span> Synapse Co-Pilot
+        </footer>
       </div>
     );
   }
@@ -223,7 +201,6 @@ function boot(){
     const periods = [...new Set(students.map(s=>s.period||'').filter(Boolean))];
     return {students, standards:standardHeaders, periods};
   }
-
   async function parseFile(file){
     const ext = (file.name.split('.').pop()||'').toLowerCase();
     if(['xlsx','xls','ods','csv','tsv'].includes(ext)){
@@ -245,9 +222,7 @@ function boot(){
       const lines = text.split(/\n+/).map(s=>s.trim()).filter(Boolean);
       const csvish = lines.map(l=> l.split(/\s{2,}|\t|,|;|\|/));
       const headers = csvish[0]||[];
-      const rows = csvish.slice(1).map(cols=>{
-        const o={}; headers.forEach((h,i)=> o[h]=cols[i]); return o;
-      });
+      const rows = csvish.slice(1).map(cols=>{ const o={}; headers.forEach((h,i)=> o[h]=cols[i]); return o; });
       return parseTableLike(rows);
     }
     if(ext==='docx'){
@@ -256,9 +231,7 @@ function boot(){
       const lines = res.value.split(/\n+/).map(s=>s.trim()).filter(Boolean);
       if(lines.length<2) return {students:[],standards:[],periods:[]};
       const headers = lines[0].split(/\s{2,}|\t|,|;|\|/);
-      const rows = lines.slice(1).map(l=>{
-        const cols = l.split(/\s{2,}|\t|,|;|\|/); const o={}; headers.forEach((h,i)=> o[h]=cols[i]); return o;
-      });
+      const rows = lines.slice(1).map(l=>{ const cols=l.split(/\s{2,}|\t|,|;|\|/); const o={}; headers.forEach((h,i)=> o[h]=cols[i]); return o; });
       return parseTableLike(rows);
     }
     throw new Error('Unsupported file type');
@@ -288,8 +261,8 @@ function boot(){
     return (
       <div className="space-y-6">
         <div className="bg-white border rounded-xl p-6 no-print">
-          <h2 className="text-lg font-semibold mb-2">Upload Roster (optional)</h2>
-          <p className="text-sm text-slate-600 mb-3">Supports CSV/XLSX/PDF/DOCX. Missing values default to “N/A” or 0.</p>
+          <h2 className="text-lg font-semibold mb-2">Upload Roster</h2>
+          <p className="text-sm text-slate-600 mb-3">CSV/XLSX/PDF/DOCX supported. Missing values default to “N/A” or 0.</p>
           <input type="file" accept=".xlsx,.xls,.ods,.csv,.tsv,.pdf,.docx" onChange={onUpload} />
           {missingPeriod && <p className="text-xs mt-2 text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-1 inline-block">No Period column found — set per row, or use “Apply to all”.</p>}
         </div>
@@ -338,7 +311,7 @@ function boot(){
   }
 
   /* ---------------- Groups Tab ---------------- */
-  function GroupsTab({model,subject,standards,periods,roster}){
+  function GroupsTab({subject,standards,periods,roster}){
     const [period,setPeriod]=React.useState(periods[0]||'');
     const [standard,setStandard]=React.useState(standards[0]||'');
     const [cards,setCards]=React.useState(null);
@@ -354,24 +327,30 @@ function boot(){
           class_summary:{type:'string'},
           groups:{type:'array',items:{type:'object',properties:{
             name:{type:'string'}, criteria:{type:'string'}, members:{type:'array'}, strategy:{type:'string'}
-          },required:['name','criteria','members','strategy']}}
+          },required:['name','criteria','members','strategy']} }
         },required:['class_summary','groups']
       };
-      const systemPrompt = `You are an expert instructional coach. Use Google Search tool to fetch OFFICIAL clarifications/objectives/content focus for the Florida standard before generating. Output JSON only.`;
+      const systemPrompt = `You are an expert instructional coach. Use official FL standards clarifications as context (CPALMS/FLDOE). Output strict JSON.`;
       const userPrompt = `Subject: ${subject}. Standard: ${standard}.
 Class data (JSON): ${JSON.stringify(classData)}
 Return JSON: {"class_summary": string, "groups":[{"name","criteria","members","strategy"}]}`;
       try{
-        const json = await withTimeout(callGemini({model,systemPrompt,userPrompt,responseSchema}), 25000);
+        const json = await withTimeout(callGemini({systemPrompt,userPrompt,responseSchema}), 25000);
         setCards(json);
       }catch(e){
-        console.warn('AI failed, using deterministic fallback:', e.message);
-        setCards(fallbackGroups({classData}));
+        console.warn('AI failed, falling back:', e.message);
+        // Deterministic fallback
+        const s=[...classData].sort((a,b)=>(a.score??0)-(b.score??0));
+        const n=s.length, t=Math.ceil(n/3);
+        setCards({
+          class_summary:`Auto groups (no AI). n=${n}. Median≈${s[Math.floor(n/2)]?.score??0}`,
+          groups:[
+            {name:'Remediation', criteria:'Lower third', members:s.slice(0,t).map(x=>x.name), strategy:'Re-teach, 2 guided items'},
+            {name:'Practice', criteria:'Middle third', members:s.slice(t,2*t).map(x=>x.name), strategy:'Mixed practice, pair-share'},
+            {name:'Enrichment', criteria:'Upper third', members:s.slice(2*t).map(x=>x.name), strategy:'Extension, explain reasoning'}
+          ]
+        });
       }finally{ setLoading(false); }
-    }
-
-    if(!periods.length || !standards.length){
-      return <div className="bg-white border rounded-xl p-6 text-slate-600">Upload a roster with standards and set periods to create groups.</div>;
     }
 
     return (
@@ -383,8 +362,8 @@ Return JSON: {"class_summary": string, "groups":[{"name","criteria","members","s
           <div><label className="text-sm">Standard</label>
             <select className="mt-1 border rounded px-3 py-2" value={standard} onChange={e=>setStandard(e.target.value)}>{standards.map(s=><option key={s}>{s}</option>)}</select>
           </div>
-          <button onClick={analyze} className="ml-auto px-4 py-2 rounded bg-blue-600 text-white">Analyze & Create Groups</button>
-          <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-slate-200">Print Groups</button>
+          <button onClick={analyze} className="ml-auto px-4 py-2 rounded bg-[var(--brand-blue)] text-white">Analyze & Create Groups</button>
+          <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-slate-200">Print</button>
         </div>
         {loading && <p className="text-sm text-slate-600">Analyzing…</p>}
         {cards && (
@@ -408,14 +387,13 @@ Return JSON: {"class_summary": string, "groups":[{"name","criteria","members","s
     );
   }
 
-  /* ---------------- Generator Tab (Roster OPTIONAL) ---------------- */
-  function GeneratorTab({model,subject,grade,standards,setStandards,roster,setRoster}){
+  /* ---------------- Generator Tab ---------------- */
+  function GeneratorTab({subject,grade,standards,setStandards,roster,setRoster}){
     const [selectedStandard,setSelectedStandard]=React.useState('');
     const [atype,setAtype]=React.useState('Worksheet');
     const [difficulty,setDifficulty]=React.useState('On-Level');
     const [studentId,setStudentId]=React.useState('');
     const [modal,setModal]=React.useState(null);
-
     const selectedStudent = React.useMemo(()=> roster.find(s=>s.id===studentId), [studentId,roster]);
 
     async function populateFLStandards(){
@@ -436,44 +414,33 @@ Return JSON: {"class_summary": string, "groups":[{"name","criteria","members","s
     async function run(kind){
       const standard = selectedStandard || standards[0] || 'Standard';
       const schema = { type:'object',properties:{title:{type:'string'},text:{type:'string'}},required:['title','text'] };
-      const systemPrompt = `You are an expert curriculum designer. Use Google Search tool to fetch the OFFICIAL clarifications/objectives/content focus for the Florida standard BEFORE generating. Output JSON only.`;
+      const systemPrompt = `You are an expert curriculum designer. Use official FL clarifications/objectives/content focus when generating. Output strict JSON.`;
       const base = (task)=>`Subject: ${subject}. Grade: ${grade}. Standard: ${standard}. Task: ${task}.
-1) Use Google Search tool to fetch official FL clarifications/objectives/content focus (CPALMS/FLDOE).
-2) Produce the output.
-Return strict JSON: {"title","text"}.`;
+Return JSON: {"title","text"}.`;
       let userPrompt='';
-      if(kind==='explain') userPrompt = base('Explain the standard plainly with bullets for key ideas.');
+      if(kind==='explain') userPrompt = base('Explain the standard plainly with bullet points for key ideas.');
       if(kind==='lesson')  userPrompt = base('Design a 15-minute mini-lesson with objective, materials, sequence, and checks.');
       if(kind==='assign')  userPrompt = base(`Create a printable ${atype} at ${difficulty} difficulty with numbered items.`);
 
       try{
-        const ai = await withTimeout(callGemini({model,systemPrompt,userPrompt,responseSchema:schema}), 25000);
+        const ai = await withTimeout(callGemini({systemPrompt,userPrompt,responseSchema:schema}), 25000);
         const clean = safePick(ai,{title:'string',text:'string'});
         setModal({heading: clean.title||'Result', content: clean.text||''});
       }catch(e){
-        console.warn('AI failed, trying search template:', e.message);
-        try{
-          const s = await withTimeout(callSearch({ q:`${standard} official clarifications`, subject }), 12000);
-          const cite = s?.results?.[0]? `\n\nSource: ${s.results[0].title}\n${s.results[0].url}\n${s.results[0].snippet||''}` : '';
-          const templ = kind==='explain'? fallbackExplain({standard})
-                     : kind==='lesson'? fallbackLesson({standard})
-                     : fallbackAssignment({standard,atype,difficulty});
-          setModal({heading: templ.title, content: templ.text + cite});
-        }catch{
-          const templ = kind==='explain'? fallbackExplain({standard})
-                     : kind==='lesson'? fallbackLesson({standard})
-                     : fallbackAssignment({standard,atype,difficulty});
-          setModal({heading: templ.title, content: templ.text});
-        }
+        console.warn('AI failed, showing template:', e.message);
+        const templ = kind==='explain'? {title:`Overview of ${standard}`, text:`• Key ideas\n• What students should do\n• Common misconceptions`}
+                   : kind==='lesson'?  {title:`15-minute Mini-lesson — ${standard}`, text:`Objective: show understanding of ${standard}\n1) Hook (2m)\n2) Model (5m)\n3) Guided practice (5m)\n4) Exit Ticket (3m)`}
+                   : {title:`${standard} — ${atype} (${difficulty})`, text:`Directions: Complete all items.\n1) …\n2) …\n3) …`};
+        setModal({heading: templ.title, content: templ.text});
       }
     }
 
     function saveScore(){
       const standard = selectedStandard || standards[0]; if(!standard) return alert('Pick a standard to store the score under.');
-      const student = selectedStudent; if(!student) return alert('Select a student first.');
+      if(!selectedStudent) return alert('Select a student first.');
       const val = Number(document.getElementById('score-input').value);
       if(!Number.isFinite(val) || val<0 || val>100) return alert('Enter a score 0–100');
-      const next = roster.map(s=> s.id===student.id? {...s, scores:{...s.scores,[standard]:val}}: s);
+      const next = roster.map(s=> s.id===selectedStudent.id? {...s, scores:{...s.scores,[standard]:val}}: s);
       setRoster(next);
     }
 
@@ -511,8 +478,8 @@ Return strict JSON: {"title","text"}.`;
           </div>
           <div className="ml-auto flex gap-2">
             <button className="px-3 py-2 rounded bg-slate-200" onClick={()=>run('explain')}>Explain Standard</button>
-            <button className="px-3 py-2 rounded bg-emerald-600 text-white" onClick={()=>run('lesson')}>Lesson Idea</button>
-            <button className="px-3 py-2 rounded bg-blue-600 text-white" onClick={()=>run('assign')}>Generate AI Assignment</button>
+            <button className="px-3 py-2 rounded bg-[var(--brand-gold)] text-[var(--brand-ink)] font-medium" onClick={()=>run('lesson')}>Lesson Idea</button>
+            <button className="px-3 py-2 rounded bg-[var(--brand-blue)] text-white" onClick={()=>run('assign')}>Generate Assignment</button>
           </div>
         </div>
 
@@ -537,7 +504,7 @@ Return strict JSON: {"title","text"}.`;
               <div className="prose">{modal.content}</div>
               <div className="mt-4 flex justify-end gap-2 no-print">
                 <button onClick={()=>setModal(null)} className="px-3 py-2 rounded bg-slate-200">Close</button>
-                <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-blue-600 text-white">Print</button>
+                <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-[var(--brand-blue)] text-white">Print</button>
               </div>
             </div>
           </div>
@@ -581,76 +548,14 @@ Return strict JSON: {"title","text"}.`;
                 return <div key={k} className={`rounded-xl p-4 ${cls}`}><div className="text-xs font-medium mb-1">{k}</div><div className="text-2xl font-semibold">{Number.isFinite(v)?v:0}</div></div>;
               })}
             </div>
-            <div className="no-print"><button className="px-3 py-2 rounded bg-slate-200" onClick={()=>window.print()}>Print Tracker View</button></div>
+            <div className="no-print"><button className="px-3 py-2 rounded bg-slate-200" onClick={()=>window.print()}>Print</button></div>
           </>
         )}
       </div>
     );
   }
 
-  function TrackerAI({model,roster,subject}){
-    const [studentId,setStudentId]=React.useState(roster[0]?.id||'');
-    const [result,setResult]=React.useState(null);
-    const student = React.useMemo(()=> roster.find(s=>s.id===studentId), [studentId,roster]);
-
-    async function run(){
-      const responseSchema={type:'object',properties:{
-        strengths:{type:'array',items:{type:'string'}}, weaknesses:{type:'array',items:{type:'string'}}, suggestions:{type:'array',items:{type:'string'}}
-      },required:['strengths','weaknesses','suggestions']};
-      const systemPrompt=`You are a precise 1:1 tutor. Output strict JSON.`;
-      const userPrompt=`Analyze this student's scores across standards. Give 3 strengths, 3 weaknesses, 2 suggestions. JSON only. Student: ${JSON.stringify(student)}`;
-      try{
-        const ai = await withTimeout(callGemini({model,systemPrompt,userPrompt,responseSchema}), 20000);
-        setResult({
-          strengths:Array.isArray(ai?.strengths)?ai.strengths:[],
-          weaknesses:Array.isArray(ai?.weaknesses)?ai.weaknesses:[],
-          suggestions:Array.isArray(ai?.suggestions)?ai.suggestions:[]
-        });
-      }catch(e){
-        const entries = Object.entries(student?.scores||{}).sort((a,b)=>(b[1]??0)-(a[1]??0));
-        const strengths = entries.slice(0,3).map(([k,v])=>`${k}: solid (~${v??0})`);
-        const weaknesses = entries.slice(-3).map(([k,v])=>`${k}: needs focus (~${v??0})`);
-        const suggestions = [
-          'Target the two lowest standards 10 min/day using worked examples.',
-          'Do a mixed review weekly with error analysis.'
-        ];
-        setResult({strengths,weaknesses,suggestions});
-      }
-    }
-
-    return (
-      <div className="bg-white border rounded-xl p-4 space-y-3 printable">
-        <div className="no-print flex items-end gap-3">
-          <div>
-            <label className="block text-sm font-medium">Student</label>
-            <select className="mt-1 border rounded px-3 py-2" value={studentId} onChange={e=>setStudentId(e.target.value)}>
-              {roster.map(s=><option key={s.id} value={s.id}>{s.name} — {s.id}</option>)}
-            </select>
-          </div>
-          <button onClick={run} className="px-3 py-2 rounded bg-indigo-600 text-white">AI Analysis</button>
-          <button onClick={()=>window.print()} className="px-3 py-2 rounded bg-slate-200">Print</button>
-        </div>
-        {result && (
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
-              <h4 className="font-semibold mb-2">Strengths</h4>
-              <ul className="list-disc pl-5 text-sm">{result.strengths.map((s,i)=><li key={i}>{s}</li>)}</ul>
-            </div>
-            <div className="bg-rose-50 border border-rose-200 rounded-xl p-4">
-              <h4 className="font-semibold mb-2">Weaknesses</h4>
-              <ul className="list-disc pl-5 text-sm">{result.weaknesses.map((s,i)=><li key={i}>{s}</li>)}</ul>
-            </div>
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-              <h4 className="font-semibold mb-2">Suggestions</h4>
-              <ul className="list-disc pl-5 text-sm">{result.suggestions.map((s,i)=><li key={i}>{s}</li>)}</ul>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  /* ---------------- Login + App ---------------- */
+  /* ---------------- Login + App (as a section in the site shell) ---------------- */
   function Login(){
     const [busy,setBusy]=React.useState(false);
     async function go(){
@@ -658,24 +563,22 @@ Return strict JSON: {"title","text"}.`;
       catch(e){ alert(e.message); } finally{ setBusy(false); }
     }
     return (
-      <div className="min-h-screen grid place-items-center">
-        <div className="bg-white border rounded-2xl shadow p-8 w-full max-w-md text-center">
-          <h1 className="text-2xl font-semibold mb-2">Sign in to Synapse</h1>
-          <p className="text-sm text-slate-600 mb-6">Use your Google account.</p>
-          <button onClick={go} disabled={busy} className="px-4 py-2 rounded bg-blue-600 text-white">{busy?'Signing in…':'Continue with Google'}</button>
-        </div>
+      <div className="bg-white border rounded-2xl shadow p-8 w-full max-w-md text-center mx-auto mt-10">
+        <img src="/logo.svg" alt="" className="w-12 h-12 mx-auto mb-3" />
+        <h1 className="text-2xl font-semibold mb-2">Sign in to Synapse</h1>
+        <p className="text-sm text-slate-600 mb-6">Use your Google account.</p>
+        <button onClick={go} disabled={busy} className="px-4 py-2 rounded bg-[var(--brand-blue)] text-white">{busy?'Signing in…':'Continue with Google'}</button>
       </div>
     );
   }
 
-  function App(){
-    const [active,setActive]=React.useState('generator');
+  function SynapseApp(){
     const [subject,setSubject]=React.useState('');
     const [grade,setGrade]=React.useState('');
-    const [model,setModel]=React.useState(GEMINI_DEFAULT);
     const [roster,setRoster]=React.useState([]);
     const [standards,setStandards]=React.useState([]);
     const [periods,setPeriods]=React.useState([]);
+    const [savingState,setSavingState]=React.useState('saved'); // 'idle' | 'saving' | 'saved'
 
     const [user,setUser]=React.useState(null);
     const isLoaded = React.useRef(false);
@@ -696,36 +599,24 @@ Return strict JSON: {"title","text"}.`;
       }
     }),[]);
 
+    // Auto-save with subtle indicator
     React.useEffect(()=>{
       if(!user || !isLoaded.current) return;
-      const t = setTimeout(()=> {
-        db.collection('users').doc(user.uid).collection('synapse').doc('state')
-          .set({subject,grade,roster,standards,periods},{merge:true});
-      }, 500);
+      setSavingState('saving');
+      const t = setTimeout(async ()=>{
+        try{
+          await db.collection('users').doc(user.uid).collection('synapse').doc('state').set({subject,grade,roster,standards,periods},{merge:true});
+          setSavingState('saved');
+          setTimeout(()=> setSavingState('idle'), 2000);
+        }catch(e){ console.warn('save state', e.message); setSavingState('idle'); }
+      }, 600);
       return ()=>clearTimeout(t);
     },[user,subject,grade,roster,standards,periods]);
-
-    const renderActiveTab = () => {
-      switch(active) {
-        case 'roster':
-          return <RosterTab subject={subject} roster={roster} setRoster={setRoster} setStandards={setStandards} setPeriods={setPeriods} />;
-        case 'groups':
-          return <GroupsTab model={model} subject={subject} standards={standards} periods={periods} roster={roster} />;
-        case 'tracker':
-          if (!roster.length) {
-            return <div className="bg-white border rounded-xl p-6 text-slate-600">Please upload a roster to track student progress.</div>
-          }
-          return <div className="space-y-6"><TrackerTab roster={roster}/><TrackerAI model={model} roster={roster} subject={subject}/></div>;
-        case 'generator':
-        default:
-          return <GeneratorTab model={model} subject={subject} grade={grade} standards={standards} setStandards={setStandards} roster={roster} setRoster={setRoster} />;
-      }
-    }
 
     if(!user) return <Login />;
 
     return (
-      <Shell active={active} setActive={setActive}>
+      <div className="space-y-6">
         <div className="mb-4 flex items-center justify-between no-print">
           <div className="flex items-center gap-3">
             {user?.photoURL && <img src={user.photoURL} alt="" className="w-8 h-8 rounded-full" />}
@@ -734,9 +625,85 @@ Return strict JSON: {"title","text"}.`;
           <button onClick={()=>auth.signOut()} className="text-sm px-3 py-1.5 rounded bg-slate-200">Sign out</button>
         </div>
 
-        <ContextBar subject={subject} setSubject={setSubject} grade={grade} setGrade={setGrade} model={model} setModel={setModel} />
-        <div className="mt-6">{renderActiveTab()}</div>
-      </Shell>
+        <div className="bg-white border rounded-xl p-4 flex flex-col md:flex-row gap-3 items-start md:items-end justify-between no-print">
+          <div className="flex-1">
+            <label className="block text-sm font-medium">Subject</label>
+            <input className="mt-1 w-full border rounded-lg px-3 py-2" value={subject} onChange={e=>setSubject(e.target.value)} placeholder="e.g., 7th Grade Florida Civics" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Grade</label>
+            <input className="mt-1 w-36 border rounded-lg px-3 py-2" value={grade} onChange={e=>setGrade(e.target.value)} placeholder="7" />
+          </div>
+          <div className="text-xs text-slate-500 mt-6 md:mt-0">Powered by <span className="font-semibold">Gemini</span></div>
+        </div>
+
+        <div className="grid gap-6">
+          <GeneratorTab subject={subject} grade={grade} standards={standards} setStandards={setStandards} roster={roster} setRoster={setRoster} />
+          <RosterTab subject={subject} roster={roster} setRoster={setRoster} setStandards={setStandards} setPeriods={setPeriods} />
+          {!!periods.length && !!standards.length && <GroupsTab subject={subject} standards={standards} periods={periods} roster={roster} />}
+          {!!roster.length && <TrackerTab roster={roster}/>}
+        </div>
+      </div>
+    );
+  }
+
+  /* ---------------- Top-level site pages ---------------- */
+  function Home(){
+    return (
+      <div className="grid md:grid-cols-2 gap-6 items-start">
+        <div className="bg-white border rounded-xl p-6">
+          <h2 className="text-2xl font-semibold mb-2">Welcome to Synapse Co-Pilot</h2>
+          <p className="text-slate-600">An AI teaching suite to generate lessons, form DI groups, and track student progress — securely, in your browser.</p>
+          <ul className="list-disc pl-6 mt-4 text-slate-700 space-y-1">
+            <li>Upload rosters (CSV/XLSX/PDF/DOCX)</li>
+            <li>Auto-generate standards-aligned materials</li>
+            <li>Intelligent group formation</li>
+            <li>Progress tracking and visualizations</li>
+          </ul>
+          <div className="mt-4">
+            <a href="#synapse" className="inline-block px-4 py-2 rounded bg-[var(--brand-blue)] text-white">Open Synapse Co-Pilot</a>
+          </div>
+        </div>
+        <div className="bg-white border rounded-xl p-6">
+          <h3 className="text-lg font-semibold">Quick Tips</h3>
+          <ol className="list-decimal pl-6 mt-2 text-slate-700 space-y-1">
+            <li>Sign in with Google to unlock tools.</li>
+            <li>Set Subject & Grade, then auto-populate standards.</li>
+            <li>Use Print buttons for handouts or records.</li>
+          </ol>
+        </div>
+      </div>
+    );
+  }
+
+  function Resources(){
+    return (
+      <div className="bg-white border rounded-xl p-6">
+        <h2 className="text-xl font-semibold mb-2">Resources</h2>
+        <p className="text-slate-600">Coming soon: planning templates, best practices, and exemplar lessons.</p>
+      </div>
+    );
+  }
+
+  function App(){
+    const [active,setActive]=React.useState((location.hash.replace('#','')||'home'));
+    const [savingState,setSavingState]=React.useState('idle');
+    React.useEffect(()=>{
+      const onHash=()=> setActive(location.hash.replace('#','')||'home');
+      window.addEventListener('hashchange',onHash);
+      return ()=>window.removeEventListener('hashchange',onHash);
+    },[]);
+
+    // Simple page switch
+    let page = null;
+    if(active==='home') page=<Home />;
+    else if(active==='resources') page=<Resources />;
+    else page=<SynapseApp />; // 'synapse' or anything else => app
+
+    return (
+      <SiteShell active={active} setActive={(k)=>{ location.hash=k; setActive(k);} } savingState={savingState}>
+        {page}
+      </SiteShell>
     );
   }
 
