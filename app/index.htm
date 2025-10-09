@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Synapse Co-Pilot — App</title>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="icon" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <meta name="theme-color" content="#1e40af">
+
+  <!-- Tailwind -->
+  <script>
+    window.tailwind = window.tailwind || {};
+    tailwind.config = { theme: { extend: { colors: { brandBlue:'#1e40af', brandGold:'#d4af37' } } } };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React UMD (prod) -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+
+  <!-- Firebase compat -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+
+  <style>
+    body{background:#0b1220;color:#fff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  </style>
+</head>
+<body>
+  <!-- Always-visible boot + status -->
+  <div id="boot" class="text-center py-3 border-b border-white/10">
+    <div class="font-bold">Booting Synapse…</div>
+    <div id="status" class="text-xs text-white/70">Loading scripts…</div>
+  </div>
+  <div id="root"></div>
+
+  <script>
+    (function(){
+      const setS = (m)=>{ const el=document.getElementById('status'); if(el) el.textContent=m; };
+      const err  = (m)=>{ setS('Error: ' + m); console.error('[Synapse]', m); };
+      window.addEventListener('error', e => err(e.error?.message || e.message || 'Script error'));
+      window.addEventListener('unhandledrejection', e => err(e.reason?.message || String(e.reason)));
+
+      function haveLibs(){ return !!(window.React && window.ReactDOM && window.firebase); }
+      let tries=60; (function wait(){ if(haveLibs()){ setS('Libraries loaded. Starting app…'); start(); return; }
+        if(--tries<=0){ err('Required libraries failed to load.'); return; } setTimeout(wait,150); })();
+
+      function start(){
+        // ---- Firebase client (Google only) ----
+        const FB_CONFIG = {
+          apiKey: "AIzaSyBT95w8fzJr9J5WCYe8iwFkvSrwXds5sms",
+          authDomain: "trackopmn.firebaseapp.com",
+          projectId: "trackopmn",
+          storageBucket: "trackopmn.appspot.com",
+          appId: "1:325895934431:web:50665d95aab0ac1a4b746a",
+          messagingSenderId: "325895934431",
+          measurementId: "G-QX53NY1CJC"
+        };
+        try{ firebase.apps.length ? firebase.app() : firebase.initializeApp(FB_CONFIG); }catch{}
+        const auth = firebase.auth();
+
+        const h = React.createElement;
+
+        // ---- Endpoints ----
+        const FN = {
+          SEARCH: "/.netlify/functions/searchStandard",
+          GEMINI: "/.netlify/functions/synapseGemini",
+          GROUPS: "/.netlify/functions/groupIntelligence"
+        };
+
+        async function idToken(){
+          const u = auth.currentUser; if(!u) throw new Error('Not signed in');
+          return await u.getIdToken();
+        }
+        async function call(fn, payload){
+          const token = await idToken();
+          const res = await fetch(fn, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json','Authorization':`Bearer ${token}`},
+            body: JSON.stringify(payload||{})
+          });
+          const text = await res.text();
+          if(!res.ok) throw new Error(text || `${fn} ${res.status}`);
+          return JSON.parse(text);
+        }
+
+        // ---- UI Components (no JSX) ----
+        function Navbar(props){
+          async function signOut(){ await auth.signOut(); }
+          return h('header', { className:'border-b border-white/10 bg-[#0b1220]/90 backdrop-blur' },
+            h('div', { className:'max-w-6xl mx-auto px-4 py-3 flex items-center gap-3' },
+              h('img',{src:'/logo.svg',alt:'',className:'w-7 h-7'}),
+              h('div',{className:'font-semibold text-lg mr-auto'},'Synapse Co-Pilot'),
+              h('nav',{className:'hidden sm:flex gap-6 text-white/80'},
+                h('a',{href:'#home',className:'hover:opacity-80'},'Home'),
+                h('a',{href:'#roster',className:'hover:opacity-80'},'Roster'),
+                h('a',{href:'#groups',className:'hover:opacity-80'},'Groups')
+              ),
+              h('div',{className:'text-xs sm:text-sm text-white/70 mr-2 hidden sm:block'}, props.user?.email || ''),
+              h('button',{onClick:signOut,className:'rounded bg-white/10 hover:bg-white/20 px-3 py-1.5 min-h-[36px]'},'Sign out')
+            )
+          );
+        }
+
+        function Select({label, value, onChange, options, placeholder}){
+          return h('label',{className:'block'},
+            h('span',{className:'text-xs opacity-80'},label),
+            h('select',{
+              className:'mt-1 w-full bg-white/5 border border-white/10 rounded px-2 py-2',
+              value:value, onChange:e=>onChange(e.target.value)
+            },
+              [h('option',{key:'__',value:''}, placeholder || 'Select...')]
+                .concat(options.map(o=>h('option',{key:o,value:o},o)))
+            )
+          );
+        }
+
+        function FetchStandardsCard(){
+          const [subject,setSubject]=React.useState('');
+          const [grade,setGrade]    = React.useState('');
+          const [msg,setMsg]        = React.useState('');
+          const [items,setItems]    = React.useState([]);
+
+          const subjects=['Civics','Science','Mathematics','English Language Arts'];
+          const grades=['K','1','2','3','4','5','6','7','8','9','10','11','12'];
+
+          async function go(){
+            try{
+              setMsg('Fetching standards…');
+              const res = await call(FN.SEARCH, {subject, grade});
+              setItems(res.standards||[]);
+              setMsg(res.strategy ? `Loaded ✓ (Matched: ${res.resolvedSubject}${res.resolvedGrade?' '+res.resolvedGrade:''})` : 'Loaded ✓');
+            }catch(e){ setMsg('Error: '+(e.message||e)); }
+          }
+
+          return h('div',{className:'rounded-2xl bg-white/5 border border-white/10 p-6'},
+            h('h3',{className:'text-2xl font-bold mb-1'},'Fetch Standards'),
+            h('p',{className:'text-white/80 mb-4'},'Select a subject and grade to fetch standards'),
+            h('div',{className:'grid sm:grid-cols-2 gap-3 mb-3'},
+              h(Select,{label:'Subject',value:subject,onChange:setSubject,options:subjects,placeholder:'Subject'}),
+              h(Select,{label:'Grade',value:grade,onChange:setGrade,options:grades,placeholder:'Grade'})
+            ),
+            h('button',{onClick:go,className:'rounded bg-white text-black px-3 py-2 min-h-[44px]'},'Fetch Standards'),
+            h('p',{className:'text-sm text-white/70 mt-3'},msg),
+            h('ul',{className:'text-sm mt-3 space-y-1 max-h-64 overflow-auto'},
+              items.length? items.map(s=>h('li',{key:s.code},h('span',{className:'font-semibold'},s.code),' — ',s.title))
+                          : [h('li',{key:'empty',className:'opacity-70'},'No standards loaded yet.')]
+            )
+          );
+        }
+
+        function UploadRosterCard(){
+          return h('div',{id:'roster',className:'rounded-2xl bg-white/5 border border-white/10 p-6'},
+            h('h3',{className:'text-2xl font-bold mb-1'},'Upload Roster'),
+            h('p',{className:'text-white/80 mb-4'},'Upload a roster file to view and organize your classroom'),
+            h('input',{type:'file',className:'block w-full text-black rounded p-2 bg-white mb-3',accept:'.csv,.xlsx,.xls'}),
+            h('button',{className:'rounded bg-white text-black px-3 py-2 min-h-[44px]'},'Upload')
+          );
+        }
+
+        function App(){
+          const [user,setUser]=React.useState(()=>auth.currentUser);
+          React.useEffect(()=>auth.onAuthStateChanged(setUser),[]);
+          if(!user){
+            async function signIn(){
+              const provider = new firebase.auth.GoogleAuthProvider();
+              try {
+                await auth.signInWithPopup(provider).catch(async e=>{
+                  if(e.code==='auth/popup-blocked'||e.code==='auth/operation-not-supported-in-this-environment'){
+                    await auth.signInWithRedirect(provider);
+                  } else { throw e; }
+                });
+              } catch(err){ alert('Sign-in failed: ' + (err.message||err)); }
+            }
+            return h('div',{className:'min-h-screen flex items-center justify-center p-6'},
+              h('div',{className:'w-full max-w-sm bg-white/5 border border-white/10 rounded-xl p-6 text-center'},
+                h('img',{src:'/logo.svg',alt:'',className:'w-9 h-9 mx-auto mb-2'}),
+                h('h1',{className:'text-xl font-bold mb-2'},'Synapse Co-Pilot'),
+                h('p',{className:'text-sm opacity-80 mb-4'},'Sign in with Google to continue.'),
+                h('button',{onClick:signIn,className:'w-full min-h-[44px] bg-white text-black rounded px-3 py-2'},'Continue with Google')
+              )
+            );
+          }
+
+          return h('div',null,
+            h(Navbar,{user}),
+            h('main',{className:'max-w-6xl mx-auto px-4 py-10'},
+              h('h1',{className:'text-4xl sm:text-5xl font-extrabold text-center mb-8'},'Welcome to Synapse Co-Pilot'),
+              h('div',{className:'grid sm:grid-cols-2 gap-6'},
+                h(FetchStandardsCard),
+                h(UploadRosterCard)
+              )
+            )
+          );
+        }
+
+        const mount = ()=>ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+        (document.readyState==='loading')?document.addEventListener('DOMContentLoaded',mount):mount();
+        setS('Rendering…');
+      }
+    })();
+  </script>
+</body>
+</html>
