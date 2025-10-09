@@ -1,14 +1,13 @@
 {
-  "name": "synapse-netlify",
+  "name": "synapse-copilot",
   "private": true,
   "scripts": {
-    "build:noop": "echo 'No build step required'"
+    "build:noop": "echo 'No build step — static site + functions'",
+    "start": "npx serve -l 3000 ."
   },
+  "engines": { "node": ">=20" },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
-    "firebase-admin": "^12.5.0"
-  },
-  "engines": {
-    "node": ">=20 <21"
+    "firebase-admin": "^12.6.0"
   }
 }
