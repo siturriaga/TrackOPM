@@ -1,46 +1,24 @@
-// /netlify/functions/searchStandard.js
-// Fetch & normalize Florida standards (CPALMS/FLDOE) based on Subject + Grade.
-// Uses curated catalog as fallback. Caches results in-memory per cold start.
-
-const { getUser } = require("./_lib/auth");
-const { moderateInput } = require("./_lib/moderation");
-const { rateLimit } = require("./_lib/rateLimiter");
+const { requireUser, json, badRequest } = require("./auth");
 const catalog = require("./standardsCatalog");
 
-const cache = new Map(); // key "Subject|Grade" -> { standards: [...] }
-
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   try {
-    const uid = await getUser(event);
-    await rateLimit(uid, "searchStandard", 60, 60); // 60 req / 60s bucket
-    const body = JSON.parse(event.body || "{}");
-    const subject = String(body.subject || "").trim();
-    const grade = String(body.grade || "").trim();
+    await requireUser(event); // verifies Google ID token
 
-    if (!subject || !grade) {
-      return resp(400, { error: "subject and grade are required" });
-    }
-    await moderateInput(`${subject} ${grade}`);
+    const body = JSON.parse(event.body || "{}");
+    let { subject, grade } = body;
+    if (!subject || !grade) return badRequest("Both 'subject' and 'grade' are required");
+
+    subject = String(subject).trim().toLowerCase();
+    grade = String(grade).trim();
+
+    const aliases = { ela:"english language arts", english:"english language arts", math:"mathematics" };
+    subject = aliases[subject] || subject;
 
     const key = `${subject}|${grade}`;
-    if (cache.has(key)) return resp(200, cache.get(key));
-
-    // 1) Try curated catalog first (fast & reliable)
-    let standards = catalog.lookup(subject, grade);
-
-    // 2) TODO (optional): live fetch from official sources (CPALMS/FLDOE).
-    // You can extend here with scraping/API calls and then merge/normalize.
-    // Keep the same return shape.
-    // For now, curated set covers major FL middle school subjects.
-
-    const payload = { standards };
-    cache.set(key, payload);
-    return resp(200, payload);
+    const standards = catalog[key] || [];
+    return json(200, { standards });
   } catch (err) {
-    return resp(500, { error: err.message || String(err) });
+    return json(500, { error: err?.message || String(err) });
   }
 };
-
-function resp(statusCode, body) {
-  return { statusCode, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) };
-}
