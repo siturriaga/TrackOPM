@@ -1,235 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Synapse Co-Pilot — Bridging the Gap in Education</title>
 
-  <!-- Tailwind config then CDN -->
-  <script>
-    window.tailwind = window.tailwind || {};
-    tailwind.config = {
-      theme: { extend: { colors: { brandBlue:'#1e40af', brandGold:'#d4af37' } } }
-    };
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- React (production) + ReactDOM (production) -->
-  <link rel="preconnect" href="https://unpkg.com" crossorigin>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-
-  <!-- Firebase (compat) -->
-  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-
-  <!-- Icons (optional but recommended) -->
+  <!-- Brand favicons (you already supplied these) -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon.ico">
   <link rel="icon" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <meta name="theme-color" content="#1e40af">
+  <meta property="og:image" content="/og-image.png" />
+
+  <!-- Tailwind -->
+  <script>
+    window.tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brandBlue: "#1e40af", brandGold: "#d4af37" },
+          backgroundImage: {
+            'hero': 'linear-gradient(90deg,#101827 0%, #11223a 55%, #232b2b 100%)'
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    body { background:#0b1220; color:#fff; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+    body { background:#0b1220; color:#fff; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
   </style>
 </head>
-
 <body>
-  <!-- Always-visible boot banner (even if JS/libs fail) -->
-  <div id="boot-banner" style="text-align:center;padding:16px">
-    <strong>Booting Synapse…</strong>
-    <div id="synapse-status" style="font-size:13px;opacity:.8">Loading scripts…</div>
-    <noscript><div style="margin-top:10px;color:#ffb4b4">Enable JavaScript to use Synapse.</div></noscript>
-  </div>
+  <!-- NAV -->
+  <header class="border-b border-white/10 bg-[#0b1220]/90 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <img src="/logo.svg" alt="" class="w-7 h-7">
+      <div class="font-semibold text-lg mr-auto">Synapse Co-Pilot</div>
+      <a href="#features" class="hover:opacity-80">Features</a>
+      <a href="#privacy" class="hover:opacity-80">Privacy</a>
+      <a href="/app/" class="ml-4 rounded bg-white text-black px-3 py-1.5 min-h-[40px]">Open App</a>
+    </div>
+  </header>
 
-  <div id="root"></div>
+  <!-- HERO -->
+  <section class="bg-hero">
+    <div class="max-w-6xl mx-auto px-4 py-16 sm:py-24 grid sm:grid-cols-[1fr,1fr] gap-10 items-center">
+      <div class="p-4">
+        <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight">Welcome to Synapse Co-Pilot</h1>
+        <p class="mt-4 text-white/80 text-lg">Standards-aware AI for teachers: fetch standards, generate lessons, form groups — securely.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="/app/" class="rounded bg-white text-black px-4 py-2 min-h-[44px]">Open the App</a>
+          <a href="#features" class="rounded border border-white/20 px-4 py-2 min-h-[44px]">Learn more</a>
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <img src="/apple-touch-icon.png" alt="Synapse icon" class="w-40 h-40 rounded-3xl shadow-lg">
+      </div>
+    </div>
+  </section>
 
-  <!-- Plain JS monitor (no Babel) -->
-  <script>
-    (function(){
-      const setStatus = (m)=>{ const el=document.getElementById('synapse-status'); if(el) el.textContent=m; };
-      const showErr   = (m)=>{ setStatus('Error: ' + m); console.error('[Synapse]', m); };
-      window.addEventListener('error', e => showErr(e.error?.message || e.message || 'Script error'));
-      window.addEventListener('unhandledrejection', e => showErr(e.reason?.message || String(e.reason)));
+  <!-- FEATURES -->
+  <section id="features" class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold mb-6">What you can do</h2>
+    <div class="grid sm:grid-cols-3 gap-6">
+      <div class="rounded-xl border border-white/10 p-5 bg-white/5">
+        <h3 class="font-semibold text-lg mb-2">Fetch Standards</h3>
+        <p class="text-white/80">Type a subject and grade (even with typos) and get the right standards instantly.</p>
+      </div>
+      <div class="rounded-xl border border-white/10 p-5 bg-white/5">
+        <h3 class="font-semibold text-lg mb-2">Generate Lessons</h3>
+        <p class="text-white/80">Ask for lessons or quizzes aligned to a standard. Tuned for classroom tone.</p>
+      </div>
+      <div class="rounded-xl border border-white/10 p-5 bg-white/5">
+        <h3 class="font-semibold text-lg mb-2">Create Groups</h3>
+        <p class="text-white/80">Upload a roster and form heterogeneous or homogeneous groups quickly.</p>
+      </div>
+    </div>
+  </section>
 
-      // Check libs and start
-      function haveLibs(){
-        return !!(window.React && window.ReactDOM && window.firebase);
-      }
-      let tries = 60; // ~9s max
-      (function wait(){
-        if (haveLibs()) { setStatus('Libraries loaded. Starting app…'); startApp(); return; }
-        if (--tries <= 0) { showErr('Required libraries failed to load (React/Firebase).'); return; }
-        setTimeout(wait, 150);
-      })();
+  <!-- PRIVACY -->
+  <section id="privacy" class="max-w-6xl mx-auto px-4 pb-20">
+    <h2 class="text-3xl font-bold mb-4">Private & Secure</h2>
+    <p class="text-white/80 max-w-3xl">
+      Google Sign-In only. Every request to our servers includes a verified Firebase ID token and is scoped to your user ID.
+      We don’t use anonymous auth and we avoid logging personal content.
+    </p>
+  </section>
 
-      function startApp(){
-        // Firebase config
-        const FB_CONFIG = {
-          apiKey: "AIzaSyBT95w8fzJr9J5WCYe8iwFkvSrwXds5sms",
-          authDomain: "trackopmn.firebaseapp.com",
-          projectId: "trackopmn",
-          storageBucket: "trackopmn.appspot.com",
-          appId: "1:325895934431:web:50665d95aab0ac1a4b746a",
-          messagingSenderId: "325895934431",
-          measurementId: "G-QX53NY1CJC"
-        };
-        try { firebase.apps.length ? firebase.app() : firebase.initializeApp(FB_CONFIG); } catch {}
-
-        const auth = firebase.auth();
-        const h = React.createElement;
-
-        // Endpoints
-        const GEMINI_URL = "/.netlify/functions/synapseGemini";
-        const SEARCH_URL = "/.netlify/functions/searchStandard";
-        const GROUPS_URL = "/.netlify/functions/groupIntelligence";
-
-        async function idToken(){
-          const u = auth.currentUser;
-          if (!u) throw new Error("Not signed in");
-          return await u.getIdToken();
-        }
-        async function callSearch({subject, grade}){
-          const token = await idToken();
-          const res = await fetch(SEARCH_URL, {
-            method:'POST',
-            headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},
-            body: JSON.stringify({subject, grade})
-          });
-          const txt = await res.text();
-          if (!res.ok) throw new Error(txt || `Search ${res.status}`);
-          return JSON.parse(txt);
-        }
-        async function callGemini(payload){
-          const token = await idToken();
-          const res = await fetch(GEMINI_URL, {
-            method:'POST',
-            headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},
-            body: JSON.stringify(payload)
-          });
-          const txt = await res.text();
-          if (!res.ok) throw new Error(txt || `Gemini ${res.status}`);
-          return JSON.parse(txt);
-        }
-        async function callGroups(payload){
-          const token = await idToken();
-          const res = await fetch(GROUPS_URL, {
-            method:'POST',
-            headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},
-            body: JSON.stringify(payload)
-          });
-          const txt = await res.text();
-          if (!res.ok) throw new Error(txt || `Groups ${res.status}`);
-          return JSON.parse(txt);
-        }
-
-        // Components (no JSX)
-        function SignIn(){
-          async function signIn(){
-            const provider = new firebase.auth.GoogleAuthProvider();
-            try {
-              await auth.signInWithPopup(provider).catch(async (e)=>{
-                if (e.code === 'auth/popup-blocked' || e.code === 'auth/operation-not-supported-in-this-environment') {
-                  await auth.signInWithRedirect(provider);
-                } else { throw e; }
-              });
-            } catch(err){ alert('Sign-in failed: ' + (err.message || err)); }
-          }
-          return h('div', { className:'min-h-screen flex items-center justify-center p-6' },
-            h('div', { className:'w-full max-w-sm bg-white/5 border border-white/10 rounded-xl p-6 text-center' },
-              h('h1', { className:'text-xl font-bold mb-2' }, 'Synapse Co-Pilot'),
-              h('p',  { className:'text-sm opacity-80 mb-4' }, 'Sign in with your Google account to continue.'),
-              h('button', { onClick:signIn, className:'w-full min-h-[44px] bg-white text-black rounded px-3 py-2' }, 'Continue with Google')
-            )
-          );
-        }
-
-        function TopBar(props){
-          async function signOut(){ await auth.signOut(); }
-          return h('header', { className:'border-b border-white/10' },
-            h('div', { className:'max-w-7xl mx-auto px-4 py-3 flex items-center gap-3' },
-              h('img', { src:'/logo.svg', alt:'', className:'w-6 h-6', onError:(e)=>{e.target.style.display='none';}}),
-              h('div', { className:'mr-auto font-semibold' }, 'Synapse Co-Pilot'),
-              h('div', { className:'text-sm opacity-80 hidden sm:block' }, props.user && props.user.email || ''),
-              h('button', { onClick:signOut, className:'min-h-[36px] px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded' }, 'Sign out')
-            )
-          );
-        }
-
-        function App(){
-          const ReactUseState = React.useState;
-          const ReactUseEffect = React.useEffect;
-
-          const [subject, setSubject] = ReactUseState('Civics');
-          const [grade,   setGrade]   = ReactUseState('7');
-          const [standards, setStandards] = ReactUseState([]);
-          const [msg, setMsg] = ReactUseState('Ready');
-
-          async function fetchStandards(){
-            try {
-              setMsg('Fetching standards…');
-              const res = await callSearch({subject, grade});
-              setStandards(res.standards || []);
-              setMsg('Loaded ✓' + (res.resolvedSubject ? ` (Matched: ${res.resolvedSubject}${res.resolvedGrade? ' ' + res.resolvedGrade : ''})` : ''));
-            } catch(e) {
-              setMsg('Error: ' + (e.message || e));
-            }
-          }
-
-          return h('div', null,
-            h(TopBar, { user: firebase.auth().currentUser }),
-            h('main', { className:'max-w-3xl mx-auto p-6' },
-              h('p', { className:'text-sm opacity-80 mb-4' }, msg),
-              h('div', { className:'grid gap-3 sm:grid-cols-3 mb-4' },
-                h('label', { className:'block' },
-                  h('span', { className:'text-xs opacity-80' }, 'Subject'),
-                  h('input', {
-                    className:'mt-1 w-full bg-white/5 border border-white/10 rounded px-2 py-2',
-                    value:subject,
-                    onChange:(e)=>setSubject(e.target.value)
-                  })
-                ),
-                h('label', { className:'block' },
-                  h('span', { className:'text-xs opacity-80' }, 'Grade'),
-                  h('input', {
-                    className:'mt-1 w-full bg-white/5 border border-white/10 rounded px-2 py-2',
-                    value:grade,
-                    onChange:(e)=>setGrade(e.target.value)
-                  })
-                ),
-                h('div', { className:'flex items-end' },
-                  h('button', { onClick:fetchStandards, className:'w-full min-h-[44px] bg-white text-black rounded px-3 py-2' }, 'Fetch Standards')
-                )
-              ),
-              h('ul', { className:'text-sm space-y-1' },
-                (standards && standards.length
-                  ? standards.map((s)=> h('li', { key:s.code }, h('span', { className:'font-semibold' }, s.code), ' — ', s.title))
-                  : [ h('li', { key:'empty', className:'opacity-70' }, 'No standards loaded yet.') ])
-              )
-            )
-          );
-        }
-
-        function Root(){
-          const [user, setUser] = React.useState(()=> auth.currentUser);
-          React.useEffect(()=> auth.onAuthStateChanged(setUser), []);
-          return user ? React.createElement(App) : React.createElement(SignIn);
-        }
-
-        // Mount after DOM is ready
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', () => ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(Root)));
-        } else {
-          ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(Root));
-        }
-
-        // Update boot status
-        setStatus('Rendering…');
-      }
-    })();
-  </script>
+  <footer class="border-t border-white/10 py-6 text-center text-white/70 text-sm">
+    © <span id="y"></span> Synapse Co-Pilot. <a class="underline" href="/app/">Open App</a>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
