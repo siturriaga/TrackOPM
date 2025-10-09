@@ -1,54 +1,41 @@
-// POST { roster:[{name,id,score}], standard, goal? } -> DI groups
-// goal: "heterogeneous" | "homogeneous" (default: homogeneous thirds)
-const { requireUser, json, badRequest } = require("./_lib/auth");
-const { rateLimit } = require("./_lib/rateLimiter");
+const { requireUser, json, badRequest } = require('./auth');
 
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") return json({ error: "Method not allowed" }, 405);
-  const u = await requireUser(event);
-  if (u.error) return u.error;
+  try {
+    const user = await requireUser(event);
+    const body = JSON.parse(event.body || "{}");
+    const { roster = [], goal = "heterogeneous", groupSize = 4 } = body;
 
-  const { roster = [], standard = "", goal = "homogeneous" } = safeParse(event.body);
-  if (!Array.isArray(roster) || roster.length === 0) return badRequest("Missing or empty roster");
-
-  const rl = await rateLimit({ uid: u.uid, fn: "groupIntelligence", maxPerMinute: 60 });
-  if (!rl.allowed) return json({ error: "Rate limit exceeded" }, 429);
-
-  // Normalize and sort by score
-  const data = roster.map(r => ({ name: r.name || "N/A", id: r.id || "", score: Number(r.score) || 0 }));
-  data.sort((a,b) => a.score - b.score);
-
-  let groups = [];
-  if (goal === "heterogeneous") {
-    // Pair top with bottom (zip)
-    const left = data.slice(0, Math.ceil(data.length/2));
-    const right = data.slice(Math.ceil(data.length/2)).reverse();
-    const pairs = [];
-    for (let i=0; i<left.length; i++) {
-      const a = left[i], b = right[i];
-      if (a && b) pairs.push([a,b]); else pairs.push([a].filter(Boolean));
+    if (!Array.isArray(roster) || roster.length === 0) {
+      return badRequest("Field 'roster' must be a non-empty array");
     }
-    groups = pairs.map((arr, i) => ({
-      name: `Mixed Group ${i+1}`,
-      criteria: "Heterogeneous pairing",
-      members: arr.map(x => x?.name).filter(Boolean),
-      strategy: "Think-pair-share; peer explanation; role cards",
-    }));
-  } else {
-    // Homogeneous thirds
-    const n = data.length;
-    const t = Math.ceil(n/3);
-    groups = [
-      { name:'Remediation', criteria:'Lower third', members:data.slice(0,t).map(x=>x.name), strategy:'Re-teach, 2 guided items' },
-      { name:'Practice', criteria:'Middle third', members:data.slice(t,2*t).map(x=>x.name), strategy:'Mixed practice, pair-share' },
-      { name:'Enrichment', criteria:'Upper third', members:data.slice(2*t).map(x=>x.name), strategy:'Extension, explain reasoning' }
-    ];
+
+    // naive attribute to spread by
+    const copy = roster.map((s,i)=>({i, ...s}));
+    // sort by score descending; tweak per goal
+    copy.sort((a,b)=>(+b.score||0)-(+a.score||0));
+
+    let groups = [];
+    if (goal === "homogeneous") {
+      for (let i = 0; i < copy.length; i += groupSize) {
+        groups.push({ name: `Group ${groups.length+1}`, members: copy.slice(i, i+groupSize) });
+      }
+    } else { // heterogeneous: snake draft
+      const lanes = Array.from({length: groupSize}, ()=>[]);
+      copy.forEach((s,idx)=>{
+        const lane = (Math.floor(idx/groupSize)%2===0) ? (idx%groupSize) : (groupSize-1-(idx%groupSize));
+        lanes[lane].push(s);
+      });
+      const maxLen = Math.max(...lanes.map(l=>l.length));
+      for (let r=0;r<maxLen;r++){
+        const g = [];
+        for (let c=0;c<groupSize;c++){ if(lanes[c][r]) g.push(lanes[c][r]); }
+        if (g.length) groups.push({ name: `Group ${groups.length+1}`, members: g });
+      }
+    }
+
+    return json(200, { uid: user.uid, groups });
+  } catch (e) {
+    return json(e.statusCode || 500, { error: e.message || String(e) });
   }
-
-  const median = data[Math.floor(data.length/2)]?.score ?? 0;
-  const class_summary = `Auto groups for ${standard || "standard"}. n=${data.length}. Median≈${median}`;
-
-  return json({ class_summary, groups });
 };
-
-function safeParse(b){ try{ return JSON.parse(b||"{}"); }catch{ return {}; } }
