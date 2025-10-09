@@ -1,22 +1,22 @@
-// Simple per-UID per-function rate-limit stored in Firestore.
-// Defaults: max 60/minute (burst ~10).
-const { db } = require("./firebaseAdmin");
+// Simple per-UID, per-function, sliding window limiter using Firestore
+const { db } = require('./firebaseAdmin');
 
-async function rateLimit({ uid, fn, maxPerMinute = 60 }) {
+async function rateLimit({ uid, key, limit = 30, windowSeconds = 60 }) {
   const now = Date.now();
-  const windowMs = 60 * 1000;
-  const start = now - windowMs;
-  const ref = db.collection("_rl").doc(uid).collection("fn").doc(fn);
+  const start = now - windowSeconds * 1000;
+  const ref = db.collection('rate_limits').doc(`${uid}_${key}`);
 
-  const snap = await ref.get();
-  const arr = (snap.exists ? snap.data()?.hits : []) || [];
-  const filtered = arr.filter((t) => t > start);
-  if (filtered.length >= maxPerMinute) {
-    return { allowed: false };
-  }
-  filtered.push(now);
-  await ref.set({ hits: filtered }, { merge: true });
-  return { allowed: true };
+  await db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    let hits = snap.exists ? (snap.data().hits || []).filter(ts => ts >= start) : [];
+    if (hits.length >= limit) {
+      const retryAfter = Math.ceil((hits[0] + windowSeconds * 1000 - now) / 1000);
+      const err = new Error(`Rate limit exceeded. Try again in ~${retryAfter}s.`);
+      err.statusCode = 429; throw err;
+    }
+    hits.push(now);
+    tx.set(ref, { hits }, { merge: true });
+  });
 }
 
 module.exports = { rateLimit };
