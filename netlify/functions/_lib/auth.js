@@ -1,28 +1,23 @@
-const { admin } = require("./firebaseAdmin");
+// Verifies Firebase ID token from Authorization: Bearer <token>
+const { admin } = require('./firebaseAdmin');
+
+const json = (status, obj) => ({
+  statusCode: status,
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(obj),
+});
+
+const badRequest = (msg) => json(400, { error: msg });
 
 async function requireUser(event) {
-  const auth = event.headers.authorization || event.headers.Authorization || "";
-  const token = auth.startsWith("Bearer ") ? auth.slice(7) : null;
-  if (!token) return { error: { statusCode: 401, body: "Missing bearer token" } };
-
-  try {
-    const decoded = await admin.auth().verifyIdToken(token);
-    return { uid: decoded.uid, email: decoded.email || null };
-  } catch (e) {
-    return { error: { statusCode: 401, body: "Invalid Firebase ID token" } };
+  const authz = event.headers.authorization || event.headers.Authorization;
+  if (!authz || !authz.startsWith('Bearer ')) {
+    throw new Error('Missing Authorization bearer token');
   }
-}
-
-function json(data, code = 200, extra = {}) {
-  return {
-    statusCode: code,
-    headers: { "content-type": "application/json", "cache-control": "no-store", ...extra },
-    body: JSON.stringify(data),
-  };
-}
-
-function badRequest(msg) {
-  return json({ error: msg }, 400);
+  const token = authz.slice(7);
+  const decoded = await admin.auth().verifyIdToken(token);
+  if (!decoded || !decoded.uid) throw new Error('Invalid token');
+  return { uid: decoded.uid, email: decoded.email || null };
 }
 
 module.exports = { requireUser, json, badRequest };
