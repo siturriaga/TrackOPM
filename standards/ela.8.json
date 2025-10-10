@@ -1,0 +1,845 @@
+{
+  "subject": "ELA",
+  "grade": 8,
+  "version": "2025.10.10",
+  "standards": [
+    {
+      "code": "ELA.8.C.1.2",
+      "name": "Write personal or fictional narratives using narrative techniques, varied transitions, and a clearly established point of view.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to write effective narratives that use a consistent point of view and a variety of transitions."
+        ],
+        "teacher_friendly": "Focus on creating a cohesive narrative flow. Teach students to use a wider variety of transitional words and phrases to connect ideas and events smoothly.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "writing",
+          "narrative"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.C.1.3",
+      "name": "Write to argue a position, supporting at least one claim and rebutting at least one counterclaim with logical reasoning, credible evidence from sources, elaboration, and using a logical organizational structure.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to write an argumentative essay that includes a claim and a rebuttal to a counterclaim.",
+          "Students will be able to support their position with credible evidence and logical reasoning."
+        ],
+        "teacher_friendly": "Teach the structure of a rebuttal: state the counterclaim, explain why it is flawed or weak, and provide evidence to disprove it. This moves beyond simply acknowledging the other side to actively arguing against it.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "writing",
+          "argumentative",
+          "rebuttal",
+          "counterclaim"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.C.1.4",
+      "name": "Write expository texts to explain and analyze information from multiple sources, using relevant supporting details, logical organization, and varied purposeful transitions.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to write analytical essays that synthesize information from multiple sources.",
+          "Students will be able to use purposeful transitions to guide the reader."
+        ],
+        "teacher_friendly": "Focus on using transitions that show the logical relationship between ideas (e.g., 'consequently,' 'in contrast,' 'furthermore'), rather than just sequencing information.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "writing",
+          "expository",
+          "analysis",
+          "transitions"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.C.1.5",
+      "name": "Improve writing by planning, editing, considering feedback from adults and peers, and revising for clarity and cohesiveness.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to revise their writing to improve clarity, organization, and the flow of ideas."
+        ],
+        "teacher_friendly": "Shift the focus of revision from fixing minor errors to making substantial improvements. Teach strategies for checking the cohesiveness of the piece, such as reading it aloud or creating a reverse outline.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "writing",
+          "writing process",
+          "revision",
+          "cohesion"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.C.2.1",
+      "name": "Present information orally, in a logical sequence, supporting the central idea with credible evidence.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to deliver a well-structured oral presentation that supports a central idea with credible evidence."
+        ],
+        "teacher_friendly": "Focus on the quality of evidence used in presentations. Teach students how to cite their sources orally and explain the credibility of the information they are presenting.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "speaking and listening",
+          "presentation",
+          "evidence"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.C.3.1",
+      "name": "Follow the rules of standard English grammar, punctuation, capitalization, and spelling appropriate to grade level.",
+      "internal": {
+        "clarifications": [
+          "Skills to be mastered include the appropriate use of passive and active voice, using semicolons to form sentences, and using verbs with attention to voice and mood."
+        ],
+        "objectives": [
+          "Students will be able to differentiate between active and passive voice.",
+          "Students will be able to correctly use semicolons to connect related independent clauses."
+        ],
+        "teacher_friendly": "Teach active voice as a more direct and powerful way of writing. Explain that semicolons can be used like a 'super-comma' to join two closely related complete sentences.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Rewrite the passive sentence 'The ball was thrown by the boy' in active voice."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "grammar",
+          "conventions",
+          "active voice",
+          "passive voice",
+          "semicolon"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.C.4.1",
+      "name": "Conduct research to answer a question, drawing on multiple reliable and valid sources, and generating additional questions for further research.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to conduct a research project that involves synthesizing information and generating further inquiry."
+        ],
+        "teacher_friendly": "Push students to move from simply reporting information to synthesizing it to form their own conclusions or arguments, and to identify gaps in their knowledge that could lead to further research.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "research",
+          "synthesis"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.C.5.1",
+      "name": "Integrate diverse digital media to emphasize the relevance of a topic or idea in oral or written tasks.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to use multimedia to connect a topic to its real-world relevance."
+        ],
+        "teacher_friendly": "Encourage students to use multimedia to answer the 'So what?' question for their audience. How can an image, a video clip, or a sound bite make the topic more relevant and impactful?",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "technology",
+          "multimedia",
+          "relevance"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.C.5.2",
+      "name": "Use a variety of digital tools to collaborate with others to produce writing.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to use digital tools to collaborate on writing projects."
+        ],
+        "teacher_friendly": "Move beyond basic word processing to introduce digital tools for brainstorming (mind maps), organizing (outliners), and collaborative peer review (commenting features).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "technology",
+          "digital tools",
+          "collaboration"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.1.1",
+      "name": "Analyze the interaction between character development, setting, and plot in a literary text.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to analyze how character, setting, and plot are interconnected and influence one another."
+        ],
+        "teacher_friendly": "Encourage students to analyze the complex interplay between literary elements. Ask questions like, 'How does the harsh setting force the main character to make a choice that drives the plot forward?'",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "literary elements",
+          "character",
+          "setting",
+          "plot"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.1.2",
+      "name": "Analyze two or more themes and their development throughout a literary text.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to analyze how multiple, sometimes conflicting, themes are developed in a text."
+        ],
+        "teacher_friendly": "Challenge students to explore how a text can develop complex and even contradictory themes, such as the conflict between 'individual freedom' and 'social responsibility'.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "literary elements",
+          "theme",
+          "analysis"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.1.3",
+      "name": "Analyze how an author develops and individualizes the perspectives of different characters.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to analyze how an author uses dialogue, actions, and thoughts to create distinct character perspectives."
+        ],
+        "teacher_friendly": "Have students track two different characters' reactions to the same event. Ask them to analyze how the author's choices in narration and dialogue reveal each character's unique point of view and motivations.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "literary elements",
+          "perspective",
+          "characterization"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.1.4",
+      "name": "Analyze structure, sound, imagery, and figurative language in poetry.",
+      "internal": {
+        "clarifications": [
+          "Structural elements include form, line length, white space, and stanza breaks.",
+          "Sound is created through elements like rhyme, alliteration, assonance, consonance, onomatopoeia, repetition, and meter.",
+          "Imagery refers to language that appeals to the five senses."
+        ],
+        "objectives": [
+          "Students will be able to analyze the effect of a poet's choices regarding structure, sound devices, imagery, and figurative language."
+        ],
+        "teacher_friendly": "Encourage a holistic analysis of poetry. Instead of just identifying elements in isolation, ask students to explain how all these elements work together to create the poem's overall mood and meaning.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "poetry",
+          "structure",
+          "sound devices",
+          "imagery"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.2.1",
+      "name": "Analyze how individual text sections and/or features convey a purpose and/or meaning in texts.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to analyze the function and impact of specific sections or features within a larger informational text."
+        ],
+        "teacher_friendly": "Ask higher-level questions about text structure. For example, 'Why did the author choose to present this information in a timeline instead of a paragraph? How does that choice affect the reader's understanding?'",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "informational text",
+          "text structure",
+          "analysis"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.2.2",
+      "name": "Analyze two or more central ideas and their development throughout a text.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to analyze the development and interaction of multiple central ideas in a complex text."
+        ],
+        "teacher_friendly": "Challenge students to analyze how an author develops related or even competing central ideas, showing how they are supported and connected throughout the text.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "informational text",
+          "central idea"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.2.3",
+      "name": "Explain how an author establishes and achieves purpose(s) through rhetorical appeals and/or figurative language.",
+      "internal": {
+        "clarifications": [
+          "Students are responsible for explaining the appropriateness of the rhetorical appeals of logos, ethos, and pathos."
+        ],
+        "objectives": [
+          "Students will be able to analyze how an author uses rhetorical appeals and figurative language to achieve their purpose."
+        ],
+        "teacher_friendly": "Move beyond identification to analysis of appropriateness. Ask, 'In this scientific article, is the author's appeal to emotion (pathos) effective, or does it weaken their credibility (ethos)?'",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "author's purpose",
+          "rhetoric",
+          "ethos",
+          "pathos",
+          "logos"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.2.4",
+      "name": "Track the development of an argument, analyzing the types of reasoning used and their effectiveness, identifying ways in which the argument could be improved.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to evaluate the effectiveness of an argument.",
+          "Students will be able to suggest specific improvements to an argument."
+        ],
+        "teacher_friendly": "Encourage students to act as critical editors. After analyzing an argument, they should be able to identify its weaknesses (e.g., lack of evidence, logical fallacies) and suggest ways to strengthen it.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "argument",
+          "evaluation"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.3.1",
+      "name": "Analyze how figurative language contributes to meaning and explain examples of symbolism in text(s).",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to analyze the function of figurative language.",
+          "Students will be able to identify and explain the meaning of symbols in a text."
+        ],
+        "teacher_friendly": "Introduce symbolism as an object or idea that represents something else on a deeper level. Discuss common symbols (like a dove representing peace) and how authors create unique symbols within a text.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "In 'The Giver,' what does the color red come to symbolize?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "figurative language",
+          "symbolism"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.3.2",
+      "name": "Paraphrase content from grade-level texts.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to paraphrase complex passages from grade-level texts accurately."
+        ],
+        "teacher_friendly": "Practice paraphrasing increasingly dense and complex texts, focusing on capturing the original meaning and nuance without copying the sentence structure or vocabulary.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "paraphrasing"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.3.3",
+      "name": "Compare and contrast the use or discussion of archetypes in texts.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to define 'archetype'.",
+          "Students will be able to identify and compare archetypal characters, settings, or plots in different texts."
+        ],
+        "teacher_friendly": "Introduce common archetypes (e.g., the Hero, the Mentor, the Quest). Have students read two different stories and compare how each one uses or subverts a particular archetype.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Compare the Mentor archetype in 'Star Wars' (Obi-Wan Kenobi) and 'Harry Potter' (Dumbledore)."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "comparative reading",
+          "archetypes"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.R.3.4",
+      "name": "Explain how an author uses rhetorical devices to support or advance an appeal.",
+      "internal": {
+        "clarifications": [
+          "Rhetorical devices include figurative language plus irony, rhetorical question, antithesis, and zeugma.",
+          "Students will explain the connection between an author's use of rhetorical devices and the appeal (logos, ethos, or pathos) being made."
+        ],
+        "objectives": [
+          "Students will be able to identify advanced rhetorical devices.",
+          "Students will be able to analyze how a specific device is used to strengthen a rhetorical appeal."
+        ],
+        "teacher_friendly": "Teach students to connect the device to the appeal. For example, explain how an author might use a powerful metaphor (rhetorical device) to create an emotional reaction in the reader (pathos).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "reading",
+          "rhetoric",
+          "rhetorical devices",
+          "appeals"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.V.1.1",
+      "name": "Integrate academic vocabulary appropriate to grade level in speaking and writing.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to use a range of academic vocabulary with precision and sophistication."
+        ],
+        "teacher_friendly": "Encourage students to use more precise and sophisticated academic language in their own writing and speaking, moving them away from simple vocabulary to more nuanced terms.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "vocabulary",
+          "academic language"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.V.1.2",
+      "name": "Apply knowledge of Greek and Latin roots and affixes to determine meanings of words and phrases in grade-level content.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to apply their morphological knowledge to decode complex, multi-syllabic words."
+        ],
+        "teacher_friendly": "Challenge students with complex words from scientific or historical texts and have them break the words down into their component roots and affixes to determine the meaning.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "vocabulary",
+          "morphology"
+        ]
+      }
+    },
+    {
+      "code": "ELA.8.V.1.3",
+      "name": "Apply knowledge of context clues, figurative language, word relationships, reference materials, and/or background knowledge to determine the connotative and denotative meaning of words and phrases, appropriate to grade level.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to use a variety of sophisticated strategies to interpret the meaning and nuance of words and phrases."
+        ],
+        "teacher_friendly": "Encourage students to use a flexible, multi-pronged approach to deciphering difficult words and phrases, considering not just the immediate context but also the author's tone, purpose, and use of figurative or nuanced language.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "ela",
+          "vocabulary",
+          "context clues",
+          "connotation",
+          "nuance"
+        ]
+      }
+    }
+  ]
+}
