@@ -1,13 +1,10 @@
 {
-  "name": "synapse-kindred-suite",
-  "version": "1.0.0",
+  "name": "synapse-standards-browser",
   "private": true,
-  "engines": { "node": ">=20" },
+  "version": "1.0.0",
   "scripts": {
-    "build:noop": "echo \"No build step\""
-  },
-  "dependencies": {
-    "firebase-admin": "^12.5.0",
-    "node-fetch": "^3.3.2"
+    "dev": "netlify dev",
+    "build": "echo \"No build step\"",
+    "start": "netlify dev"
   }
 }
