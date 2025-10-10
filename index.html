@@ -1,99 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Synapse Co-Pilot — Bridging the Gap in Education</title>
-
-  <!-- Brand favicons (you already supplied these) -->
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="/favicon.ico">
-  <link rel="icon" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" sizes="16x16" href="/favicon-16.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-  <meta name="theme-color" content="#1e40af">
-  <meta property="og:image" content="/og-image.png" />
-
-  <!-- Tailwind -->
-  <script>
-    window.tailwind = window.tailwind || {};
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: { brandBlue: "#1e40af", brandGold: "#d4af37" },
-          backgroundImage: {
-            'hero': 'linear-gradient(90deg,#101827 0%, #11223a 55%, #232b2b 100%)'
-          }
-        }
-      }
-    };
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    body { background:#0b1220; color:#fff; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Synapse + Kindred — Teach more. Click less.</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <meta name="description" content="Synapse (planning, lessons, groups, tracker) and Kindred (teacher–parent communication).">
 </head>
 <body>
-  <!-- NAV -->
-  <header class="border-b border-white/10 bg-[#0b1220]/90 backdrop-blur">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
-      <img src="/logo.svg" alt="" class="w-7 h-7">
-      <div class="font-semibold text-lg mr-auto">Synapse Co-Pilot</div>
-      <a href="#features" class="hover:opacity-80">Features</a>
-      <a href="#privacy" class="hover:opacity-80">Privacy</a>
-      <a href="/app/" class="ml-4 rounded bg-white text-black px-3 py-1.5 min-h-[40px]">Open App</a>
-    </div>
+  <header class="container header">
+    <div class="brand"><div class="logo"></div><h1>Synapse + Kindred</h1></div>
+    <nav>
+      <a href="/app/">Open Synapse</a>
+      <a href="/kindred/">Open Kindred</a>
+      <a href="#tour">Tour</a>
+    </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="bg-hero">
-    <div class="max-w-6xl mx-auto px-4 py-16 sm:py-24 grid sm:grid-cols-[1fr,1fr] gap-10 items-center">
-      <div class="p-4">
-        <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight">Welcome to Synapse Co-Pilot</h1>
-        <p class="mt-4 text-white/80 text-lg">Standards-aware AI for teachers: fetch standards, generate lessons, form groups — securely.</p>
-        <div class="mt-6 flex gap-3">
-          <a href="/app/" class="rounded bg-white text-black px-4 py-2 min-h-[44px]">Open the App</a>
-          <a href="#features" class="rounded border border-white/20 px-4 py-2 min-h-[44px]">Learn more</a>
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h2 style="margin:0 0 12px">Teach more. Click less.</h2>
+        <p style="margin:0 0 18px;color:var(--muted)">Synapse plans instruction. Kindred communicates home. You just teach.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn primary" href="/app/">Open Synapse</a>
+          <a class="btn accent" href="/kindred/">Open Kindred</a>
+          <a class="btn" href="#tour">See a 2-min tour</a>
+        </div>
+        <div class="split" style="margin-top:20px">
+          <article class="card">
+            <div class="badge synapse">Synapse</div>
+            <h3 style="margin:8px 0">Standards → Lessons in seconds</h3>
+            <p>Generate 90-min plans with I-We-You, assign & print, and track mastery.</p>
+            <ul style="color:var(--muted)">
+              <li>Flexible standards search</li>
+              <li>Auto grouping & differentiation</li>
+              <li>Heatmaps & growth insights</li>
+            </ul>
+            <div style="margin-top:12px"><a class="btn" href="/app/">Open Synapse</a></div>
+          </article>
+          <article class="card">
+            <div class="badge kindred">Kindred</div>
+            <h3 style="margin:8px 0">Communication, handled</h3>
+            <p>Emails, reminders, and letters—personalized and logged automatically.</p>
+            <ul style="color:var(--muted)">
+              <li>Positive notes & alerts</li>
+              <li>Conference scheduling</li>
+              <li>Outreach log</li>
+            </ul>
+            <div style="margin-top:12px"><a class="btn" href="/kindred/">Open Kindred</a></div>
+          </article>
         </div>
       </div>
-      <div class="flex items-center justify-center">
-        <img src="/apple-touch-icon.png" alt="Synapse icon" class="w-40 h-40 rounded-3xl shadow-lg">
-      </div>
+      <div class="art"></div>
+    </section>
+
+    <section class="footer">© <span id="year"></span> Synapse + Kindred — Less clicking, more teaching.</section>
+  </main>
+
+  <!-- Accessibility -->
+  <div class="accessibility" id="a11y">
+    <button class="btn" onclick="toggleA11y()">Accessibility</button>
+    <div class="panel">
+      <div class="row"><span>High contrast</span><label><input type="checkbox" id="hc" onchange="applyA11y()"> on</label></div>
+      <div class="row"><span>Font size</span><input type="range" id="fs" min="1" max="1.3" step="0.05" value="1" oninput="applyA11y()"></div>
+      <div class="row"><span>Reduce motion</span><label><input type="checkbox" id="rm" onchange="applyA11y()"> on</label></div>
+      <div class="row"><span>Dyslexia-friendly</span><label><input type="checkbox" id="dx" onchange="applyA11y()"> on</label></div>
+      <div class="row"><span>Color-blind safe</span><label><input type="checkbox" id="cb" onchange="applyA11y()"> on</label></div>
     </div>
-  </section>
+  </div>
 
-  <!-- FEATURES -->
-  <section id="features" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-3xl font-bold mb-6">What you can do</h2>
-    <div class="grid sm:grid-cols-3 gap-6">
-      <div class="rounded-xl border border-white/10 p-5 bg-white/5">
-        <h3 class="font-semibold text-lg mb-2">Fetch Standards</h3>
-        <p class="text-white/80">Type a subject and grade (even with typos) and get the right standards instantly.</p>
-      </div>
-      <div class="rounded-xl border border-white/10 p-5 bg-white/5">
-        <h3 class="font-semibold text-lg mb-2">Generate Lessons</h3>
-        <p class="text-white/80">Ask for lessons or quizzes aligned to a standard. Tuned for classroom tone.</p>
-      </div>
-      <div class="rounded-xl border border-white/10 p-5 bg-white/5">
-        <h3 class="font-semibold text-lg mb-2">Create Groups</h3>
-        <p class="text-white/80">Upload a roster and form heterogeneous or homogeneous groups quickly.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRIVACY -->
-  <section id="privacy" class="max-w-6xl mx-auto px-4 pb-20">
-    <h2 class="text-3xl font-bold mb-4">Private & Secure</h2>
-    <p class="text-white/80 max-w-3xl">
-      Google Sign-In only. Every request to our servers includes a verified Firebase ID token and is scoped to your user ID.
-      We don’t use anonymous auth and we avoid logging personal content.
-    </p>
-  </section>
-
-  <footer class="border-t border-white/10 py-6 text-center text-white/70 text-sm">
-    © <span id="y"></span> Synapse Co-Pilot. <a class="underline" href="/app/">Open App</a>
-  </footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const el = document.getElementById('a11y');
+    function toggleA11y(){ el.classList.toggle('open'); }
+    function applyA11y(){
+      const hc = document.getElementById('hc').checked;
+      const rm = document.getElementById('rm').checked;
+      const dx = document.getElementById('dx').checked;
+      const cb = document.getElementById('cb').checked;
+      const fs = document.getElementById('fs').value;
+      document.body.classList.toggle('high-contrast', hc);
+      document.body.classList.toggle('reduce-motion', rm);
+      document.body.classList.toggle('dyslexia', dx);
+      document.body.classList.toggle('colorblind-safe', cb);
+      document.documentElement.style.setProperty('--font-scale', fs);
+      localStorage.setItem('a11y', JSON.stringify({hc,rm,dx,cb,fs}));
+    }
+    (function(){
+      try{ const s = JSON.parse(localStorage.getItem('a11y')||'null'); if(!s) return;
+        document.getElementById('hc').checked=s.hc; document.getElementById('rm').checked=s.rm;
+        document.getElementById('dx').checked=s.dx; document.getElementById('cb').checked=s.cb;
+        document.getElementById('fs').value=s.fs; applyA11y();
+      }catch(e){}
+    })();
+  </script>
 </body>
 </html>
