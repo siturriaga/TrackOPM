@@ -3,102 +3,217 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Synapse | Standards</title>
-  <meta name="description" content="Browse standards by subject and grade. Clean, teacher-safe view." />
+  <title>Synapse • Kindred — Teaching Tools that Feel Magical</title>
+  <meta name="description" content="Promotional site for Synapse and Kindred. Explore features, then launch the apps." />
   <link rel="icon" href="/favicon.ico" />
-  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/styles.css" />
   <style>
-    /* brand tokens (lightweight) */
     :root{
-      --brand: 222 89% 55%;    /* blue */
-      --brand-2: 43 96% 56%;   /* amber */
       --ink: 222 47% 11%;
-      --muted: 215 20% 65%;
-      --bg: 210 40% 98%;
+      --muted: 215 20% 62%;
+      --bg: 222 60% 99%;
+      --brand: 224 100% 60%;      /* Synapse blue */
+      --accent: 43 96% 56%;       /* Kindred amber */
       --card: 0 0% 100%;
     }
+    html,body{min-height:100%}
+    body{background:radial-gradient(1200px 600px at 10% -10%,hsla(224,100%,60%,.12),transparent),
+                     radial-gradient(1000px 600px at 90% 0%,hsla(43,96%,56%,.10),transparent),
+                     hsl(var(--bg));}
+    /* Glass card + micro-shadow */
+    .glass{background:hsla(0,0%,100%,.8); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.6)}
+    /* Shimmer CTA */
+    .shimmer{position:relative;overflow:hidden}
+    .shimmer::after{
+      content:""; position:absolute; inset:-2px;
+      background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.25) 30%,transparent 60%);
+      transform:translateX(-100%); transition:transform .8s ease;
+    }
+    .shimmer:hover::after{ transform:translateX(100%) }
+    /* Tilt on hover */
+    .tilt{ transition: transform .25s ease, box-shadow .25s ease; will-change: transform }
+    .tilt:hover{ transform: translateY(-4px) rotate3d(.5,1,0,6deg); box-shadow:0 30px 60px rgba(2,6,23,.15) }
+    /* Reveal on scroll */
+    .reveal{ opacity:0; transform:translateY(12px); transition: all .6s ease }
+    .reveal.on{ opacity:1; transform:none }
+    /* Gradient text */
+    .grad-text{ background:linear-gradient(90deg,hsl(var(--brand)),hsl(var(--accent))); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    /* Icon circle */
+    .ic{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50% }
+    .ring-smooth{ box-shadow:0 0 0 6px rgba(0,0,0,.02) }
   </style>
 </head>
-<body class="min-h-screen bg-[hsl(var(--bg))] text-[hsl(var(--ink))]">
-  <header class="border-b border-slate-200 bg-white/70 backdrop-blur">
-    <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="h-8 w-8 rounded-xl bg-[hsl(var(--brand))]"></div>
+<body class="text-[hsl(var(--ink))] antialiased selection:bg-blue-100 selection:text-blue-900">
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a class="flex items-center gap-3" href="/">
+        <span class="ic ring-smooth bg-[hsl(var(--brand))] text-white">S</span>
         <span class="font-semibold tracking-tight">Synapse</span>
-      </div>
-      <nav class="hidden sm:flex items-center gap-6 text-sm text-slate-600">
-        <span class="opacity-70">Standards Browser</span>
-        <span class="opacity-50">Grouping</span>
-        <span class="opacity-50">Tracker</span>
+        <span class="opacity-40">+</span>
+        <span class="ic ring-smooth bg-[hsl(var(--accent))] text-white">K</span>
+        <span class="font-semibold tracking-tight">Kindred</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600">
+        <a class="hover:text-slate-900" href="#apps">Apps</a>
+        <a class="hover:text-slate-900" href="#features">Features</a>
+        <a class="hover:text-slate-900" href="#faq">FAQ</a>
       </nav>
-      <a href="/app/" class="inline-flex items-center rounded-xl px-4 h-9 text-white bg-[hsl(var(--brand))] hover:opacity-95">
-        Open Standards
+      <a href="#apps" class="shimmer inline-flex items-center h-10 px-4 rounded-xl text-white bg-[hsl(var(--brand))]">
+        Explore Apps
       </a>
     </div>
   </header>
 
-  <main class="mx-auto max-w-6xl px-6">
-    <section class="py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <h1 class="text-3xl md:text-5xl font-bold tracking-tight">
-          Fast, clean access to the standards.
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <!-- subtle orbs -->
+    <div class="pointer-events-none absolute -top-24 -left-20 w-[34rem] h-[34rem] rounded-full blur-3xl opacity-30" style="background:radial-gradient(circle at 30% 30%, hsl(var(--brand)), transparent 60%)"></div>
+    <div class="pointer-events-none absolute -top-28 -right-20 w-[32rem] h-[32rem] rounded-full blur-3xl opacity-30" style="background:radial-gradient(circle at 70% 30%, hsl(var(--accent)), transparent 60%)"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-14 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div class="reveal">
+        <p class="text-xs tracking-widest uppercase text-slate-500">For Teachers • Fast • Focused</p>
+        <h1 class="mt-3 text-4xl md:text-6xl font-black leading-tight">
+          Plan smarter. <span class="grad-text">Teach lighter</span>.
         </h1>
         <p class="mt-4 text-slate-600 max-w-prose">
-          Pick a subject and grade, then browse the official standards by code and title.
-          Internal guidance stays hidden for AI-only use.
+          Synapse and Kindred help you move from standards to instruction in minutes.
+          Cleaner browsing, smarter grouping, and a mastery tracker that fits your flow.
         </p>
-        <div class="mt-8 flex gap-3">
-          <a href="/app/" class="inline-flex items-center rounded-xl px-5 h-11 text-white bg-[hsl(var(--brand))] hover:opacity-95">
-            Open Standards
-          </a>
-          <a href="#features" class="inline-flex items-center rounded-xl px-5 h-11 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50">
-            Learn more
-          </a>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#apps" class="shimmer inline-flex items-center h-11 px-5 rounded-2xl text-white bg-[hsl(var(--brand))]">See Apps</a>
+          <a href="#features" class="inline-flex items-center h-11 px-5 rounded-2xl border border-slate-200 bg-white text-slate-800 hover:bg-slate-50">How it works</a>
+        </div>
+        <div class="mt-6 flex items-center gap-6 text-sm text-slate-500">
+          <div class="flex items-center gap-2"><span class="ic bg-blue-100 text-blue-700">✓</span> ADA-aware</div>
+          <div class="flex items-center gap-2"><span class="ic bg-amber-100 text-amber-700">✓</span> No student data required</div>
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-        <div class="text-xs uppercase tracking-wider text-slate-500 mb-2">Preview</div>
-        <div class="rounded-xl border border-slate-200">
-          <div class="p-4 border-b bg-slate-50 flex gap-3">
+      <!-- Promo mock (no app embedded) -->
+      <div class="reveal glass rounded-3xl p-6 lg:p-8 border tilt">
+        <div class="text-xs uppercase text-slate-500 mb-3">Standards Preview</div>
+        <div class="rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="p-4 bg-slate-50 flex gap-3 items-center">
+            <span class="ic bg-[hsl(var(--brand))] text-white">S</span>
             <span class="text-sm">Subject</span>
             <span class="px-2 py-1 rounded bg-white border text-sm">Math</span>
-            <span class="text-sm ml-4">Grade</span>
+            <span class="text-sm ml-3">Grade</span>
             <span class="px-2 py-1 rounded bg-white border text-sm">7</span>
           </div>
           <ul class="divide-y">
-            <li class="p-4"><span class="font-semibold">MA.7.AR.1.2</span> — Determine whether two linear expressions are equivalent.</li>
-            <li class="p-4"><span class="font-semibold">MA.7.GR.1.2</span> — Solve problems involving the area and circumference of circles.</li>
-            <li class="p-4"><span class="font-semibold">MA.7.DP.1.1</span> — Use random sampling to draw inferences about a population.</li>
+            <li class="p-4"><strong>MA.7.AR.1.2</strong> — Determine whether two linear expressions are equivalent.</li>
+            <li class="p-4"><strong>MA.7.GR.1.2</strong> — Area & circumference of circles.</li>
+            <li class="p-4"><strong>MA.7.DP.1.1</strong> — Inferences from random samples.</li>
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="features" class="py-12 grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <h3 class="font-semibold">Standards Browser</h3>
-        <p class="text-slate-600 mt-2 text-sm">Subject + Grade → teacher-safe list (code — name). Internal metadata stays server-side.</p>
-      </div>
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <h3 class="font-semibold">Grouping (DI)</h3>
-        <p class="text-slate-600 mt-2 text-sm">Create groups tied to standards and roster data. (Available in your workspace.)</p>
-      </div>
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
-        <h3 class="font-semibold">Tracker</h3>
-        <p class="text-slate-600 mt-2 text-sm">Track mastery by standard; evidence stays internal. (Visible in your teacher view.)</p>
-      </div>
-    </section>
-  </main>
+  <!-- APPS (cards link OUT to the apps; not embedded) -->
+  <section id="apps" class="max-w-7xl mx-auto px-6 py-14 md:py-20">
+    <h2 class="reveal text-2xl md:text-3xl font-bold tracking-tight mb-6">Apps</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Synapse card -->
+      <a href="/app/" class="reveal tilt group block rounded-3xl border border-slate-200 bg-white p-6 lg:p-8">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="ic bg-[hsl(var(--brand))] text-white">S</span>
+            <div>
+              <div class="font-semibold">Synapse</div>
+              <div class="text-slate-500 text-sm">Standards → Plans in minutes</div>
+            </div>
+          </div>
+          <span class="text-slate-400 group-hover:text-slate-700 transition">→</span>
+        </div>
+        <ul class="mt-5 text-sm text-slate-600 space-y-2">
+          <li>• Browse standards (code — title only)</li>
+          <li>• Smart search by grade & subject</li>
+          <li>• Lesson & task suggestions (AI-assisted)</li>
+        </ul>
+      </a>
 
-  <footer class="mt-12 border-t border-slate-200">
-    <div class="mx-auto max-w-6xl px-6 py-8 text-xs text-slate-500">
-      © <span id="y"></span> Synapse. All rights reserved.
+      <!-- Kindred card -->
+      <a href="/kindred/" class="reveal tilt group block rounded-3xl border border-slate-200 bg-white p-6 lg:p-8">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="ic bg-[hsl(var(--accent))] text-white">K</span>
+            <div>
+              <div class="font-semibold">Kindred</div>
+              <div class="text-slate-500 text-sm">Grouping • Tracker • Evidence</div>
+            </div>
+          </div>
+          <span class="text-slate-400 group-hover:text-slate-700 transition">→</span>
+        </div>
+        <ul class="mt-5 text-sm text-slate-600 space-y-2">
+          <li>• Flexible grouping by needs/standards</li>
+          <li>• Mastery tracker with evidence</li>
+          <li>• CSV/XLSX imports (no student data required to try)</li>
+        </ul>
+      </a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="max-w-7xl mx-auto px-6 py-14 md:py-20">
+    <h2 class="reveal text-2xl md:text-3xl font-bold tracking-tight mb-8">Why teachers like it</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="reveal tilt rounded-3xl border border-slate-200 bg-white p-6">
+        <div class="ic bg-blue-100 text-blue-700 mb-3">⚡</div>
+        <div class="font-semibold">Fast and focused</div>
+        <p class="text-sm text-slate-600 mt-2">Zero clutter. Choose a grade/subject, see the standards, move on with your plan.</p>
+      </div>
+      <div class="reveal tilt rounded-3xl border border-slate-200 bg-white p-6">
+        <div class="ic bg-amber-100 text-amber-700 mb-3">🧩</div>
+        <div class="font-semibold">Built for DI</div>
+        <p class="text-sm text-slate-600 mt-2">Grouping and mastery tracking align to standards without exposing extra internals.</p>
+      </div>
+      <div class="reveal tilt rounded-3xl border border-slate-200 bg-white p-6">
+        <div class="ic bg-emerald-100 text-emerald-700 mb-3">🔒</div>
+        <div class="font-semibold">Teacher-safe view</div>
+        <p class="text-sm text-slate-600 mt-2">Only code + title are visible. All detailed metadata is internal for AI planning.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (short) -->
+  <section id="faq" class="max-w-7xl mx-auto px-6 py-14 md:py-20">
+    <h2 class="reveal text-2xl md:text-3xl font-bold tracking-tight mb-6">FAQ</h2>
+    <div class="grid md:grid-cols-2 gap-6 text-sm text-slate-700">
+      <div class="reveal rounded-2xl border border-slate-200 bg-white p-5">
+        <div class="font-semibold">Do you show the full standards?</div>
+        <p class="mt-2 text-slate-600">Teachers see code + title. Internals stay server-side for AI-assisted lesson creation.</p>
+      </div>
+      <div class="reveal rounded-2xl border border-slate-200 bg-white p-5">
+        <div class="font-semibold">Does this replace my LMS?</div>
+        <p class="mt-2 text-slate-600">No. Synapse/Kindred are lightweight companions for planning, grouping, and tracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 py-10 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-4">
+      <div>© <span id="y"></span> Synapse + Kindred</div>
+      <div class="flex items-center gap-4">
+        <a class="hover:text-slate-700" href="#apps">Apps</a>
+        <a class="hover:text-slate-700" href="#features">Features</a>
+        <a class="hover:text-slate-700" href="#faq">FAQ</a>
+      </div>
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    // copyright year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // simple scroll-reveal
+    const obs = new IntersectionObserver((ents)=>{
+      ents.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); }});
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
 </body>
 </html>
