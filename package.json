@@ -1,13 +1,13 @@
 {
-  "name": "synapse-copilot",
+  "name": "synapse-kindred-suite",
+  "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "build:noop": "echo 'No build step — static site + functions'",
-    "start": "npx serve -l 3000 ."
-  },
   "engines": { "node": ">=20" },
+  "scripts": {
+    "build:noop": "echo \"No build step\""
+  },
   "dependencies": {
-    "@google/generative-ai": "^0.21.0",
-    "firebase-admin": "^12.6.0"
+    "firebase-admin": "^12.5.0",
+    "node-fetch": "^3.3.2"
   }
 }
