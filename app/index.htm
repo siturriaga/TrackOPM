@@ -1,209 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Synapse Co-Pilot — App</title>
-
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="/favicon.ico">
-  <link rel="icon" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" sizes="16x16" href="/favicon-16.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-  <meta name="theme-color" content="#1e40af">
-
-  <!-- Tailwind -->
-  <script>
-    window.tailwind = window.tailwind || {};
-    tailwind.config = { theme: { extend: { colors: { brandBlue:'#1e40af', brandGold:'#d4af37' } } } };
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- React UMD (prod) -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-
-  <!-- Firebase compat -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-
-  <style>
-    body{background:#0b1220;color:#fff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-  </style>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synapse — Teaching Co-Pilot</title>
+  <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
-  <!-- Always-visible boot + status -->
-  <div id="boot" class="text-center py-3 border-b border-white/10">
-    <div class="font-bold">Booting Synapse…</div>
-    <div id="status" class="text-xs text-white/70">Loading scripts…</div>
+  <div class="container">
+    <header class="header">
+      <div class="brand"><div class="logo"></div><h1>Synapse · App</h1></div>
+      <nav>
+        <button class="btn" id="signin">Sign in with Google</button>
+        <button class="btn" id="signout" style="display:none">Sign out</button>
+      </nav>
+    </header>
+
+    <div id="greet" style="margin:10px 0; color:var(--muted)">Good day, Teacher.</div>
+
+    <div class="tabs" id="tabs"></div>
+    <section id="view"></section>
   </div>
-  <div id="root"></div>
 
   <script>
-    (function(){
-      const setS = (m)=>{ const el=document.getElementById('status'); if(el) el.textContent=m; };
-      const err  = (m)=>{ setS('Error: ' + m); console.error('[Synapse]', m); };
-      window.addEventListener('error', e => err(e.error?.message || e.message || 'Script error'));
-      window.addEventListener('unhandledrejection', e => err(e.reason?.message || String(e.reason)));
+    // Simple tab system
+    const TABS = ["Dashboard","Standards","Roster","Groups","Assignments","Tracker","Reports","Help","Settings"];
+    const tabsEl = document.getElementById('tabs'), viewEl = document.getElementById('view');
+    TABS.forEach((t,i)=>{ const b=document.createElement('button'); b.className='tab'+(i===0?' active':''); b.textContent=t; b.onclick=()=>openTab(t,b); tabsEl.appendChild(b); });
 
-      function haveLibs(){ return !!(window.React && window.ReactDOM && window.firebase); }
-      let tries=60; (function wait(){ if(haveLibs()){ setS('Libraries loaded. Starting app…'); start(); return; }
-        if(--tries<=0){ err('Required libraries failed to load.'); return; } setTimeout(wait,150); })();
+    function openTab(name, btn){
+      [...tabsEl.children].forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+      if(name==="Dashboard"){ viewEl.innerHTML = `
+        <div class='grid cols-2'>
+          <div class='card'><h3>Today</h3><p>Quick actions: Create Lesson, Generate Groups, Assign.</p>
+            <div style='display:flex;gap:8px;margin-top:8px'>
+              <a class='btn primary' href='#/standards'>Create Lesson</a>
+              <a class='btn' href='#/groups'>Generate Groups</a>
+              <a class='btn' href='#/assignments'>Assign</a>
+            </div>
+          </div>
+          <div class='card'><h3>Insights</h3><p>Mastery heatmap & growth trends will render here.</p></div>
+        </div>`; }
 
-      function start(){
-        // ---- Firebase client (Google only) ----
-        const FB_CONFIG = {
-          apiKey: "AIzaSyBT95w8fzJr9J5WCYe8iwFkvSrwXds5sms",
-          authDomain: "trackopmn.firebaseapp.com",
-          projectId: "trackopmn",
-          storageBucket: "trackopmn.appspot.com",
-          appId: "1:325895934431:web:50665d95aab0ac1a4b746a",
-          messagingSenderId: "325895934431",
-          measurementId: "G-QX53NY1CJC"
-        };
-        try{ firebase.apps.length ? firebase.app() : firebase.initializeApp(FB_CONFIG); }catch{}
-        const auth = firebase.auth();
+      if(name==="Standards"){ viewEl.innerHTML = `
+        <div class='card'>
+          <h3>Find a standard</h3>
+          <div style='display:flex; gap:8px; flex-wrap:wrap; margin:8px 0'>
+            <select id='subject'>
+              <option>ELA</option><option>Math</option><option>Science</option><option>Social Studies</option><option>Civics</option>
+            </select>
+            <select id='grade'><option>6</option><option>7</option><option>8</option></select>
+            <input id='q' placeholder='Search (typos ok)…' style='flex:1; padding:10px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--text)'>
+            <button class='btn' onclick='searchStandards()'>Search</button>
+          </div>
+          <div id='results'></div>
+        </div>`; }
 
-        const h = React.createElement;
+      if(name==="Roster"){ viewEl.innerHTML = `
+        <div class='card'>
+          <h3>Roster</h3><p>Upload CSV/XLSX client-side; edit inline. Moving a student’s period updates all views.</p>
+          <table class='table' id='roster'><tr><th>Name</th><th>Email</th><th>Period</th><th>Tier</th></tr></table>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <input type="file" id="file" accept=".csv, .xlsx" />
+            <button class="btn" onclick="loadSampleRoster()">Load sample</button>
+          </div>
+        </div>`; }
 
-        // ---- Endpoints ----
-        const FN = {
-          SEARCH: "/.netlify/functions/searchStandard",
-          GEMINI: "/.netlify/functions/synapseGemini",
-          GROUPS: "/.netlify/functions/groupIntelligence"
-        };
+      if(name==="Groups"){ viewEl.innerHTML = `<div class='card'><h3>Groups</h3><p>Auto-groups appear here; use “Regenerate” for strategy or constraints.</p></div>`; }
+      if(name==="Assignments"){ viewEl.innerHTML = `<div class='card'><h3>Assignments</h3><p>Create & assign differentiated tasks. Delivery: Email or Print. All actions are logged.</p></div>`; }
+      if(name==="Tracker"){ viewEl.innerHTML = `<div class='card'><h3>Tracker</h3><p>Student profiles, evidence timeline, mastery by standard, growth charts.</p></div>`; }
+      if(name==="Reports"){ viewEl.innerHTML = `<div class='card'><h3>Reports</h3><p>Heatmap, coverage vs pacing, growth over time.</p></div>`; }
+      if(name==="Help"){ viewEl.innerHTML = `<div class='card'><h3>Help & How-To</h3><p>Ask how to do anything: “How do I print XYZ?”</p></div>`; }
+      if(name==="Settings"){ viewEl.innerHTML = `<div class='card'><h3>Settings</h3><p>Profile title, theme, accessibility. Preferences persist per teacher.</p></div>`; }
+    }
+    openTab("Dashboard", tabsEl.children[0]);
 
-        async function idToken(){
-          const u = auth.currentUser; if(!u) throw new Error('Not signed in');
-          return await u.getIdToken();
-        }
-        async function call(fn, payload){
-          const token = await idToken();
-          const res = await fetch(fn, {
-            method: 'POST',
-            headers: {'Content-Type':'application/json','Authorization':`Bearer ${token}`},
-            body: JSON.stringify(payload||{})
-          });
-          const text = await res.text();
-          if(!res.ok) throw new Error(text || `${fn} ${res.status}`);
-          return JSON.parse(text);
-        }
+    // (A) Standards search (fuzzy, typo-tolerant)
+    async function searchStandards(){
+      const subject = document.getElementById('subject').value;
+      const grade = document.getElementById('grade').value;
+      const q = document.getElementById('q').value.trim().toLowerCase();
+      const path = {
+        "ELA": `/data/standards/ela.${grade}.json`,
+        "Math": `/data/standards/math.${grade}.json`,
+        "Science": `/data/standards/science.${grade}.json`,
+        "Social Studies": `/data/standards/social.${grade}.json`,
+        "Civics": `/data/standards/civics.7.json`
+      }[subject];
 
-        // ---- UI Components (no JSX) ----
-        function Navbar(props){
-          async function signOut(){ await auth.signOut(); }
-          return h('header', { className:'border-b border-white/10 bg-[#0b1220]/90 backdrop-blur' },
-            h('div', { className:'max-w-6xl mx-auto px-4 py-3 flex items-center gap-3' },
-              h('img',{src:'/logo.svg',alt:'',className:'w-7 h-7'}),
-              h('div',{className:'font-semibold text-lg mr-auto'},'Synapse Co-Pilot'),
-              h('nav',{className:'hidden sm:flex gap-6 text-white/80'},
-                h('a',{href:'#home',className:'hover:opacity-80'},'Home'),
-                h('a',{href:'#roster',className:'hover:opacity-80'},'Roster'),
-                h('a',{href:'#groups',className:'hover:opacity-80'},'Groups')
-              ),
-              h('div',{className:'text-xs sm:text-sm text-white/70 mr-2 hidden sm:block'}, props.user?.email || ''),
-              h('button',{onClick:signOut,className:'rounded bg-white/10 hover:bg-white/20 px-3 py-1.5 min-h-[36px]'},'Sign out')
-            )
-          );
-        }
+      let items = [];
+      try { items = await (await fetch(path)).json(); } catch(e){ items = []; }
 
-        function Select({label, value, onChange, options, placeholder}){
-          return h('label',{className:'block'},
-            h('span',{className:'text-xs opacity-80'},label),
-            h('select',{
-              className:'mt-1 w-full bg-white/5 border border-white/10 rounded px-2 py-2',
-              value:value, onChange:e=>onChange(e.target.value)
-            },
-              [h('option',{key:'__',value:''}, placeholder || 'Select...')]
-                .concat(options.map(o=>h('option',{key:o,value:o},o)))
-            )
-          );
-        }
+      const results = !q ? items : items
+        .map(it=>{
+          const hay = [it.code, it.title||"", it.description||"", (it.clarifications||[]).join(" ")].join(" ").toLowerCase();
+          // longest common subsequence ratio (quick & simple)
+          let i=0,j=0; while(i<q.length && j<hay.length){ if(q[i]===hay[j]) i++; j++; }
+          const s = i/Math.max(1,q.length);
+          return {it,s};
+        })
+        .filter(x=>x.s>0.45)  // typo forgiveness
+        .sort((a,b)=>b.s-a.s)
+        .map(x=>x.it);
 
-        function FetchStandardsCard(){
-          const [subject,setSubject]=React.useState('');
-          const [grade,setGrade]    = React.useState('');
-          const [msg,setMsg]        = React.useState('');
-          const [items,setItems]    = React.useState([]);
+      const target = document.getElementById('results');
+      target.innerHTML = results.slice(0,40).map(x => `
+        <div class='card' style='margin:10px 0'>
+          <div class='badge'>${x.subject} · Grade ${x.grade} · ${x.code}</div>
+          <h3 style='margin:6px 0'>${x.title||x.description||'Untitled benchmark'}</h3>
+          <p>${(x.description||'').slice(0,280)}</p>
+          ${x.clarifications && x.clarifications.length ? `<p style="color:var(--muted)"><strong>Clarifications:</strong> ${x.clarifications.join('; ')}</p>` : ``}
+          ${x.itemSpec ? `<p style="color:var(--muted)"><strong>Item Spec:</strong> ${x.itemSpec}</p>` : ``}
+          <div style='display:flex; gap:8px; flex-wrap:wrap; margin-top:8px'>
+            <button class='btn' onclick='explain(${JSON.stringify({code:x.code,subject:x.subject,grade:x.grade})})'>Simple explanation</button>
+            <button class='btn primary' onclick='generateLesson(${JSON.stringify({code:x.code,subject:x.subject,grade:x.grade})})'>Generate 90-min lesson</button>
+          </div>
+        </div>`).join('') || "<p>No results</p>";
+    }
 
-          const subjects=['Civics','Science','Mathematics','English Language Arts'];
-          const grades=['K','1','2','3','4','5','6','7','8','9','10','11','12'];
+    function explain(ctx){ alert("Student-friendly explanation for "+ctx.code+" will be generated (Gemini function)."); }
+    function generateLesson(ctx){ alert("Lesson generation for "+ctx.subject+" "+ctx.grade+" · "+ctx.code+" (Gemini function + Assignment save)."); }
 
-          async function go(){
-            try{
-              setMsg('Fetching standards…');
-              const res = await call(FN.SEARCH, {subject, grade});
-              setItems(res.standards||[]);
-              setMsg(res.strategy ? `Loaded ✓ (Matched: ${res.resolvedSubject}${res.resolvedGrade?' '+res.resolvedGrade:''})` : 'Loaded ✓');
-            }catch(e){ setMsg('Error: '+(e.message||e)); }
-          }
+    // (B) Minimal roster sample (client-side)
+    function loadSampleRoster(){
+      const rows = [
+        {name:"Maria Lopez", email:"", period:"2", tier:"On"},
+        {name:"J. Smith", email:"", period:"2", tier:"Emerging"}
+      ];
+      const t = document.getElementById('roster');
+      t.innerHTML = "<tr><th>Name</th><th>Email</th><th>Period</th><th>Tier</th></tr>"+
+        rows.map(r=>`<tr><td contenteditable="true">${r.name}</td><td contenteditable="true">${r.email||'N/A'}</td><td contenteditable="true">${r.period}</td><td><span class='chip' contenteditable="true">${r.tier}</span></td></tr>`).join('');
+    }
 
-          return h('div',{className:'rounded-2xl bg-white/5 border border-white/10 p-6'},
-            h('h3',{className:'text-2xl font-bold mb-1'},'Fetch Standards'),
-            h('p',{className:'text-white/80 mb-4'},'Select a subject and grade to fetch standards'),
-            h('div',{className:'grid sm:grid-cols-2 gap-3 mb-3'},
-              h(Select,{label:'Subject',value:subject,onChange:setSubject,options:subjects,placeholder:'Subject'}),
-              h(Select,{label:'Grade',value:grade,onChange:setGrade,options:grades,placeholder:'Grade'})
-            ),
-            h('button',{onClick:go,className:'rounded bg-white text-black px-3 py-2 min-h-[44px]'},'Fetch Standards'),
-            h('p',{className:'text-sm text-white/70 mt-3'},msg),
-            h('ul',{className:'text-sm mt-3 space-y-1 max-h-64 overflow-auto'},
-              items.length? items.map(s=>h('li',{key:s.code},h('span',{className:'font-semibold'},s.code),' — ',s.title))
-                          : [h('li',{key:'empty',className:'opacity-70'},'No standards loaded yet.')]
-            )
-          );
-        }
-
-        function UploadRosterCard(){
-          return h('div',{id:'roster',className:'rounded-2xl bg-white/5 border border-white/10 p-6'},
-            h('h3',{className:'text-2xl font-bold mb-1'},'Upload Roster'),
-            h('p',{className:'text-white/80 mb-4'},'Upload a roster file to view and organize your classroom'),
-            h('input',{type:'file',className:'block w-full text-black rounded p-2 bg-white mb-3',accept:'.csv,.xlsx,.xls'}),
-            h('button',{className:'rounded bg-white text-black px-3 py-2 min-h-[44px]'},'Upload')
-          );
-        }
-
-        function App(){
-          const [user,setUser]=React.useState(()=>auth.currentUser);
-          React.useEffect(()=>auth.onAuthStateChanged(setUser),[]);
-          if(!user){
-            async function signIn(){
-              const provider = new firebase.auth.GoogleAuthProvider();
-              try {
-                await auth.signInWithPopup(provider).catch(async e=>{
-                  if(e.code==='auth/popup-blocked'||e.code==='auth/operation-not-supported-in-this-environment'){
-                    await auth.signInWithRedirect(provider);
-                  } else { throw e; }
-                });
-              } catch(err){ alert('Sign-in failed: ' + (err.message||err)); }
-            }
-            return h('div',{className:'min-h-screen flex items-center justify-center p-6'},
-              h('div',{className:'w-full max-w-sm bg-white/5 border border-white/10 rounded-xl p-6 text-center'},
-                h('img',{src:'/logo.svg',alt:'',className:'w-9 h-9 mx-auto mb-2'}),
-                h('h1',{className:'text-xl font-bold mb-2'},'Synapse Co-Pilot'),
-                h('p',{className:'text-sm opacity-80 mb-4'},'Sign in with Google to continue.'),
-                h('button',{onClick:signIn,className:'w-full min-h-[44px] bg-white text-black rounded px-3 py-2'},'Continue with Google')
-              )
-            );
-          }
-
-          return h('div',null,
-            h(Navbar,{user}),
-            h('main',{className:'max-w-6xl mx-auto px-4 py-10'},
-              h('h1',{className:'text-4xl sm:text-5xl font-extrabold text-center mb-8'},'Welcome to Synapse Co-Pilot'),
-              h('div',{className:'grid sm:grid-cols-2 gap-6'},
-                h(FetchStandardsCard),
-                h(UploadRosterCard)
-              )
-            )
-          );
-        }
-
-        const mount = ()=>ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
-        (document.readyState==='loading')?document.addEventListener('DOMContentLoaded',mount):mount();
-        setS('Rendering…');
-      }
-    })();
+    // (C) (Optional) Sign-in UI hook (you’ll wire Firebase Web SDK here)
+    document.getElementById('signin').onclick = ()=>{ document.getElementById('greet').textContent="Good morning, Ms./Dr. YourName"; document.getElementById('signin').style.display='none'; document.getElementById('signout').style.display='inline-flex'; };
+    document.getElementById('signout').onclick = ()=>{ document.getElementById('greet').textContent="Good day, Teacher."; document.getElementById('signin').style.display='inline-flex'; document.getElementById('signout').style.display='none'; };
   </script>
 </body>
 </html>
