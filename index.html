@@ -13,29 +13,27 @@
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og-image.png" />
 
-  <!-- Inter font (optional, safe with headers below) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap"
-    rel="stylesheet">
+  <!-- Inter font (safe with CSP if you allow fonts.googleapis.com / fonts.gstatic.com) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Single tiny stylesheet (no Tailwind, no JS build) -->
+  <!-- Single, local stylesheet -->
   <link rel="stylesheet" href="/assets/site.css" />
 </head>
 <body class="body">
 
   <!-- NAV -->
-  <header class="nav">
+  <header class="nav" role="banner">
     <div class="wrap nav__inner">
       <a class="brand" href="/" aria-label="Home">
-        <span class="ic ic--brand">S</span>
+        <span class="ic ic--brand" aria-hidden="true">S</span>
         <span class="brand__name">Synapse</span>
-        <span class="brand__plus">+</span>
-        <span class="ic ic--accent">K</span>
+        <span class="brand__plus" aria-hidden="true">+</span>
+        <span class="ic ic--accent" aria-hidden="true">K</span>
         <span class="brand__name">Kindred</span>
       </a>
-      <nav class="nav__links">
+      <nav class="nav__links" aria-label="Primary">
         <a href="#apps">Apps</a>
         <a href="#features">Features</a>
         <a href="#faq">FAQ</a>
@@ -46,9 +44,9 @@
 
   <!-- HERO -->
   <section class="hero">
-    <!-- gradient orbs -->
-    <div class="orb orb--brand"></div>
-    <div class="orb orb--accent"></div>
+    <!-- background orbs -->
+    <div class="orb orb--brand" aria-hidden="true"></div>
+    <div class="orb orb--accent" aria-hidden="true"></div>
 
     <div class="wrap hero__grid">
       <div class="hero__copy">
@@ -62,18 +60,18 @@
           <a href="#apps" class="btn btn--brand shimmer">See Apps</a>
           <a href="#features" class="btn btn--ghost">How it works</a>
         </div>
-        <div class="badges">
-          <div class="badge"><span class="ic ic--soft">✓</span> ADA-aware</div>
-          <div class="badge"><span class="ic ic--soft accent">✓</span> No student data required</div>
+        <div class="badges" aria-label="Key highlights">
+          <div class="badge"><span class="ic ic--soft" aria-hidden="true">✓</span> ADA-aware</div>
+          <div class="badge"><span class="ic ic--soft accent" aria-hidden="true">✓</span> No student data required</div>
         </div>
       </div>
 
-      <!-- Visual preview (glass card) -->
-      <div class="card glass tilt">
+      <!-- Visual-only glass preview -->
+      <div class="card glass tilt" aria-label="Standards preview (visual)">
         <div class="card__label">Standards Preview</div>
         <div class="preview">
           <div class="preview__bar">
-            <span class="ic ic--brand">S</span>
+            <span class="ic ic--brand" aria-hidden="true">S</span>
             <span class="label">Subject</span>
             <span class="chip">Math</span>
             <span class="label ml">Grade</span>
@@ -94,16 +92,16 @@
     <div class="wrap">
       <h2 class="section__title">Apps</h2>
       <div class="grid">
-        <a href="#synapse-app" class="appcard tilt">
+        <a href="#synapse-app" class="appcard tilt" aria-label="Open Synapse (placeholder)">
           <div class="appcard__top">
             <div class="appcard__brand">
-              <span class="ic ic--brand">S</span>
+              <span class="ic ic--brand" aria-hidden="true">S</span>
               <div>
                 <div class="appcard__name">Synapse</div>
                 <div class="appcard__sub">Standards → Plans in minutes</div>
               </div>
             </div>
-            <span class="arrow">→</span>
+            <span class="arrow" aria-hidden="true">→</span>
           </div>
           <ul class="appcard__list">
             <li>• Browse standards (code — title only)</li>
@@ -112,16 +110,16 @@
           </ul>
         </a>
 
-        <a href="#kindred-app" class="appcard tilt">
+        <a href="#kindred-app" class="appcard tilt" aria-label="Open Kindred (placeholder)">
           <div class="appcard__top">
             <div class="appcard__brand">
-              <span class="ic ic--accent">K</span>
+              <span class="ic ic--accent" aria-hidden="true">K</span>
               <div>
                 <div class="appcard__name">Kindred</div>
                 <div class="appcard__sub">Grouping • Tracker • Evidence</div>
               </div>
             </div>
-            <span class="arrow">→</span>
+            <span class="arrow" aria-hidden="true">→</span>
           </div>
           <ul class="appcard__list">
             <li>• Flexible grouping by needs/standards</li>
@@ -139,17 +137,17 @@
       <h2 class="section__title">Why teachers like it</h2>
       <div class="grid grid--features">
         <div class="feature tilt">
-          <div class="ic ic--soft">⚡</div>
+          <div class="ic ic--soft" aria-hidden="true">⚡</div>
           <div class="feature__title">Fast and focused</div>
           <p class="feature__desc">Zero clutter. Choose a grade/subject, see the standards, move on with your plan.</p>
         </div>
         <div class="feature tilt">
-          <div class="ic ic--soft accent">🧩</div>
+          <div class="ic ic--soft accent" aria-hidden="true">🧩</div>
           <div class="feature__title">Built for DI</div>
           <p class="feature__desc">Grouping and mastery tracking align to standards without exposing extra internals.</p>
         </div>
         <div class="feature tilt">
-          <div class="ic ic--soft green">🔒</div>
+          <div class="ic ic--soft green" aria-hidden="true">🔒</div>
           <div class="feature__title">Teacher-safe view</div>
           <p class="feature__desc">Only code + title are visible. All detailed metadata is internal for AI planning.</p>
         </div>
@@ -175,9 +173,9 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="wrap footer__inner">
-      <div>© <span id="y"></span> Synapse + Kindred</div>
+      <div>© Synapse + Kindred</div>
       <div class="footer__links">
         <a href="#apps">Apps</a>
         <a href="#features">Features</a>
@@ -185,10 +183,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    // minimal progressive enhancement without inline-eval
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
