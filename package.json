@@ -1,10 +1,5 @@
 {
-  "name": "synapse-standards-browser",
-  "private": true,
-  "version": "1.0.0",
   "scripts": {
-    "build:noop": "echo \"No operation build script\"",
-    "build": "npm run build:noop",
-    "start": "netlify dev"
+    "build:noop": "echo \"No build step\""
   }
 }
