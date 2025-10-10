@@ -1,28 +1,99 @@
-// Map "subject|grade" (lowercase) -> [{code,title,description?}]
-module.exports = {
-  "civics|6": [
-    { code: "SS.6.C.1.1", title: "Identify the origins and purposes of government." },
-    { code: "SS.6.C.2.1", title: "Explain rights and responsibilities of citizens." }
-  ],
-  "civics|7": [
-    { code: "SS.7.C.1.1", title: "Analyze ancient governments' influence on the U.S." },
-    { code: "SS.7.C.2.1", title: "Evaluate civic obligations: laws, taxes, defense, juries." },
-    { code: "SS.7.C.3.1", title: "Compare powers of the three branches of government." }
-  ],
-  "civics|8": [
-    { code: "SS.8.C.1.1", title: "Trace development of U.S. constitutional principles." },
-    { code: "SS.8.C.3.1", title: "Explain federalism and division of powers." }
-  ],
-  "english language arts|7": [
-    { code: "ELA.7.R.1.1", title: "Analyze setting, conflict, and character development." },
-    { code: "ELA.7.R.2.1", title: "Examine how structure contributes to meaning." }
-  ],
-  "mathematics|7": [
-    { code: "MA.7.AR.1.1", title: "Write and solve two-step equations." },
-    { code: "MA.7.DP.1.1", title: "Analyze data; compare measures of center/variability." }
-  ],
-  "science|7": [
-    { code: "SC.7.L.14.1", title: "Describe cell theory and plant vs. animal cells." },
-    { code: "SC.7.E.6.1",  title: "Model the rock cycle and crustal change." }
-  ]
-};
+// standardsCatalog.js
+// GET  /.netlify/functions/standardsCatalog?subject=Civics&grade=7&view=teacher|internal
+//      view=teacher  => only [{code,name}] (for UI lists)
+//      view=internal => full objects with .internal
+// Also de-dupes by (code) and prefers the richest internal payload.
+
+import fs from "fs";
+import path from "path";
+
+const root = path.resolve(process.cwd());
+
+function safeReadJSON(p) {
+  try {
+    return JSON.parse(fs.readFileSync(p, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function dedupeKeepRich(records) {
+  const byCode = new Map();
+  for (const r of records) {
+    const key = r.code?.trim();
+    if (!key) continue;
+    if (!byCode.has(key)) {
+      byCode.set(key, r);
+      continue;
+    }
+    // prefer record with longer internal metadata
+    const a = byCode.get(key);
+    const aLen = JSON.stringify(a.internal || {}).length;
+    const bLen = JSON.stringify(r.internal || {}).length;
+    byCode.set(key, bLen > aLen ? r : a);
+  }
+  return Array.from(byCode.values());
+}
+
+export async function handler(event) {
+  try {
+    const url = new URL(event.rawUrl);
+    const subject = url.searchParams.get("subject");
+    const grade = url.searchParams.get("grade");
+    const view = (url.searchParams.get("view") || "teacher").toLowerCase();
+
+    if (!subject || !grade) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "subject and grade are required" })
+      };
+    }
+
+    // Load manifest
+    const manifestPath = path.join(root, "standards", "index.json");
+    const manifest = safeReadJSON(manifestPath);
+    if (!manifest) {
+      return { statusCode: 500, body: JSON.stringify({ error: "manifest not found" }) };
+    }
+
+    // Resolve path pattern for the subject
+    const entry = manifest.subjects.find(
+      s => s.subject.toLowerCase() === subject.toLowerCase()
+    );
+    if (!entry) {
+      return { statusCode: 404, body: JSON.stringify({ error: "subject not in manifest" }) };
+    }
+
+    const chunkRel = entry.pathPattern.replace("{grade}", grade);
+    const chunkAbs = path.join(root, chunkRel);
+    const chunk = safeReadJSON(chunkAbs);
+
+    if (!chunk || !Array.isArray(chunk.standards)) {
+      return { statusCode: 200, body: JSON.stringify({ subject, grade, standards: [] }) };
+    }
+
+    // De-dupe and sanitize
+    const deduped = dedupeKeepRich(chunk.standards);
+
+    let payload;
+    if (view === "teacher") {
+      payload = deduped.map(({ code, name }) => ({ code, name }));
+    } else {
+      payload = deduped; // includes .internal
+    }
+
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=300" },
+      body: JSON.stringify({
+        subject: chunk.subject,
+        grade: chunk.grade,
+        version: chunk.version,
+        count: payload.length,
+        standards: payload
+      })
+    };
+  } catch (err) {
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+  }
+}
