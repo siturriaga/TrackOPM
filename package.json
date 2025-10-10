@@ -3,8 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "netlify dev",
-    "build": "echo \"No build step\"",
+    "build:noop": "echo \"No operation build script\"",
+    "build": "npm run build:noop",
     "start": "netlify dev"
   }
 }
