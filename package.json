@@ -1,4 +1,6 @@
 {
+  "name": "synapse-site",
+  "version": "1.0.0",
   "scripts": {
     "build:noop": "echo \"No build step\""
   }
