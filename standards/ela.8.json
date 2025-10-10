@@ -1,19 +1,19 @@
 {
-  "subject": "ELA",
+  "subject": "Math",
   "grade": 8,
   "version": "2025.10.10",
   "standards": [
     {
-      "code": "ELA.8.C.1.2",
-      "name": "Write personal or fictional narratives using narrative techniques, varied transitions, and a clearly established point of view.",
+      "code": "MA.8.AR.1.1",
+      "name": "Apply the Laws of Exponents to generate equivalent algebraic expressions, limited to integer exponents and monomial bases.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Refer to the K-12 Formulas (Appendix E) for the Laws of Exponents."
         ],
         "objectives": [
-          "Students will be able to write effective narratives that use a consistent point of view and a variety of transitions."
+          "Students will be able to use the Laws of Exponents to simplify algebraic expressions with monomials."
         ],
-        "teacher_friendly": "Focus on creating a cohesive narrative flow. Teach students to use a wider variety of transitional words and phrases to connect ideas and events smoothly.",
+        "teacher_friendly": "Extend the Laws of Exponents from numbers to variables. Practice simplifying expressions like (x^2)(x^3) and (y^5)^2.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -21,7 +21,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Simplify the expression: (2a^3b)^4"
         ],
         "exclusions": [
           "N/A"
@@ -30,24 +30,25 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "writing",
-          "narrative"
+          "algebraic reasoning",
+          "exponents",
+          "expressions",
+          "monomials"
         ]
       }
     },
     {
-      "code": "ELA.8.C.1.3",
-      "name": "Write to argue a position, supporting at least one claim and rebutting at least one counterclaim with logical reasoning, credible evidence from sources, elaboration, and using a logical organizational structure.",
+      "code": "MA.8.AR.1.2",
+      "name": "Apply properties of operations to multiply two linear expressions with rational coefficients.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Problems are limited to products where at least one of the factors is a monomial.",
+          "Refer to Properties of Operations, Equality and Inequality (Appendix D)."
         ],
         "objectives": [
-          "Students will be able to write an argumentative essay that includes a claim and a rebuttal to a counterclaim.",
-          "Students will be able to support their position with credible evidence and logical reasoning."
+          "Students will be able to use the distributive property to multiply linear expressions."
         ],
-        "teacher_friendly": "Teach the structure of a rebuttal: state the counterclaim, explain why it is flawed or weak, and provide evidence to disprove it. This moves beyond simply acknowledging the other side to actively arguing against it.",
+        "teacher_friendly": "Focus on using the distributive property to multiply a monomial by a binomial, such as 3x(2x + 5).",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -55,35 +56,33 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Expand the expression: -5y(2y - 4)."
         ],
         "exclusions": [
-          "N/A"
+          "Multiplying two binomials."
         ],
         "crosswalk": {
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "writing",
-          "argumentative",
-          "rebuttal",
-          "counterclaim"
+          "algebraic reasoning",
+          "expressions",
+          "multiplication",
+          "distributive property"
         ]
       }
     },
     {
-      "code": "ELA.8.C.1.4",
-      "name": "Write expository texts to explain and analyze information from multiple sources, using relevant supporting details, logical organization, and varied purposeful transitions.",
+      "code": "MA.8.AR.1.3",
+      "name": "Rewrite the sum of two algebraic expressions having a common monomial factor as a common factor multiplied by the sum of two algebraic expressions.",
       "internal": {
         "clarifications": [
           "N/A"
         ],
         "objectives": [
-          "Students will be able to write analytical essays that synthesize information from multiple sources.",
-          "Students will be able to use purposeful transitions to guide the reader."
+          "Students will be able to factor out a common monomial factor from an algebraic expression."
         ],
-        "teacher_friendly": "Focus on using transitions that show the logical relationship between ideas (e.g., 'consequently,' 'in contrast,' 'furthermore'), rather than just sequencing information.",
+        "teacher_friendly": "Teach this as the reverse of the distributive property. Guide students to find the greatest common factor (GCF) of the terms and 'pull it out' of the expression.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -91,7 +90,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Factor the expression: 12x^3 + 8x^2."
         ],
         "exclusions": [
           "N/A"
@@ -100,25 +99,25 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "writing",
-          "expository",
-          "analysis",
-          "transitions"
+          "algebraic reasoning",
+          "expressions",
+          "factoring",
+          "gcf"
         ]
       }
     },
     {
-      "code": "ELA.8.C.1.5",
-      "name": "Improve writing by planning, editing, considering feedback from adults and peers, and revising for clarity and cohesiveness.",
+      "code": "MA.8.AR.2.1",
+      "name": "Solve multi-step linear equations in one variable, with rational number coefficients. Include equations with variables on both sides.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Problem types include examples of one-variable linear equations that generate one solution, infinitely many solutions or no solution."
         ],
         "objectives": [
-          "Students will be able to revise their writing to improve clarity, organization, and the flow of ideas."
+          "Students will be able to solve linear equations with variables on both sides.",
+          "Students will be able to identify equations that have one solution, no solution, or infinitely many solutions."
         ],
-        "teacher_friendly": "Shift the focus of revision from fixing minor errors to making substantial improvements. Teach strategies for checking the cohesiveness of the piece, such as reading it aloud or creating a reverse outline.",
+        "teacher_friendly": "Teach a clear process: 1) Distribute, 2) Combine like terms on each side, 3) Move variables to one side, 4) Solve the remaining two-step equation. Introduce the special cases of 'no solution' and 'infinitely many solutions'.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -126,7 +125,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Solve for x: 5x - 3 = 2(x + 6)."
         ],
         "exclusions": [
           "N/A"
@@ -135,25 +134,26 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "writing",
-          "writing process",
-          "revision",
-          "cohesion"
+          "algebraic reasoning",
+          "equations",
+          "multi-step",
+          "variables on both sides"
         ]
       }
     },
     {
-      "code": "ELA.8.C.2.1",
-      "name": "Present information orally, in a logical sequence, supporting the central idea with credible evidence.",
+      "code": "MA.8.AR.2.2",
+      "name": "Solve two-step linear inequalities in one variable and represent solutions algebraically and graphically.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Instruction includes inequalities in the forms px±q>r and p(x±q)>r, where p, q and r are specific rational numbers and where any inequality symbol can be represented.",
+          "Problems include inequalities where the variable may be on either side of the inequality."
         ],
         "objectives": [
-          "Students will be able to deliver a well-structured oral presentation that supports a central idea with credible evidence."
+          "Students will be able to solve two-step linear inequalities.",
+          "Students will be able to graph the solution set of an inequality on a number line."
         ],
-        "teacher_friendly": "Focus on the quality of evidence used in presentations. Teach students how to cite their sources orally and explain the credibility of the information they are presenting.",
+        "teacher_friendly": "Remind students to solve inequalities just like equations, with the crucial exception of flipping the inequality symbol when multiplying or dividing both sides by a negative number.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -161,7 +161,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Solve and graph the inequality: -2x + 4 ≤ 10."
         ],
         "exclusions": [
           "N/A"
@@ -170,25 +170,25 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "speaking and listening",
-          "presentation",
-          "evidence"
+          "algebraic reasoning",
+          "inequalities",
+          "two-step"
         ]
       }
     },
     {
-      "code": "ELA.8.C.3.1",
-      "name": "Follow the rules of standard English grammar, punctuation, capitalization, and spelling appropriate to grade level.",
+      "code": "MA.8.AR.2.3",
+      "name": "Given an equation in the form of x^2=p and x^3=q, where p is a whole number and q is an integer, determine the real solutions.",
       "internal": {
         "clarifications": [
-          "Skills to be mastered include the appropriate use of passive and active voice, using semicolons to form sentences, and using verbs with attention to voice and mood."
+          "Instruction focuses on understanding that when solving x^2=p, there is both a positive and negative solution.",
+          "Within this benchmark, the expectation is to calculate square roots of perfect squares up to 225 and cube roots of perfect cubes from -125 to 125."
         ],
         "objectives": [
-          "Students will be able to differentiate between active and passive voice.",
-          "Students will be able to correctly use semicolons to connect related independent clauses."
+          "Students will be able to solve equations involving perfect squares and perfect cubes.",
+          "Students will be able to identify both the positive and negative solutions for square roots."
         ],
-        "teacher_friendly": "Teach active voice as a more direct and powerful way of writing. Explain that semicolons can be used like a 'super-comma' to join two closely related complete sentences.",
+        "teacher_friendly": "Emphasize that equations of the form x^2=p have two solutions (positive and negative), while equations of the form x^3=q have only one real solution.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -196,7 +196,8 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "Rewrite the passive sentence 'The ball was thrown by the boy' in active voice."
+          "Find all real solutions for x^2 = 81.",
+          "Find the real solution for x^3 = -64."
         ],
         "exclusions": [
           "N/A"
@@ -205,26 +206,25 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "grammar",
-          "conventions",
-          "active voice",
-          "passive voice",
-          "semicolon"
+          "algebraic reasoning",
+          "equations",
+          "square roots",
+          "cube roots"
         ]
       }
     },
     {
-      "code": "ELA.8.C.4.1",
-      "name": "Conduct research to answer a question, drawing on multiple reliable and valid sources, and generating additional questions for further research.",
+      "code": "MA.8.AR.3.1",
+      "name": "Determine if a linear relationship is also a proportional relationship.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Instruction focuses on the understanding that proportional relationships are linear relationships whose graph passes through the origin.",
+          "Instruction includes the representation of relationships using tables, graphs, equations and written descriptions."
         ],
         "objectives": [
-          "Students will be able to conduct a research project that involves synthesizing information and generating further inquiry."
+          "Students will be able to identify the two conditions for a proportional relationship: it must be linear and pass through the origin (0,0)."
         ],
-        "teacher_friendly": "Push students to move from simply reporting information to synthesizing it to form their own conclusions or arguments, and to identify gaps in their knowledge that could lead to further research.",
+        "teacher_friendly": "Explain that all proportional relationships are linear, but not all linear relationships are proportional. The key difference is that the graph of a proportional relationship MUST go through the origin.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -232,7 +232,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Is the equation y = 3x proportional? Is the equation y = 3x + 2 proportional? Why or why not?"
         ],
         "exclusions": [
           "N/A"
@@ -241,23 +241,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "research",
-          "synthesis"
+          "algebraic reasoning",
+          "linear relationships",
+          "proportional relationships"
         ]
       }
     },
     {
-      "code": "ELA.8.C.5.1",
-      "name": "Integrate diverse digital media to emphasize the relevance of a topic or idea in oral or written tasks.",
+      "code": "MA.8.AR.3.2",
+      "name": "Given a table, graph or written description of a linear relationship, determine the slope.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Problem types include cases where two points are given to determine the slope.",
+          "Instruction includes making connections of slope to the constant of proportionality and to similar triangles represented on the coordinate plane."
         ],
         "objectives": [
-          "Students will be able to use multimedia to connect a topic to its real-world relevance."
+          "Students will be able to calculate the slope of a line from a graph, table, or two points."
         ],
-        "teacher_friendly": "Encourage students to use multimedia to answer the 'So what?' question for their audience. How can an image, a video clip, or a sound bite make the topic more relevant and impactful?",
+        "teacher_friendly": "Teach slope as 'rise over run' from a graph and using the slope formula m = (y2 - y1) / (x2 - x1) when given two points. Emphasize that slope represents the rate of change.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -265,7 +266,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Find the slope of a line that passes through the points (2, 5) and (4, 9)."
         ],
         "exclusions": [
           "N/A"
@@ -274,24 +275,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "technology",
-          "multimedia",
-          "relevance"
+          "algebraic reasoning",
+          "linear relationships",
+          "slope"
         ]
       }
     },
     {
-      "code": "ELA.8.C.5.2",
-      "name": "Use a variety of digital tools to collaborate with others to produce writing.",
+      "code": "MA.8.AR.3.3",
+      "name": "Given a table, graph or written description of a linear relationship, write an equation in slope-intercept form.",
       "internal": {
         "clarifications": [
           "N/A"
         ],
         "objectives": [
-          "Students will be able to use digital tools to collaborate on writing projects."
+          "Students will be able to determine the slope (m) and y-intercept (b) from a representation of a linear relationship.",
+          "Students will be able to write the equation in the form y = mx + b."
         ],
-        "teacher_friendly": "Move beyond basic word processing to introduce digital tools for brainstorming (mind maps), organizing (outliners), and collaborative peer review (commenting features).",
+        "teacher_friendly": "Guide students to first find the slope (rate of change) and then identify the y-intercept (the starting value, or where x=0). Once they have 'm' and 'b', they can write the equation.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -299,7 +300,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "A line has a slope of -2 and passes through the point (0, 7). What is its equation in slope-intercept form?"
         ],
         "exclusions": [
           "N/A"
@@ -308,24 +309,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "technology",
-          "digital tools",
-          "collaboration"
+          "algebraic reasoning",
+          "linear relationships",
+          "equations",
+          "slope-intercept form"
         ]
       }
     },
     {
-      "code": "ELA.8.R.1.1",
-      "name": "Analyze the interaction between character development, setting, and plot in a literary text.",
+      "code": "MA.8.AR.3.4",
+      "name": "Given a mathematical or real-world context, graph a two-variable linear equation from a written description, a table or an equation in slope-intercept form.",
       "internal": {
         "clarifications": [
           "N/A"
         ],
         "objectives": [
-          "Students will be able to analyze how character, setting, and plot are interconnected and influence one another."
+          "Students will be able to graph a linear equation on the coordinate plane."
         ],
-        "teacher_friendly": "Encourage students to analyze the complex interplay between literary elements. Ask questions like, 'How does the harsh setting force the main character to make a choice that drives the plot forward?'",
+        "teacher_friendly": "Teach students to use the slope-intercept form (y = mx + b) for graphing: start by plotting the y-intercept ('b') on the y-axis, then use the slope ('m', rise over run) to find a second point and draw the line.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -333,7 +334,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Graph the equation y = (1/2)x - 3."
         ],
         "exclusions": [
           "N/A"
@@ -342,26 +343,23 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "literary elements",
-          "character",
-          "setting",
-          "plot"
+          "algebraic reasoning",
+          "linear relationships",
+          "graphing"
         ]
       }
     },
     {
-      "code": "ELA.8.R.1.2",
-      "name": "Analyze two or more themes and their development throughout a literary text.",
+      "code": "MA.8.AR.3.5",
+      "name": "Given a real-world context, determine and interpret the slope and y-intercept of a two-variable linear equation from a written description, a table, a graph or an equation in slope-intercept form.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Problems include conversions with temperature and equations of lines of fit in scatter plots."
         ],
         "objectives": [
-          "Students will be able to analyze how multiple, sometimes conflicting, themes are developed in a text."
+          "Students will be able to interpret the meaning of the slope and y-intercept in a real-world context."
         ],
-        "teacher_friendly": "Challenge students to explore how a text can develop complex and even contradictory themes, such as the conflict between 'individual freedom' and 'social responsibility'.",
+        "teacher_friendly": "Emphasize that the slope is the 'rate of change' (e.g., cost per item, speed in mph) and the y-intercept is the 'starting value' or 'flat fee' (e.g., the initial charge for a service).",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -369,7 +367,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "A taxi charges a $3 flat fee plus $2 per mile. In the equation y = 2x + 3, what do the 2 and the 3 represent?"
         ],
         "exclusions": [
           "N/A"
@@ -378,25 +376,25 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "literary elements",
-          "theme",
-          "analysis"
+          "algebraic reasoning",
+          "linear relationships",
+          "slope",
+          "y-intercept",
+          "real-world"
         ]
       }
     },
     {
-      "code": "ELA.8.R.1.3",
-      "name": "Analyze how an author develops and individualizes the perspectives of different characters.",
+      "code": "MA.8.AR.4.1",
+      "name": "Given a system of two linear equations and a specified set of possible solutions, determine which ordered pairs satisfy the system of linear equations.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Instruction focuses on the understanding that a solution to a system of equations satisfies both linear equations simultaneously."
         ],
         "objectives": [
-          "Students will be able to analyze how an author uses dialogue, actions, and thoughts to create distinct character perspectives."
+          "Students will be able to check if an ordered pair is a solution to a system by substituting the x and y values into both equations."
         ],
-        "teacher_friendly": "Have students track two different characters' reactions to the same event. Ask them to analyze how the author's choices in narration and dialogue reveal each character's unique point of view and motivations.",
+        "teacher_friendly": "Explain that to be a solution for the system, an ordered pair must make *both* equations true. Teach students to plug the point into each equation to check.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -404,7 +402,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Is the point (2, 1) a solution to the system y = x - 1 and y = -x + 3?"
         ],
         "exclusions": [
           "N/A"
@@ -413,27 +411,22 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "literary elements",
-          "perspective",
-          "characterization"
+          "algebraic reasoning",
+          "systems of equations"
         ]
       }
     },
     {
-      "code": "ELA.8.R.1.4",
-      "name": "Analyze structure, sound, imagery, and figurative language in poetry.",
+      "code": "MA.8.AR.4.2",
+      "name": "Given a system of two linear equations represented graphically on the same coordinate plane, determine whether there is one solution, no solution or infinitely many solutions.",
       "internal": {
         "clarifications": [
-          "Structural elements include form, line length, white space, and stanza breaks.",
-          "Sound is created through elements like rhyme, alliteration, assonance, consonance, onomatopoeia, repetition, and meter.",
-          "Imagery refers to language that appeals to the five senses."
+          "N/A"
         ],
         "objectives": [
-          "Students will be able to analyze the effect of a poet's choices regarding structure, sound devices, imagery, and figurative language."
+          "Students will be able to identify the number of solutions to a system by looking at its graph."
         ],
-        "teacher_friendly": "Encourage a holistic analysis of poetry. Instead of just identifying elements in isolation, ask students to explain how all these elements work together to create the poem's overall mood and meaning.",
+        "teacher_friendly": "Use a graphical approach: intersecting lines have one solution, parallel lines have no solution, and the same line (coincident lines) has infinitely many solutions.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -441,7 +434,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "If two lines on a graph are parallel, how many solutions does the system have?"
         ],
         "exclusions": [
           "N/A"
@@ -450,26 +443,25 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "poetry",
-          "structure",
-          "sound devices",
-          "imagery"
+          "algebraic reasoning",
+          "systems of equations",
+          "graphing"
         ]
       }
     },
     {
-      "code": "ELA.8.R.2.1",
-      "name": "Analyze how individual text sections and/or features convey a purpose and/or meaning in texts.",
+      "code": "MA.8.AR.4.3",
+      "name": "Given a mathematical or real-world context, solve systems of two linear equations by graphing.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Instruction includes approximating non-integer solutions.",
+          "Within this benchmark, it is the expectation to represent systems of linear equations in slope-intercept form only.",
+          "Instruction includes recognizing that parallel lines have the same slope."
         ],
         "objectives": [
-          "Students will be able to analyze the function and impact of specific sections or features within a larger informational text."
+          "Students will be able to solve a system of linear equations by graphing both lines and finding their point of intersection."
         ],
-        "teacher_friendly": "Ask higher-level questions about text structure. For example, 'Why did the author choose to present this information in a timeline instead of a paragraph? How does that choice affect the reader's understanding?'",
+        "teacher_friendly": "Teach students to carefully graph both linear equations on the same coordinate plane. The solution to the system is the ordered pair where the two lines cross.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -477,7 +469,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Solve by graphing: y = 2x - 3 and y = -x + 3."
         ],
         "exclusions": [
           "N/A"
@@ -486,25 +478,25 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "informational text",
-          "text structure",
-          "analysis"
+          "algebraic reasoning",
+          "systems of equations",
+          "graphing"
         ]
       }
     },
     {
-      "code": "ELA.8.R.2.2",
-      "name": "Analyze two or more central ideas and their development throughout a text.",
+      "code": "MA.8.F.1.1",
+      "name": "Given a set of ordered pairs, a table, a graph or mapping diagram, determine whether the relationship is a function. Identify the domain and range of the relation.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Instruction includes referring to the input as the independent variable and the output as the dependent variable.",
+          "Within this benchmark, it is the expectation to represent domain and range as a list of numbers or as an inequality."
         ],
         "objectives": [
-          "Students will be able to analyze the development and interaction of multiple central ideas in a complex text."
+          "Students will be able to determine if a relation is a function.",
+          "Students will be able to identify the domain (all x-values) and range (all y-values) of a relation."
         ],
-        "teacher_friendly": "Challenge students to analyze how an author develops related or even competing central ideas, showing how they are supported and connected throughout the text.",
+        "teacher_friendly": "Explain the key rule for a function: each input (x-value) can have only one output (y-value). Introduce the vertical line test as a simple way to check for functions on a graph.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -512,7 +504,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Is the set of points {(1, 2), (2, 4), (1, 3)} a function? What is its domain?"
         ],
         "exclusions": [
           "N/A"
@@ -521,24 +513,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "informational text",
-          "central idea"
+          "functions",
+          "relations",
+          "domain",
+          "range"
         ]
       }
     },
     {
-      "code": "ELA.8.R.2.3",
-      "name": "Explain how an author establishes and achieves purpose(s) through rhetorical appeals and/or figurative language.",
+      "code": "MA.8.F.1.2",
+      "name": "Given a function defined by a graph or an equation, determine whether the function is a linear function. Given an input-output table, determine whether it could represent a linear function.",
       "internal": {
         "clarifications": [
-          "Students are responsible for explaining the appropriateness of the rhetorical appeals of logos, ethos, and pathos."
+          "Instruction includes recognizing that a table may not determine a function."
         ],
         "objectives": [
-          "Students will be able to analyze how an author uses rhetorical appeals and figurative language to achieve their purpose."
+          "Students will be able to determine if a function is linear."
         ],
-        "teacher_friendly": "Move beyond identification to analysis of appropriateness. Ask, 'In this scientific article, is the author's appeal to emotion (pathos) effective, or does it weaken their credibility (ethos)?'",
+        "teacher_friendly": "Teach students to check for a constant rate of change (slope) in a table. A function is linear if its graph is a straight line and its equation can be written in the form y = mx + b.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -546,7 +538,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Does the equation y = x^2 represent a linear function?"
         ],
         "exclusions": [
           "N/A"
@@ -555,28 +547,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "author's purpose",
-          "rhetoric",
-          "ethos",
-          "pathos",
-          "logos"
+          "functions",
+          "linear functions"
         ]
       }
     },
     {
-      "code": "ELA.8.R.2.4",
-      "name": "Track the development of an argument, analyzing the types of reasoning used and their effectiveness, identifying ways in which the argument could be improved.",
+      "code": "MA.8.F.1.3",
+      "name": "Analyze a real-world written description or graphical representation of a functional relationship between two quantities and identify where the function is increasing, decreasing or constant.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Problem types are limited to continuous functions.",
+          "Analysis includes writing a description of a graphical representation or sketching a graph from a written description."
         ],
         "objectives": [
-          "Students will be able to evaluate the effectiveness of an argument.",
-          "Students will be able to suggest specific improvements to an argument."
+          "Students will be able to analyze a graph to determine where it is increasing, decreasing, or constant.",
+          "Students will be able to translate between a graphical representation and a written story."
         ],
-        "teacher_friendly": "Encourage students to act as critical editors. After analyzing an argument, they should be able to identify its weaknesses (e.g., lack of evidence, logical fallacies) and suggest ways to strengthen it.",
+        "teacher_friendly": "Use 'story graphs' that show a relationship over time (e.g., distance from home on a trip). Have students describe the story the graph tells, identifying sections where the quantity is increasing, decreasing, or staying the same.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -584,7 +572,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Sketch a graph representing this story: A person walks away from home, stops for a while, then walks back home."
         ],
         "exclusions": [
           "N/A"
@@ -593,25 +581,26 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "argument",
-          "evaluation"
+          "functions",
+          "graph analysis",
+          "increasing",
+          "decreasing"
         ]
       }
     },
     {
-      "code": "ELA.8.R.3.1",
-      "name": "Analyze how figurative language contributes to meaning and explain examples of symbolism in text(s).",
+      "code": "MA.8.GR.1.1",
+      "name": "Apply the Pythagorean Theorem to solve mathematical and real-world problems involving unknown side lengths in right triangles.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Instruction includes exploring right triangles with natural-number side lengths to illustrate the Pythagorean Theorem.",
+          "Within this benchmark, the expectation is to memorize the Pythagorean Theorem.",
+          "Radicands are limited to whole numbers up to 225."
         ],
         "objectives": [
-          "Students will be able to analyze the function of figurative language.",
-          "Students will be able to identify and explain the meaning of symbols in a text."
+          "Students will be able to use the Pythagorean Theorem (a^2 + b^2 = c^2) to find a missing side length of a right triangle."
         ],
-        "teacher_friendly": "Introduce symbolism as an object or idea that represents something else on a deeper level. Discuss common symbols (like a dove representing peace) and how authors create unique symbols within a text.",
+        "teacher_friendly": "Ensure students can correctly identify the legs (a and b) and the hypotenuse (c, the side opposite the right angle). Provide practice solving for both a leg and the hypotenuse.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -619,7 +608,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "In 'The Giver,' what does the color red come to symbolize?"
+          "A right triangle has legs of length 6 and 8. What is the length of the hypotenuse?"
         ],
         "exclusions": [
           "N/A"
@@ -628,24 +617,25 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "figurative language",
-          "symbolism"
+          "geometry",
+          "pythagorean theorem",
+          "right triangles"
         ]
       }
     },
     {
-      "code": "ELA.8.R.3.2",
-      "name": "Paraphrase content from grade-level texts.",
+      "code": "MA.8.GR.1.2",
+      "name": "Apply the Pythagorean Theorem to solve mathematical and real-world problems involving the distance between two points in a coordinate plane.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Instruction includes making connections between distance on the coordinate plane and right triangles.",
+          "Within this benchmark, the expectation is to memorize the Pythagorean Theorem. It is not the expectation to use the distance formula.",
+          "Radicands are limited to whole numbers up to 225."
         ],
         "objectives": [
-          "Students will be able to paraphrase complex passages from grade-level texts accurately."
+          "Students will be able to find the distance between two points on a coordinate plane by creating a right triangle and using the Pythagorean Theorem."
         ],
-        "teacher_friendly": "Practice paraphrasing increasingly dense and complex texts, focusing on capturing the original meaning and nuance without copying the sentence structure or vocabulary.",
+        "teacher_friendly": "Teach students to plot two points, draw a right triangle using the horizontal and vertical distances between them as the legs, and then use the Pythagorean Theorem to find the direct distance (hypotenuse).",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -653,33 +643,34 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Find the distance between the points (1, 2) and (4, 6)."
         ],
         "exclusions": [
-          "N/A"
+          "Using the distance formula."
         ],
         "crosswalk": {
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "paraphrasing"
+          "geometry",
+          "pythagorean theorem",
+          "coordinate plane",
+          "distance"
         ]
       }
     },
     {
-      "code": "ELA.8.R.3.3",
-      "name": "Compare and contrast the use or discussion of archetypes in texts.",
+      "code": "MA.8.GR.1.3",
+      "name": "Use the Triangle Inequality Theorem to determine if a triangle can be formed from a given set of sides. Use the converse of the Pythagorean Theorem to determine if a right triangle can be formed from a given set of sides.",
       "internal": {
         "clarifications": [
           "N/A"
         ],
         "objectives": [
-          "Students will be able to define 'archetype'.",
-          "Students will be able to identify and compare archetypal characters, settings, or plots in different texts."
+          "Students will be able to determine if three side lengths can form a triangle.",
+          "Students will be able to determine if a triangle is a right triangle using the converse of the Pythagorean Theorem."
         ],
-        "teacher_friendly": "Introduce common archetypes (e.g., the Hero, the Mentor, the Quest). Have students read two different stories and compare how each one uses or subverts a particular archetype.",
+        "teacher_friendly": "For the Triangle Inequality, teach the simple rule: the sum of the two shorter sides must be greater than the longest side. For the converse, check if a^2 + b^2 equals c^2. If it does, it's a right triangle.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -687,7 +678,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "Compare the Mentor archetype in 'Star Wars' (Obi-Wan Kenobi) and 'Harry Potter' (Dumbledore)."
+          "Can a triangle have side lengths of 3, 5, and 9? Can a triangle with side lengths 5, 12, and 13 be a right triangle?"
         ],
         "exclusions": [
           "N/A"
@@ -696,26 +687,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "comparative reading",
-          "archetypes"
+          "geometry",
+          "triangles",
+          "triangle inequality",
+          "pythagorean theorem"
         ]
       }
     },
     {
-      "code": "ELA.8.R.3.4",
-      "name": "Explain how an author uses rhetorical devices to support or advance an appeal.",
+      "code": "MA.8.GR.1.4",
+      "name": "Solve mathematical problems involving the relationships between supplementary, complementary, vertical or adjacent angles.",
       "internal": {
         "clarifications": [
-          "Rhetorical devices include figurative language plus irony, rhetorical question, antithesis, and zeugma.",
-          "Students will explain the connection between an author's use of rhetorical devices and the appeal (logos, ethos, or pathos) being made."
+          "N/A"
         ],
         "objectives": [
-          "Students will be able to identify advanced rhetorical devices.",
-          "Students will be able to analyze how a specific device is used to strengthen a rhetorical appeal."
+          "Students will be able to identify and use the properties of supplementary, complementary, vertical, and adjacent angles to find missing angle measures."
         ],
-        "teacher_friendly": "Teach students to connect the device to the appeal. For example, explain how an author might use a powerful metaphor (rhetorical device) to create an emotional reaction in the reader (pathos).",
+        "teacher_friendly": "Use clear definitions and diagrams: complementary (add to 90°), supplementary (add to 180°), vertical (are congruent), and adjacent (share a side). Practice setting up and solving simple equations based on these relationships.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -723,7 +712,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "Two vertical angles are shown. One is 75°. What is the measure of the other?"
         ],
         "exclusions": [
           "N/A"
@@ -732,25 +721,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "reading",
-          "rhetoric",
-          "rhetorical devices",
-          "appeals"
+          "geometry",
+          "angles",
+          "angle relationships"
         ]
       }
     },
     {
-      "code": "ELA.8.V.1.1",
-      "name": "Integrate academic vocabulary appropriate to grade level in speaking and writing.",
+      "code": "MA.8.GR.1.5",
+      "name": "Solve problems involving the relationships of interior and exterior angles of a triangle.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Problems include using the Triangle Sum Theorem and representing angle measures as algebraic expressions."
         ],
         "objectives": [
-          "Students will be able to use a range of academic vocabulary with precision and sophistication."
+          "Students will be able to use the fact that the interior angles of a triangle sum to 180°.",
+          "Students will be able to use the Exterior Angle Theorem."
         ],
-        "teacher_friendly": "Encourage students to use more precise and sophisticated academic language in their own writing and speaking, moving them away from simple vocabulary to more nuanced terms.",
+        "teacher_friendly": "Reinforce the Triangle Sum Theorem (all three angles add to 180°). Introduce the Exterior Angle Theorem: an exterior angle is equal to the sum of the two opposite interior angles.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -758,7 +746,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "A triangle has two interior angles measuring 50° and 70°. What is the measure of the third angle?"
         ],
         "exclusions": [
           "N/A"
@@ -767,23 +755,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "vocabulary",
-          "academic language"
+          "geometry",
+          "triangles",
+          "angles",
+          "triangle sum theorem"
         ]
       }
     },
     {
-      "code": "ELA.8.V.1.2",
-      "name": "Apply knowledge of Greek and Latin roots and affixes to determine meanings of words and phrases in grade-level content.",
+      "code": "MA.8.GR.1.6",
+      "name": "Develop and use formulas for the sums of the interior angles of regular polygons by decomposing them into triangles.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Problems include representing angle measures as algebraic expressions."
         ],
         "objectives": [
-          "Students will be able to apply their morphological knowledge to decode complex, multi-syllabic words."
+          "Students will be able to find the sum of the interior angles of a polygon using the formula (n-2) * 180."
         ],
-        "teacher_friendly": "Challenge students with complex words from scientific or historical texts and have them break the words down into their component roots and affixes to determine the meaning.",
+        "teacher_friendly": "Show students how to find the formula by picking a vertex and drawing diagonals to the other vertices. This divides the polygon into (n-2) triangles, and since each triangle has 180°, the sum is (n-2) * 180.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -791,7 +780,7 @@
           "cognitive_complexity": "N/A"
         },
         "examples": [
-          "N/A"
+          "What is the sum of the interior angles of a hexagon?"
         ],
         "exclusions": [
           "N/A"
@@ -800,23 +789,24 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "vocabulary",
-          "morphology"
+          "geometry",
+          "polygons",
+          "interior angles"
         ]
       }
     },
     {
-      "code": "ELA.8.V.1.3",
-      "name": "Apply knowledge of context clues, figurative language, word relationships, reference materials, and/or background knowledge to determine the connotative and denotative meaning of words and phrases, appropriate to grade level.",
+      "code": "MA.8.GR.2.1",
+      "name": "Given a preimage and image generated by a single transformation, identify the transformation that describes the relationship.",
       "internal": {
         "clarifications": [
-          "N/A"
+          "Within this benchmark, transformations are limited to reflections, translations or rotations of images.",
+          "Instruction focuses on the preservation of congruence so that a figure maps onto a copy of itself."
         ],
         "objectives": [
-          "Students will be able to use a variety of sophisticated strategies to interpret the meaning and nuance of words and phrases."
+          "Students will be able to identify a transformation as a reflection, translation, or rotation."
         ],
-        "teacher_friendly": "Encourage students to use a flexible, multi-pronged approach to deciphering difficult words and phrases, considering not just the immediate context but also the author's tone, purpose, and use of figurative or nuanced language.",
+        "teacher_friendly": "Use simple visual cues to help students identify transformations: translations are 'slides', reflections are 'flips' across a line, and rotations are 'turns' around a point.",
         "item_specs": {
           "eligible_content": "N/A",
           "stimulus": "N/A",
@@ -833,11 +823,573 @@
           "legacy": "N/A"
         },
         "tags": [
-          "ela",
-          "vocabulary",
-          "context clues",
-          "connotation",
-          "nuance"
+          "geometry",
+          "transformations",
+          "reflection",
+          "translation",
+          "rotation"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.GR.2.2",
+      "name": "Given a preimage and image generated by a single dilation, identify the scale factor that describes the relationship.",
+      "internal": {
+        "clarifications": [
+          "Instruction includes the connection to scale drawings and proportions.",
+          "Instruction focuses on the preservation of similarity and the lack of preservation of congruence when a figure maps onto a scaled copy of itself, unless the scaling factor is 1."
+        ],
+        "objectives": [
+          "Students will be able to calculate the scale factor of a dilation."
+        ],
+        "teacher_friendly": "Teach students to find the scale factor by creating a ratio of a side length of the image to the corresponding side length of the preimage (image / preimage). Emphasize that scale factors greater than 1 mean an enlargement, and less than 1 mean a reduction.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "A triangle with a side of length 3 is dilated to create an image with a corresponding side of length 9. What is the scale factor?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "geometry",
+          "transformations",
+          "dilation",
+          "scale factor"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.GR.2.3",
+      "name": "Describe and apply the effect of a single transformation on two-dimensional figures using coordinates and the coordinate plane.",
+      "internal": {
+        "clarifications": [
+          "Within this benchmark, transformations are limited to reflections, translations, rotations or dilations of images.",
+          "Lines of reflection are limited to the x-axis, y-axis or lines parallel to the axes.",
+          "Rotations must be about the origin and are limited to 90°, 180°, 270° or 360°.",
+          "Dilations must be centered at the origin."
+        ],
+        "objectives": [
+          "Students will be able to perform transformations on the coordinate plane and identify the coordinates of the new image."
+        ],
+        "teacher_friendly": "Teach the coordinate rules for common transformations, such as how reflecting over the y-axis changes (x, y) to (-x, y), or how dilating by a scale factor of k changes (x, y) to (kx, ky).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "What are the coordinates of the point (2, 3) after a 90° counterclockwise rotation about the origin?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "geometry",
+          "transformations",
+          "coordinate plane"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.GR.2.4",
+      "name": "Solve mathematical and real-world problems involving proportional relationships between similar triangles.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to use proportions to find missing side lengths in similar triangles."
+        ],
+        "teacher_friendly": "Teach students to identify corresponding sides of similar triangles and set up a proportion to solve for an unknown side. Use real-world examples like shadow problems or indirect measurement.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "A 6-foot person casts a 4-foot shadow. At the same time, a nearby tree casts a 20-foot shadow. How tall is the tree?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "geometry",
+          "similar triangles",
+          "proportions"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.DP.1.1",
+      "name": "Given a set of real-world bivariate numerical data, construct a scatter plot or a line graph as appropriate for the context.",
+      "internal": {
+        "clarifications": [
+          "Instruction includes recognizing similarities and differences between scatter plots and line graphs, and on determining which is more appropriate as a representation of the data based on the context.",
+          "Sets of data are limited to 20 points."
+        ],
+        "objectives": [
+          "Students will be able to construct a scatter plot.",
+          "Students will be able to determine when to use a scatter plot versus a line graph."
+        ],
+        "teacher_friendly": "Explain the key difference: use a line graph to show change over a continuous interval like time. Use a scatter plot to show the relationship between two separate numerical variables.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "To show the relationship between hours studied and test scores for a group of students, would you use a line graph or a scatter plot?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "data analysis",
+          "probability",
+          "scatter plots",
+          "line graphs",
+          "bivariate data"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.DP.1.2",
+      "name": "Given a scatter plot within a real-world context, describe patterns of association.",
+      "internal": {
+        "clarifications": [
+          "Descriptions include outliers; positive or negative association; linear or nonlinear association; strong or weak association."
+        ],
+        "objectives": [
+          "Students will be able to describe the association shown in a scatter plot."
+        ],
+        "teacher_friendly": "Teach students the vocabulary to describe scatter plots: positive (points trend up), negative (points trend down), linear (points form a rough line), strong (points are tightly packed), weak (points are spread out), and outliers.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "data analysis",
+          "probability",
+          "scatter plots",
+          "association",
+          "correlation"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.DP.1.3",
+      "name": "Given a scatter plot with a linear association, informally fit a straight line.",
+      "internal": {
+        "clarifications": [
+          "Instruction focuses on the connection to linear functions.",
+          "Instruction includes using a variety of tools, including a ruler, to draw a line with approximately the same number of points above and below the line."
+        ],
+        "objectives": [
+          "Students will be able to draw a line of best fit for a scatter plot."
+        ],
+        "teacher_friendly": "Explain that a line of best fit (or trend line) is a straight line that goes through the 'middle' of the data points. The goal is to draw a line that captures the general trend with about half the points above it and half below it.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "N/A"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "data analysis",
+          "probability",
+          "scatter plots",
+          "line of best fit"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.DP.2.1",
+      "name": "Determine the sample space for a repeated experiment.",
+      "internal": {
+        "clarifications": [
+          "Instruction includes recording sample spaces for repeated experiments using organized lists, tables or tree diagrams.",
+          "Experiments to be repeated are limited to tossing a fair coin, rolling a fair die, picking a card randomly from a deck with replacement, picking marbles randomly from a bag with replacement and spinning a fair spinner.",
+          "Repetition of experiments is limited to two times except for tossing a coin."
+        ],
+        "objectives": [
+          "Students will be able to determine all possible outcomes for a compound event."
+        ],
+        "teacher_friendly": "Teach students to use organizational tools like lists, tables, or tree diagrams to find the sample space for compound events, such as flipping a coin and then rolling a die.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "What is the sample space for flipping two coins?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "data analysis",
+          "probability",
+          "sample space",
+          "compound events"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.DP.2.2",
+      "name": "Find the theoretical probability of an event related to a repeated experiment.",
+      "internal": {
+        "clarifications": [
+          "Instruction includes representing probability as a fraction, percentage or decimal.",
+          "Experiments to be repeated are limited to tossing a fair coin, rolling a fair die, picking a card randomly from a deck with replacement, picking marbles randomly from a bag with replacement and spinning a fair spinner.",
+          "Repetition of experiments is limited to two times except for tossing a coin."
+        ],
+        "objectives": [
+          "Students will be able to calculate the theoretical probability of a compound event."
+        ],
+        "teacher_friendly": "Once students can find the total sample space, they can calculate the probability of a compound event using the formula: P = (number of favorable outcomes) / (total number of outcomes).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "What is the probability of rolling a 6 on a die and then flipping heads on a coin?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "data analysis",
+          "probability",
+          "compound events"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.DP.2.3",
+      "name": "Solve real-world problems involving probabilities related to single or repeated experiments, including making predictions based on theoretical probability.",
+      "internal": {
+        "clarifications": [
+          "Instruction includes making connections to proportional relationships and representing probability as a fraction, percentage or decimal.",
+          "Experiments to be repeated are limited to tossing a fair coin, rolling a fair die, picking a card randomly from a deck with replacement, picking marbles randomly from a bag with replacement and spinning a fair spinner.",
+          "Repetition of experiments is limited to two times except for tossing a coin."
+        ],
+        "objectives": [
+          "Students will be able to use probability to make predictions about the frequency of an event."
+        ],
+        "teacher_friendly": "Connect probability to predictions using proportions. If the probability of an event is 1/4, students should be able to predict that it will happen about 25 times out of 100 trials.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "The probability of winning a game is 1/10. If 200 people play the game, how many winners would you expect?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "data analysis",
+          "probability",
+          "predictions"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.NSO.1.1",
+      "name": "Extend previous understanding of rational numbers to define irrational numbers within the real number system. Locate an approximate value of a numerical expression involving irrational numbers on a number line.",
+      "internal": {
+        "clarifications": [
+          "Instruction includes the use of number line and rational number approximations, and recognizing pi (π) as an irrational number.",
+          "Within this benchmark, the expectation is to approximate numerical expressions involving one arithmetic operation and estimating square roots or pi (π)."
+        ],
+        "objectives": [
+          "Students will be able to define irrational numbers.",
+          "Students will be able to approximate the value of simple expressions with irrational numbers and place them on a number line."
+        ],
+        "teacher_friendly": "Explain irrational numbers as numbers that cannot be written as a simple fraction (non-repeating, non-terminating decimals). Practice approximating square roots of non-perfect squares by finding the two perfect squares they are between.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Between which two integers does the square root of 20 lie on a number line?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "number sense",
+          "operations",
+          "real numbers",
+          "irrational numbers"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.NSO.1.2",
+      "name": "Plot, order and compare rational and irrational numbers, represented in various forms.",
+      "internal": {
+        "clarifications": [
+          "Within this benchmark, it is not the expectation to work with the number e.",
+          "Within this benchmark, the expectation is to plot, order and compare square roots and cube roots.",
+          "Within this benchmark, the expectation is to use symbols (<,> or =)."
+        ],
+        "objectives": [
+          "Students will be able to compare and order rational and irrational numbers."
+        ],
+        "teacher_friendly": "To compare numbers in different forms (e.g., a square root and a fraction), teach students to convert all numbers to their decimal approximations first, then place them on a number line to compare.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Place the following numbers in order from least to greatest: 3.5, π, √9."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "number sense",
+          "operations",
+          "real numbers",
+          "comparing numbers"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.NSO.1.3",
+      "name": "Extend previous understanding of the Laws of Exponents to include integer exponents. Apply the Laws of Exponents to evaluate numerical expressions and generate equivalent numerical expressions, limited to integer exponents and rational number bases, with procedural fluency.",
+      "internal": {
+        "clarifications": [
+          "Refer to the K-12 Formulas (Appendix E) for the Laws of Exponents."
+        ],
+        "objectives": [
+          "Students will be able to apply the Laws of Exponents to expressions with integer exponents (positive, negative, and zero)."
+        ],
+        "teacher_friendly": "Introduce the rules for zero and negative exponents (x^0 = 1 and x^-n = 1/x^n). Practice simplifying expressions that combine these rules with the product, quotient, and power rules.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Simplify the expression: (4^2) / (4^5)."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "number sense",
+          "operations",
+          "exponents",
+          "integer exponents"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.NSO.1.4",
+      "name": "Express numbers in scientific notation to represent and approximate very large or very small quantities. Determine how many times larger or smaller one number is compared to a second number.",
+      "internal": {
+        "clarifications": [
+          "N/A"
+        ],
+        "objectives": [
+          "Students will be able to convert numbers between standard form and scientific notation.",
+          "Students will be able to use scientific notation to compare the magnitude of two numbers."
+        ],
+        "teacher_friendly": "Explain scientific notation as a 'shortcut' for writing very large or small numbers. To compare magnitudes, teach students to divide the numbers and look at the power of 10 in the result.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "How many times larger is 6 x 10^8 than 2 x 10^5?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "number sense",
+          "operations",
+          "scientific notation"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.NSO.1.5",
+      "name": "Add, subtract, multiply and divide numbers expressed in scientific notation with procedural fluency.",
+      "internal": {
+        "clarifications": [
+          "Within this benchmark, for addition and subtraction with numbers expressed in scientific notation, exponents are limited to within 2 of each other."
+        ],
+        "objectives": [
+          "Students will be able to perform all four operations with numbers in scientific notation."
+        ],
+        "teacher_friendly": "For multiplication/division, multiply/divide the coefficients and add/subtract the exponents. For addition/subtraction, the exponents must be the same before adding/subtracting the coefficients.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Calculate (3 x 10^4) * (2 x 10^3)."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "number sense",
+          "operations",
+          "scientific notation"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.NSO.1.6",
+      "name": "Solve real-world problems involving operations with numbers expressed in scientific notation.",
+      "internal": {
+        "clarifications": [
+          "Instruction includes recognizing the importance of significant digits when physical measurements are involved.",
+          "Within this benchmark, for addition and subtraction with numbers expressed in scientific notation, exponents are limited to within 2 of each other."
+        ],
+        "objectives": [
+          "Students will be able to solve real-world problems using scientific notation."
+        ],
+        "teacher_friendly": "Use real-world examples involving large or small quantities, such as astronomical distances or the size of microscopic organisms, to provide context for operations with scientific notation.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "The distance to the sun is about 9.3 x 10^7 miles. The distance to Proxima Centauri is about 2.5 x 10^13 miles. About how many times farther is Proxima Centauri than the sun?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "number sense",
+          "operations",
+          "scientific notation",
+          "real-world"
+        ]
+      }
+    },
+    {
+      "code": "MA.8.NSO.1.7",
+      "name": "Solve multi-step mathematical and real-world problems involving the order of operations with rational numbers including exponents and radicals.",
+      "internal": {
+        "clarifications": [
+          "Multi-step expressions are limited to 6 or fewer steps.",
+          "Within this benchmark, the expectation is to simplify radicals by factoring square roots of perfect squares up to 225 and cube roots of perfect cubes from -125 to 125."
+        ],
+        "objectives": [
+          "Students will be able to apply the order of operations to expressions containing radicals and exponents.",
+          "Students will be able to simplify basic radicals."
+        ],
+        "teacher_friendly": "Incorporate square roots into the order of operations (GEMS/PEMS - radicals are treated like exponents). Practice simplifying radicals by finding perfect square factors.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Evaluate: 5 + √16 * 2^3."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "number sense",
+          "operations",
+          "order of operations",
+          "radicals",
+          "exponents"
         ]
       }
     }
