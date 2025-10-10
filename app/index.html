@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Synapse + Kindred — Teach more. Click less.</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <meta name="description" content="Synapse (planning, lessons, groups, tracker) and Kindred (teacher–parent communication).">
+</head>
+<body>
+  <header class="container header">
+    <div class="brand"><div class="logo"></div><h1>Synapse + Kindred</h1></div>
+    <nav>
+      <a href="/app/">Open Synapse</a>
+      <a href="/kindred/">Open Kindred</a>
+      <a href="#tour">Tour</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h2 style="margin:0 0 12px">Teach more. Click less.</h2>
+        <p style="margin:0 0 18px;color:var(--muted)">Synapse plans instruction. Kindred communicates home. You just teach.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn primary" href="/app/">Open Synapse</a>
+          <a class="btn accent" href="/kindred/">Open Kindred</a>
+          <a class="btn" href="#tour">See a 2-min tour</a>
+        </div>
+        <div class="split" style="margin-top:20px">
+          <article class="card">
+            <div class="badge synapse">Synapse</div>
+            <h3 style="margin:8px 0">Standards → Lessons in seconds</h3>
+            <p>Generate 90-min plans with I-We-You, assign & print, and track mastery.</p>
+            <ul style="color:var(--muted)">
+              <li>Flexible standards search</li>
+              <li>Auto grouping & differentiation</li>
+              <li>Heatmaps & growth insights</li>
+            </ul>
+            <div style="margin-top:12px"><a class="btn" href="/app/">Open Synapse</a></div>
+          </article>
+          <article class="card">
+            <div class="badge kindred">Kindred</div>
+            <h3 style="margin:8px 0">Communication, handled</h3>
+            <p>Emails, reminders, and letters—personalized and logged automatically.</p>
+            <ul style="color:var(--muted)">
+              <li>Positive notes & alerts</li>
+              <li>Conference scheduling</li>
+              <li>Outreach log</li>
+            </ul>
+            <div style="margin-top:12px"><a class="btn" href="/kindred/">Open Kindred</a></div>
+          </article>
+        </div>
+      </div>
+      <div class="art"></div>
+    </section>
+
+    <section class="footer">© <span id="year"></span> Synapse + Kindred — Less clicking, more teaching.</section>
+  </main>
+
+  <!-- Accessibility -->
+  <div class="accessibility" id="a11y">
+    <button class="btn" onclick="toggleA11y()">Accessibility</button>
+    <div class="panel">
+      <div class="row"><span>High contrast</span><label><input type="checkbox" id="hc" onchange="applyA11y()"> on</label></div>
+      <div class="row"><span>Font size</span><input type="range" id="fs" min="1" max="1.3" step="0.05" value="1" oninput="applyA11y()"></div>
+      <div class="row"><span>Reduce motion</span><label><input type="checkbox" id="rm" onchange="applyA11y()"> on</label></div>
+      <div class="row"><span>Dyslexia-friendly</span><label><input type="checkbox" id="dx" onchange="applyA11y()"> on</label></div>
+      <div class="row"><span>Color-blind safe</span><label><input type="checkbox" id="cb" onchange="applyA11y()"> on</label></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const el = document.getElementById('a11y');
+    function toggleA11y(){ el.classList.toggle('open'); }
+    function applyA11y(){
+      const hc = document.getElementById('hc').checked;
+      const rm = document.getElementById('rm').checked;
+      const dx = document.getElementById('dx').checked;
+      const cb = document.getElementById('cb').checked;
+      const fs = document.getElementById('fs').value;
+      document.body.classList.toggle('high-contrast', hc);
+      document.body.classList.toggle('reduce-motion', rm);
+      document.body.classList.toggle('dyslexia', dx);
+      document.body.classList.toggle('colorblind-safe', cb);
+      document.documentElement.style.setProperty('--font-scale', fs);
+      localStorage.setItem('a11y', JSON.stringify({hc,rm,dx,cb,fs}));
+    }
+    (function(){
+      try{ const s = JSON.parse(localStorage.getItem('a11y')||'null'); if(!s) return;
+        document.getElementById('hc').checked=s.hc; document.getElementById('rm').checked=s.rm;
+        document.getElementById('dx').checked=s.dx; document.getElementById('cb').checked=s.cb;
+        document.getElementById('fs').value=s.fs; applyA11y();
+      }catch(e){}
+    })();
+  </script>
+</body>
+</html>
