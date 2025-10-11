@@ -1,21 +1,51 @@
-# Netlify configuration for Synapse (CSP is now in the HTML)
-
 [build]
-  base    = "."
-  command = "npm run build:noop"
+  command = ""
   publish = "."
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# SPA routing for the app
+# ---------- SPA Routing ----------
 [[redirects]]
   from = "/app/*"
   to = "/app/index.html"
   status = 200
 
-[[redirects]]
-  from = "/app"
-  to = "/app/index.html"
-  status = 200
+# Optional: root SPA fallback (if you also want marketing to be SPA)
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
+
+# ---------- Security headers (applies to everything by default) ----------
+[[headers]]
+  for = "/*"
+  [headers.values]
+  X-Content-Type-Options = "nosniff"
+  X-Frame-Options        = "DENY"
+  Referrer-Policy        = "strict-origin-when-cross-origin"
+  Permissions-Policy     = "geolocation=(), microphone=(), camera=()"
+  Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# ---------- CSP for the app ----------
+[[headers]]
+  for = "/app/*"
+  [headers.values]
+  Content-Security-Policy = """
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
+    connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://*.firebaseio.com https://www.googleapis.com https://www.gstatic.com /.netlify/functions;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' data: https://lh3.googleusercontent.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    frame-src https://accounts.google.com;
+    base-uri 'self';
+    form-action 'self';
+  """
+
+# Cache the standards JSON for speed
+[[headers]]
+  for = "/standards/*"
+  [headers.values]
+  Cache-Control = "public, max-age=86400, immutable"
