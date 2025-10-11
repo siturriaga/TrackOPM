@@ -1,8 +1,0 @@
-{
-  "name": "synapse-copilot",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@google/generative-ai": "^0.17.0"
-  }
-}
