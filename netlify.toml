@@ -1,12 +1,13 @@
 [build]
-  command = "npm run build:noop"
-  publish = "."
-
-[[redirects]]
-  from = "/app/*"
-  to   = "/app/index.html"
-  status = 200
+command = "npm run build:noop"
+publish = "."
 
 [functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
+directory = "netlify/functions"
+node_bundler = "esbuild"
+
+# App lives at /app/ (single-page app style)
+[[redirects]]
+from = "/app/*"
+to = "/app/index.html"
+status = 200
