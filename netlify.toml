@@ -1,3 +1,4 @@
+# Netlify configuration for Synapse
 [build]
 command = "npm run build:noop"
 publish = "."
@@ -6,24 +7,28 @@ publish = "."
 directory = "netlify/functions"
 node_bundler = "esbuild"
 
-# Route the SPA app that lives under /app/
+# SPA routing for the app at /app/
 [[redirects]]
 from = "/app/*"
 to = "/app/index.html"
 status = 200
 
-# Security headers for the /app/ scope
+# Convenience redirect for /app (no trailing slash)
+[[redirects]]
+from = "/app"
+to = "/app/index.html"
+status = 200
+
+# Security headers for the app
 [[headers]]
 for = "/app/*"
   [headers.values]
-  # Strict CSP that allows Firebase Auth/Firestore + Netlify Functions.
-  # No 'unsafe-eval'. No inline scripts (we use external module scripts).
   Content-Security-Policy = """
     default-src 'self';
     script-src 'self' https://www.gstatic.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
     connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://*.firebaseio.com https://www.googleapis.com https://www.gstatic.com /.netlify/functions;
     style-src 'self' 'unsafe-inline';
-    img-src 'self' data:;
+    img-src 'self' data: https://lh3.googleusercontent.com;
     font-src 'self' data:;
     frame-src https://accounts.google.com;
   """
