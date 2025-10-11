@@ -6,8 +6,28 @@ publish = "."
 directory = "netlify/functions"
 node_bundler = "esbuild"
 
-# App lives at /app/ (single-page app style)
+# Route the SPA app that lives under /app/
 [[redirects]]
 from = "/app/*"
 to = "/app/index.html"
 status = 200
+
+# Security headers for the /app/ scope
+[[headers]]
+for = "/app/*"
+  [headers.values]
+  # Strict CSP that allows Firebase Auth/Firestore + Netlify Functions.
+  # No 'unsafe-eval'. No inline scripts (we use external module scripts).
+  Content-Security-Policy = """
+    default-src 'self';
+    script-src 'self' https://www.gstatic.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
+    connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://*.firebaseio.com https://www.googleapis.com https://www.gstatic.com /.netlify/functions;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data:;
+    font-src 'self' data:;
+    frame-src https://accounts.google.com;
+  """
+  Referrer-Policy = "strict-origin-when-cross-origin"
+  X-Content-Type-Options = "nosniff"
+  X-Frame-Options = "SAMEORIGIN"
+  X-XSS-Protection = "0"
