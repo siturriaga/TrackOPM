@@ -1,4 +1,4 @@
-# Netlify configuration for Synapse (Headers are now in the _headers file)
+# Netlify configuration for Synapse (Headers are in the _headers file)
 
 [build]
   base    = "."
