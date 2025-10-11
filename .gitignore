@@ -1,0 +1,24 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+
+# Dependency directories
+node_modules/
+
+# Vite build output
+dist
+dist-ssr
+
+# Environment variables
+.env
+.env.local
+
+# IDE and OS files
+.DS_Store
+.idea
+.vscode
