@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "synapse-app",
+  "name": "synapse",
   "version": "1.0.0",
-  "description": "Synapse teacher app (static front-end + Netlify Functions)",
+  "description": "Synapse website + app (Netlify + Firebase + Gemini)",
   "scripts": {
     "build:noop": "echo \"No build step\""
   },
