@@ -1,32 +1,35 @@
-// Firebase client initializer (modular SDK via CDN).
-// Fetches config from Netlify function and exposes Auth + Firestore.
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-  getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import {
-  getFirestore, collection, doc, setDoc, getDoc, getDocs, addDoc, query, where, orderBy, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+let firebaseApp;
+let auth;
+let db;
 
-let app, auth, db;
-
-async function fetchConfig() {
-  const res = await fetch('/.netlify/functions/firebaseClientConfig');
-  if (!res.ok) throw new Error('Failed to load Firebase config');
-  return res.json();
+async function getFirebaseConfig() {
+    try {
+        const response = await fetch('/.netlify/functions/firebaseClientConfig');
+        if (!response.ok) {
+            throw new Error(`Failed to fetch Firebase config: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Could not fetch Firebase config:", error);
+        throw error;
+    }
 }
 
-export async function initFirebase() {
-  if (getApps().length) return { app, auth, db };
-  const cfg = await fetchConfig();
-  app = initializeApp(cfg);
-  auth = getAuth(app);
-  db   = getFirestore(app);
-  return { app, auth, db };
+export async function initializeFirebase() {
+    if (firebaseApp) {
+        return { app: firebaseApp, auth, db };
+    }
+    
+    const firebaseConfig = await getFirebaseConfig();
+    firebaseApp = initializeApp(firebaseConfig);
+    auth = getAuth(firebaseApp);
+    db = getFirestore(firebaseApp);
+    
+    return { app: firebaseApp, auth, db };
 }
 
-export {
-  auth, db, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut,
-  collection, doc, setDoc, getDoc, getDocs, addDoc, query, where, orderBy, serverTimestamp
-};
+export { auth, db, getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, collection, doc, setDoc, getDoc, getDocs, serverTimestamp };
