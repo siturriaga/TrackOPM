@@ -25,7 +25,7 @@ for = "/app/*"
   [headers.values]
   Content-Security-Policy = """
     default-src 'self';
-    script-src 'self' https://www.gstatic.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
+    script-src 'self' 'unsafe-eval' https://www.gstatic.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
     connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://*.firebaseio.com https://www.googleapis.com https://www.gstatic.com /.netlify/functions;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' data: https://lh3.googleusercontent.com;
@@ -36,3 +36,4 @@ for = "/app/*"
   X-Content-Type-Options = "nosniff"
   X-Frame-Options = "SAMEORIGIN"
   X-XSS-Protection = "0"
+
