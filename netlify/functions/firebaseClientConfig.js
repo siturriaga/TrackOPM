@@ -1,3 +1,6 @@
+// Netlify Function: returns your Firebase Web config (public client config).
+// Inline values avoid env var issues and unblock Firebase initialization.
+
 function json(status, body) {
   return {
     statusCode: status,
@@ -15,27 +18,14 @@ exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return json(200, {});
   if (event.httpMethod !== 'GET') return json(405, { error: "Method Not Allowed" });
 
-  const {
-    FIREBASE_API_KEY,
-    FIREBASE_AUTH_DOMAIN,
-    FIREBASE_PROJECT_ID,
-    FIREBASE_APP_ID,
-    FIREBASE_STORAGE_BUCKET,
-    FIREBASE_MESSAGING_SENDER_ID,
-    FIREBASE_MEASUREMENT_ID
-  } = process.env;
-
-  if (!FIREBASE_API_KEY || !FIREBASE_AUTH_DOMAIN || !FIREBASE_PROJECT_ID || !FIREBASE_APP_ID) {
-    return json(500, { error: "Missing Firebase env vars" });
-  }
-
+  // 🔓 Firebase Web config is safe to expose (client SDK uses it)
   return json(200, {
-    apiKey: FIREBASE_API_KEY,
-    authDomain: FIREBASE_AUTH_DOMAIN,
-    projectId: FIREBASE_PROJECT_ID,
-    appId: FIREBASE_APP_ID,
-    storageBucket: FIREBASE_STORAGE_BUCKET || "",
-    messagingSenderId: FIREBASE_MESSAGING_SENDER_ID || "",
-    measurementId: FIREBASE_MEASUREMENT_ID || ""
+    apiKey: "AIzaSyBT95w8fzJr9J5WCYe8iwFkvSrwXds5sms",
+    authDomain: "trackopmn.firebaseapp.com",
+    projectId: "trackopmn",
+    appId: "1:325895934431:web:50665d95aab0ac1a4b746a",
+    storageBucket: "trackopmn.firebasestorage.app",
+    messagingSenderId: "325895934431",
+    measurementId: "G-QX53NY1CJC"
   });
 };
