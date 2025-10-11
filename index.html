@@ -1,190 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Synapse • Kindred — Teaching Tools that Feel Magical</title>
-  <meta name="description" content="Plan faster, differentiate smarter, and track learning with AI that understands standards." />
-  <link rel="icon" href="/favicon.ico" />
-  <!-- cache-bust the CSS so updates show up immediately -->
-  <link rel="stylesheet" href="/site.css?v=1.0.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse • Kindred — Teaching Tools that Feel Magical</title>
+    <link rel="stylesheet" href="site.css?v=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="site">
-
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="wrap topbar__inner">
-      <a class="brand" href="/" aria-label="Synapse Home">
-        <span class="brand__logo">S</span>
-        <span class="brand__word">Synapse</span>
-        <span class="dot">•</span>
-        <span class="brand__word alt">Kindred</span>
-      </a>
-
-      <nav class="nav">
-        <a href="#features">Features</a>
-        <a href="#how">How it works</a>
-        <a href="#faq">FAQ</a>
-        <a class="btn btn--ghost" href="/app/">Open App</a>
-      </nav>
-
-      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="wrap hero__inner">
-      <div class="hero__copy">
-        <h1>Teaching tools that feel <span class="grad">magical</span>.</h1>
-        <p class="lead">
-          Plan in minutes, group with confidence, and track progress—powered by AI that understands your standards.
-        </p>
-        <div class="cta-row">
-          <a href="/app/" class="btn btn--brand">Launch Synapse App</a>
-          <a href="/kindred/" class="btn btn--ghost">Explore Kindred</a>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">Synapse</a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="/kindred/" class="nav-link--subtle">Kindred</a></li>
+                    <li><a href="/app/" class="btn btn--nav">Launch App</a></li>
+                </ul>
+            </nav>
         </div>
-        <p class="meta">No setup required. Google sign-in. Works with your existing data.</p>
-      </div>
+    </header>
 
-      <div class="hero__card tilt">
-        <div class="glass">
-          <div class="glass__head">
-            <div class="pill pill--green">Live</div>
-            <div class="dots"><span></span><span></span><span></span></div>
-          </div>
-          <div class="glass__body">
-            <h3 class="mini">AI Lesson & Groups</h3>
-            <ul class="ticks">
-              <li>Standards-aligned assignments</li>
-              <li>Heterodox grouping (DI ready)</li>
-              <li>Quarter & period aware tracker</li>
-            </ul>
-          </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Teaching Tools that Feel Magical</h1>
+                <p class="subtitle">Synapse uses AI to help you create differentiated lesson plans, activities, and student groups in seconds. Spend less time planning and more time teaching.</p>
+                <a href="/app/" class="btn btn--brand">Launch Synapse App</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Built for the Modern Educator</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Standards-Aligned Content</h3>
+                        <p>Generate lesson plans, activities, and assessments directly from your state standards. Ensure every lesson is purposeful and targeted.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Intelligent Grouping</h3>
+                        <p>Automatically create homogeneous or heterodox student groups based on performance data. Perfect for differentiated instruction and collaborative learning.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Effortless Roster Management</h3>
+                        <p>Import your student rosters from a CSV in seconds. Track progress, manage periods, and keep your data organized all in one place.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Kindred Tools. All rights reserved.</p>
         </div>
-        <div class="glow"></div>
-      </div>
-    </div>
-    <div class="orb orb--a"></div>
-    <div class="orb orb--b"></div>
-  </section>
-
-  <!-- Logos / trust -->
-  <section class="trust">
-    <div class="wrap trust__inner">
-      <span class="muted">Secure by design — Firebase Auth • Netlify Functions</span>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section id="features" class="section">
-    <div class="wrap">
-      <h2 class="h2">Everything you need in one place</h2>
-      <p class="sub">Built for busy teachers—fast, flexible, and friendly.</p>
-
-      <div class="grid grid-3">
-        <article class="card hover-rise">
-          <div class="card__icon i-purple">🎯</div>
-          <h3>Standards Picker</h3>
-          <p>Pick subject & grade to see code + title only. Internal AI uses the full data for plans & assignments.</p>
-        </article>
-
-        <article class="card hover-rise">
-          <div class="card__icon i-blue">🧮</div>
-          <h3>Student Tracker</h3>
-          <p>Quarter/period aware progress with quick status toggles (NA→IP→M→RT), plus class/individual visuals.</p>
-        </article>
-
-        <article class="card hover-rise">
-          <div class="card__icon i-amber">🧩</div>
-          <h3>Smart Grouping</h3>
-          <p>Heterodox groups using scores & pedagogy. Updates automatically with each roster upload.</p>
-        </article>
-
-        <article class="card hover-rise">
-          <div class="card__icon i-green">📥</div>
-          <h3>Roster Ingestion</h3>
-          <p>Upload CSV/XLS/PDF extracts; AI matches names/IDs—even with typos. Missing fields marked N/A.</p>
-        </article>
-
-        <article class="card hover-rise">
-          <div class="card__icon i-pink">📝</div>
-          <h3>Assignment Builder</h3>
-          <p>AI-drafted, standards-aligned lessons (Gradual Release, DI/stations, exit tickets). 60/90/Unit options.</p>
-        </article>
-
-        <article class="card hover-rise">
-          <div class="card__icon i-slate">🔐</div>
-          <h3>Private & Secure</h3>
-          <p>Google sign-in. Gemini via secure server proxy. No keys in the browser.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section id="how" class="section alt">
-    <div class="wrap">
-      <h2 class="h2">How it works</h2>
-      <ol class="steps">
-        <li><span class="step">1</span>Sign in with Google</li>
-        <li><span class="step">2</span>Pick standards and upload rosters</li>
-        <li><span class="step">3</span>Track mastery, group, and assign—instantly</li>
-      </ol>
-      <div class="cta-row center">
-        <a href="/app/" class="btn btn--brand">Open the App</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="wrap">
-      <h2 class="h2">FAQ</h2>
-      <details class="faq">
-        <summary>Does Synapse store student data?</summary>
-        <p>Student records live in your Firebase project under your control. We never expose your AI keys.</p>
-      </details>
-      <details class="faq">
-        <summary>Can I use my own standards?</summary>
-        <p>Yes. Drop JSON chunks into <code>/standards/</code> and they appear in the picker.</p>
-      </details>
-      <details class="faq">
-        <summary>Will this work on school devices?</summary>
-        <p>Yes—no extensions needed. Works on modern browsers with your district Google account.</p>
-      </details>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="wrap footer__inner">
-      <div>© <span id="year"></span> Synapse • Kindred</div>
-      <nav class="footnav">
-        <a href="/app/">Open App</a>
-        <a href="/kindred/">Kindred</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-    </div>
-  </footer>
-
-  <!-- Tiny JS: year, mobile menu, reveal-on-scroll -->
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const burger = document.querySelector('.hamburger');
-    const nav = document.querySelector('.nav');
-    burger.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    const io = new IntersectionObserver(es => {
-      es.forEach(e => e.isIntersecting && e.target.classList.add('reveal'));
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.hover-rise, .card, .hero__card').forEach(el => io.observe(el));
-  </script>
+    </footer>
 </body>
 </html>
