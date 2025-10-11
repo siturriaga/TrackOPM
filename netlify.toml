@@ -6,19 +6,22 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# ---------- SPA Routing ----------
+# -------- SPA routing (only the app) --------
 [[redirects]]
   from = "/app/*"
   to = "/app/index.html"
   status = 200
 
-# Optional: root SPA fallback (if you also want marketing to be SPA)
+# (Optional) If you want the ROOT to be a SPA too, uncomment:
 # [[redirects]]
 #   from = "/*"
 #   to = "/index.html"
 #   status = 200
 
-# ---------- Security headers (applies to everything by default) ----------
+# IMPORTANT: Do NOT add a catch-all 200 redirect that includes "/.netlify/*"
+# Netlify automatically serves functions under /.netlify/functions/*
+
+# -------- Global security headers --------
 [[headers]]
   for = "/*"
   [headers.values]
@@ -28,14 +31,14 @@
   Permissions-Policy     = "geolocation=(), microphone=(), camera=()"
   Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
-# ---------- CSP for the app ----------
+# -------- CSP for the app (no invalid sources; no unsafe-eval) --------
 [[headers]]
   for = "/app/*"
   [headers.values]
   Content-Security-Policy = """
     default-src 'self';
-    script-src 'self' https://www.gstatic.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
-    connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://*.firebaseio.com https://www.googleapis.com https://www.gstatic.com /.netlify/functions;
+    script-src 'self' https://www.gstatic.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://apis.google.com;
+    connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://*.firebaseio.com https://www.googleapis.com https://www.gstatic.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' data: https://lh3.googleusercontent.com;
     font-src 'self' https://fonts.gstatic.com data:;
@@ -44,7 +47,7 @@
     form-action 'self';
   """
 
-# Cache the standards JSON for speed
+# -------- Cache standards JSON for speed --------
 [[headers]]
   for = "/standards/*"
   [headers.values]
