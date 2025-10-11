@@ -1,15 +1,8 @@
 {
+  "name": "synapse-copilot",
   "private": true,
-  "name": "synapse",
-  "version": "1.0.0",
-  "description": "Synapse website + app (Netlify + Firebase + Gemini)",
-  "scripts": {
-    "build:noop": "echo \"No build step\""
-  },
+  "type": "module",
   "dependencies": {
-    "@google/generative-ai": "^0.19.0"
-  },
-  "engines": {
-    "node": ">=18"
+    "@google/generative-ai": "^0.17.0"
   }
 }
