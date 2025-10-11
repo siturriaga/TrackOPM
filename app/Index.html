@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <title>Synapse — Teacher Dashboard</title>
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Phone-first, modern UI -->
+  <link rel="stylesheet" href="/app/app.css?v=2.0.0" />
+</head>
+<body class="synapse-app">
+
+  <!-- AUTH GATE (blocks app until Google sign-in) -->
+  <div id="authGate" class="auth-gate" aria-live="polite">
+    <div class="auth-card">
+      <h1>Welcome to Synapse</h1>
+      <p>Sign in with your Google account to continue.</p>
+      <button class="btn brand" data-action="google-signin">Sign in with Google</button>
+      <p class="muted" style="margin-top:10px;">
+        Your data is private to your account.
+      </p>
+    </div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="app-topbar">
+    <div class="wrap">
+      <div class="brand-row">
+        <a class="brand" href="/">← Synapse</a>
+        <nav class="app-nav">
+          <span id="welcomeMsg" class="muted"></span>
+          <a href="/" title="Back to website">Website</a>
+          <a href="#" data-action="open-profile">Profile</a>
+          <a href="#" data-action="sign-out">Sign out</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab bar -->
+  <nav class="tabs" role="tablist">
+    <div class="wrap tabs__inner">
+      <button class="tab is-active" data-tab="dashboard">Dashboard</button>
+      <button class="tab" data-tab="roster">Roster</button>
+      <button class="tab" data-tab="tracker">Tracker</button>
+      <button class="tab" data-tab="groups">Groups</button>
+      <button class="tab" data-tab="assignments">Assignments</button>
+      <button class="tab" data-tab="settings">Settings</button>
+    </div>
+  </nav>
+
+  <!-- Views -->
+  <main id="views" class="app-shell">
+    <div class="wrap stack-md">
+
+      <!-- DASHBOARD -->
+      <section id="view-dashboard" data-view="dashboard" class="view is-active">
+        <div class="grid grid-3">
+          <div class="card pad kpi reveal">
+            <div class="num" id="kpi-students">0</div>
+            <div class="label">Students</div>
+          </div>
+          <div class="card pad kpi reveal">
+            <div class="num" id="kpi-periods">0</div>
+            <div class="label">Periods</div>
+          </div>
+          <div class="card pad kpi reveal">
+            <div class="num" id="kpi-master">—</div>
+            <div class="label">Avg. Mastery</div>
+          </div>
+        </div>
+
+        <div class="card pad reveal">
+          <div class="toolbar">
+            <button class="btn brand" data-action="goto-roster">Upload roster</button>
+            <button class="btn" data-action="goto-assignments">Pick standards</button>
+            <button class="btn" data-action="goto-assignments">Create assignment</button>
+          </div>
+          <p class="muted">Use the quick actions above to get started.</p>
+        </div>
+      </section>
+
+      <!-- ROSTER -->
+      <section id="view-roster" data-view="roster" class="view">
+        <div class="card pad reveal">
+          <h2>Roster upload</h2>
+          <p class="sub">CSV / XLSX / TSV / simple PDF extracts. Missing fields become N/A.</p>
+          <div class="toolbar">
+            <input type="file" id="rosterFile" class="input" accept=".csv,.tsv,.txt,.xlsx,.xls,.pdf" />
+            <select id="rosterQuarter" class="select">
+              <option value="Q1">Q1</option><option value="Q2">Q2</option>
+              <option value="Q3">Q3</option><option value="Q4">Q4</option>
+            </select>
+            <select id="rosterPeriod" class="select">
+              <option value="Period 1">Period 1</option>
+              <option value="Period 2">Period 2</option>
+              <option value="Period 3">Period 3</option>
+              <option value="Period 4">Period 4</option>
+            </select>
+            <button class="btn brand" data-action="upload-roster">Import</button>
+          </div>
+          <div id="rosterSummary" class="muted stack-sm"></div>
+        </div>
+
+        <div class="card pad reveal">
+          <h2>Current roster</h2>
+          <div class="table-wrap">
+            <table class="data-table" id="rosterTable">
+              <thead><tr>
+                <th>Name</th><th>ID</th><th>Quarter</th><th>Period</th>
+                <th class="hide-on-mobile">Test</th><th class="hide-on-mobile">Score</th><th>Proficiency</th>
+              </tr></thead>
+              <tbody><!-- rows injected --></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRACKER -->
+      <section id="view-tracker" data-view="tracker" class="view">
+        <div class="card pad reveal">
+          <h2>Filters</h2>
+          <div class="toolbar">
+            <select id="trkQuarter" class="select">
+              <option value="Q1">Q1</option><option value="Q2">Q2</option>
+              <option value="Q3">Q3</option><option value="Q4">Q4</option>
+            </select>
+            <select id="trkPeriod" class="select"></select>
+            <select id="trkTest" class="select">
+              <option value="Latest">Latest</option>
+            </select>
+            <button class="btn" data-action="save-tracker">Save</button>
+            <button class="btn" data-action="clear-tracker">Clear</button>
+            <button class="btn" data-action="print-view">Print</button>
+          </div>
+        </div>
+
+        <div class="card pad reveal">
+          <h2>Class status</h2>
+          <div class="table-wrap">
+            <table class="data-table" id="trackerTable">
+              <thead><tr>
+                <th>Student</th><th>ID</th><th>Status</th><th>Notes</th>
+              </tr></thead>
+              <tbody><!-- rows injected --></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- GROUPS -->
+      <section id="view-groups" data-view="groups" class="view">
+        <div class="card pad reveal">
+          <h2>Grouping controls</h2>
+          <div class="toolbar">
+            <select id="grpPeriod" class="select"></select>
+            <select id="grpStrategy" class="select">
+              <option value="heterodox">Heterodox (DI)</option>
+              <option value="homogeneous">Homogeneous</option>
+            </select>
+            <select id="grpSize" class="select">
+              <option value="3">Groups of 3</option>
+              <option value="4">Groups of 4</option>
+              <option value="5">Groups of 5</option>
+            </select>
+            <button class="btn brand" data-action="regen-groups">Regenerate</button>
+          </div>
+        </div>
+
+        <div class="grid grid-3" id="groupsGrid"><!-- group columns injected --></div>
+      </section>
+
+      <!-- ASSIGNMENTS -->
+      <section id="view-assignments" data-view="assignments" class="view">
+        <div class="card pad reveal">
+          <h2>Standards picker</h2>
+          <p class="sub">Subject & grade show only <strong>code + title</strong> for teachers; full standard stays internal for AI.</p>
+          <div class="toolbar">
+            <select id="stdSubject" class="select"></select>
+            <select id="stdGrade" class="select"></select>
+            <input id="stdSearch" class="input" placeholder="Search code or title…" />
+            <button class="btn" data-action="load-standards">Load</button>
+          </div>
+          <ul id="stdList" class="std-list stack-xs"><!-- items injected --></ul>
+        </div>
+
+        <div class="card pad reveal">
+          <h2>Create assignment</h2>
+          <div class="toolbar">
+            <select id="asnLevel" class="select">
+              <option value="Remedial">Remedial</option>
+              <option value="On">On grade</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+            <select id="asnDuration" class="select">
+              <option value="60">60 min</option>
+              <option value="90">90 min</option>
+              <option value="Unit">Unit</option>
+            </select>
+            <button class="btn brand" data-action="generate-assignment">Generate</button>
+          </div>
+          <article id="asnOut" class="card pad stack-sm"><!-- markdown injected --></article>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="view-settings" data-view="settings" class="view">
+        <div class="card pad reveal">
+          <h2>Profile</h2>
+          <div class="grid grid-2">
+            <div class="stack-sm">
+              <label>Title</label>
+              <select id="pfTitle" class="select">
+                <option>Ms.</option><option>Mr.</option><option>Mrs.</option>
+                <option>Dr.</option><option>PhD</option>
+              </select>
+            </div>
+            <div class="stack-sm">
+              <label>Display name</label>
+              <input id="pfName" class="input" placeholder="Your name" />
+            </div>
+            <div class="stack-sm">
+              <label>Role</label>
+              <input id="pfRole" class="input" placeholder="e.g., 7th Grade ELA Teacher" />
+            </div>
+          </div>
+          <div class="toolbar">
+            <button class="btn" data-action="save-profile">Save profile</button>
+          </div>
+        </div>
+
+        <div class="card pad reveal">
+          <h2>Data</h2>
+          <div class="toolbar">
+            <button class="btn" data-action="export-csv">Export CSV</button>
+            <button class="btn warn" data-action="clear-data">Clear</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- App logic (tabs, actions, Firebase Auth+Firestore, standards, AI generation) -->
+  <script src="/app/app.js?v=2.0.0" type="module"></script>
+</body>
+</html>
