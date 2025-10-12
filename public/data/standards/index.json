@@ -1,0 +1,20 @@
+[
+  { "id": "civics-7",     "label": "Civics (Grade 7)",           "path": "/data/standards/civics-7.json" },
+  { "id": "us-history-6", "label": "U.S. History (Grade 6)",     "path": "/data/standards/us-history-6.json" },
+
+  { "id": "math-6",       "label": "Mathematics (Grade 6)",      "path": "/data/standards/math-6.json" },
+  { "id": "math-7",       "label": "Mathematics (Grade 7)",      "path": "/data/standards/math-7.json" },
+  { "id": "math-8",       "label": "Mathematics (Grade 8)",      "path": "/data/standards/math-8.json" },
+
+  { "id": "ela-6",        "label": "ELA (Grade 6)",              "path": "/data/standards/ela-6.json" },
+  { "id": "ela-7",        "label": "ELA (Grade 7)",              "path": "/data/standards/ela-7.json" },
+  { "id": "ela-8",        "label": "ELA (Grade 8)",              "path": "/data/standards/ela-8.json" },
+
+  { "id": "reading-6",    "label": "Reading (Grade 6)",          "path": "/data/standards/reading-6.json" },
+  { "id": "reading-7",    "label": "Reading (Grade 7)",          "path": "/data/standards/reading-7.json" },
+  { "id": "reading-8",    "label": "Reading (Grade 8)",          "path": "/data/standards/reading-8.json" },
+
+  { "id": "science-6",    "label": "Science (Grade 6)",          "path": "/data/standards/science-6.json" },
+  { "id": "science-7",    "label": "Science (Grade 7)",          "path": "/data/standards/science-7.json" },
+  { "id": "science-8",    "label": "Science (Grade 8)",          "path": "/data/standards/science-8.json" }
+]
