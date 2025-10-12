@@ -1,74 +1,55 @@
-// src/components/AuthGate.tsx
-import React, { useEffect, useState } from 'react';
-import { auth, provider } from '../lib/firebase';
-import { signInWithPopup, signOut, onAuthStateChanged, User } from 'firebase/auth';
-import { Button } from './Buttons';
+import React, { useEffect, useState } from 'react'
+import { auth, provider } from '../lib/firebase'
+import { signInWithPopup, signOut, onAuthStateChanged, User } from 'firebase/auth'
+import { Button } from './Buttons'
 
-const AuthGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function AuthGate({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
-      setUser(u);
-      setLoading(false);
-    });
-    return () => unsub();
-  }, []);
-
-  const handleSignIn = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-    } catch (e) {
-      console.error('Sign-in error:', e);
-    }
-  };
-
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (e) {
-      console.error('Sign-out error:', e);
-    }
-  };
+      setUser(u)
+      setLoading(false)
+    })
+    return () => unsub()
+  }, [])
 
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center text-gray-500">
-        Loading...
-      </div>
-    );
+      <div className="py-24 text-center text-gray-600">Loading…</div>
+    )
   }
 
   if (!user) {
     return (
-      <div className="flex h-screen flex-col items-center justify-center bg-gray-50 text-center">
-        <h1 className="mb-4 text-3xl font-bold text-gray-800">Welcome to Synapse Co-Pilot</h1>
-        <p className="mb-6 text-gray-600">Please sign in with your Google account to continue.</p>
-        <Button onClick={handleSignIn}>Sign in with Google</Button>
+      <div className="max-w-lg mx-auto my-10 rounded-2xl bg-white/70 backdrop-blur p-8 shadow text-center">
+        <h2 className="font-display text-2xl">Welcome to Synapse</h2>
+        <p className="mt-2 text-gray-600">Sign in with Google to access your dashboard.</p>
+        <div className="mt-6">
+          <Button
+            onClick={async () => {
+              await signInWithPopup(auth, provider)
+            }}
+            variant="primary"
+          >
+            Sign in with Google
+          </Button>
+        </div>
+        <p className="mt-4 text-xs text-gray-500">By signing in, you agree to our teacher-friendly privacy policy.</p>
       </div>
-    );
+    )
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="flex items-center justify-between bg-blue-600 p-4 text-white">
-        <h1 className="text-lg font-semibold">Synapse Co-Pilot</h1>
-        <div className="flex items-center gap-3">
-          {user.photoURL && (
-            <img
-              src={user.photoURL}
-              alt="User Avatar"
-              className="h-8 w-8 rounded-full border border-white"
-            />
-          )}
-          <span className="text-sm">{user.displayName || user.email}</span>
-          <Button onClick={handleSignOut}>Sign Out</Button>
-        </div>
-      </header>
-      <main className="flex-1 bg-white">{children}</main>
-    </div>
-  );
-};
+    <AuthContext.Provider value={user}>
+      {children}
+      <div className="fixed bottom-4 right-4">
+        <Button onClick={() => signOut(auth)} variant="ghost">Sign out</Button>
+      </div>
+    </AuthContext.Provider>
+  )
+}
 
-export default AuthGate;
+export const AuthContext = React.createContext<import('firebase/auth').User | null>(null)
+export const useAuth = () => React.useContext(AuthContext)
