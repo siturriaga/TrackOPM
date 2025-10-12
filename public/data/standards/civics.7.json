@@ -1,0 +1,1418 @@
+{
+  "subject": "Civics",
+  "grade": 7,
+  "version": "2025.10.10",
+  "standards": [
+    {
+      "code": "SS.7.CG.1.1",
+      "name": "Analyze the influences of ancient Greece, ancient Rome and the Judeo-Christian tradition on America's constitutional republic.",
+      "internal": {
+        "clarifications": [
+          "Students will explain the influence of ancient Greece on America's constitutional republic (e.g., civic participation, legislative bodies, polis, voting rights, written constitution).",
+          "Students will explain the influence of ancient Rome on America's constitutional republic (e.g., civic participation, republicanism, representative government, rule of law, separation of powers).",
+          "Students will compare and contrast the democratic principles of ancient Greece and ancient Rome with those of the United States.",
+          "Students will explain how the Judeo-Christian ethical ideas of justice, individual worth, personal responsibility and the rule of law influenced America's constitutional republic."
+        ],
+        "objectives": [
+          "Students will be able to identify democratic principles from ancient Greece and Rome in the U.S. system.",
+          "Students will be able to explain the influence of Judeo-Christian ethics on American government."
+        ],
+        "teacher_friendly": "Connect concepts like Roman republicanism to the U.S. representative government and Greek direct democracy to local town meetings.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Compare the structure of the Roman Senate to the U.S. Senate."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "foundations",
+          "government",
+          "history"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.10",
+      "name": "Compare the viewpoints of the Federalists and the Anti-Federalists regarding ratification of the U.S. Constitution and including a bill of rights.",
+      "internal": {
+        "clarifications": [
+          "Students will identify the viewpoints of the Federalists and the Anti-Federalists about the ratification of the U.S. Constitution.",
+          "Students will recognize the Anti-Federalists' reasons for the inclusion of a bill of rights in the U.S. Constitution."
+        ],
+        "objectives": [
+          "Students will be able to explain the main arguments of the Federalists.",
+          "Students will be able to explain the main arguments of the Anti-Federalists and their demand for a Bill of Rights."
+        ],
+        "teacher_friendly": "Use a T-chart to compare the Federalists' desire for a strong central government with the Anti-Federalists' fear of tyranny and demand for protected individual rights.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Debate the question: Is a Bill of Rights necessary if the government has limited powers?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "constitution",
+          "federalists",
+          "anti-federalists",
+          "bill of rights"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.11",
+      "name": "Define the rule of law and recognize its influence on the development of legal, political and governmental systems in the United States.",
+      "internal": {
+        "clarifications": [
+          "Students will compare and contrast the characteristics of a society that operates under the rule of law and one that does not.",
+          "Students will assess the importance of the rule of law in protecting citizens from arbitrary and abusive uses of government power.",
+          "Students will analyze the meaning and importance of due process in the United States legal system."
+        ],
+        "objectives": [
+          "Students will be able to define the rule of law.",
+          "Students will be able to explain how the rule of law protects citizens."
+        ],
+        "teacher_friendly": "Explain the 'rule of law' as the idea that everyone, including leaders, must follow the law; no one is above it. Contrast this with a system where a ruler can do whatever they want.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Discuss what might happen in a country without the rule of law versus a country with it."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "government",
+          "rule of law",
+          "due process"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.2",
+      "name": "Trace the principles underlying America's founding ideas on law and government.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize principles contained in the founding documents (e.g., due process of law, equality of mankind, limited government, natural rights, the rule of law).",
+          "Students will explain why religious liberty is a protected right."
+        ],
+        "objectives": [
+          "Students will be able to identify core principles like natural rights and limited government in founding documents."
+        ],
+        "teacher_friendly": "Focus on key ideas from the Declaration of Independence and Constitution, explaining what concepts like 'natural rights' and 'limited government' mean in practice.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Where in the Declaration of Independence can you find the idea of natural rights?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "foundations",
+          "government",
+          "founding principles"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.3",
+      "name": "Trace the impact that the Magna Carta, Mayflower Compact, English Bill of Rights and Thomas Paine's Common Sense had on colonists' views of government.",
+      "internal": {
+        "clarifications": [
+          "Students will identify the important ideas contained in the Magna Carta (e.g., due process of law, limitation of government power, right to justice, right to fair trial), Mayflower Compact (e.g., consent of the governed, self-government), English Bill of Rights (e.g., right to life, liberty and property; no taxation without representation; right to a speedy and fair jury trial; no excessive punishments) and Common Sense (representative self-government)."
+        ],
+        "objectives": [
+          "Students will be able to identify the key ideas from the Magna Carta, Mayflower Compact, English Bill of Rights, and Common Sense.",
+          "Students will be able to explain how these documents influenced the American colonists."
+        ],
+        "teacher_friendly": "Create a timeline or chart to show how ideas from these earlier documents (like limited government and self-rule) directly influenced the colonists' arguments against British rule.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "How did the English Bill of Rights' idea of 'no taxation without representation' influence the American Revolution?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "foundations",
+          "historical documents"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.4",
+      "name": "Analyze how Enlightenment ideas, including Montesquieu's view of separation of powers and John Locke's theories related to natural law and Locke's social contract, influenced the Founding.",
+      "internal": {
+        "clarifications": [
+          "Students will identify and describe the Enlightenment ideas of separation of powers, natural law and social contract.",
+          "Students will examine how Enlightenment ideas influenced the Founders' beliefs about individual liberties and government.",
+          "Students will evaluate the influence of Montesquieu's and Locke's ideas on the Founding Fathers."
+        ],
+        "objectives": [
+          "Students will be able to define social contract, natural law, and separation of powers.",
+          "Students will be able to explain how Locke and Montesquieu influenced the U.S. Constitution."
+        ],
+        "teacher_friendly": "Explain Locke's 'social contract' as an agreement where people give up some freedom for government protection, and Montesquieu's 'separation of powers' as a way to prevent any one part of government from becoming too powerful.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "How does the U.S. government's structure reflect Montesquieu's idea of three branches?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "foundations",
+          "enlightenment",
+          "locke",
+          "montesquieu"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.5",
+      "name": "Describe how British policies and responses to colonial concerns led to the writing of the Declaration of Independence.",
+      "internal": {
+        "clarifications": [
+          "Students will trace the causal relationships between British policies, British responses to colonial grievances and the writing of the Declaration of Independence (e.g., Stamp Act, Quartering Act, Declaratory Act, Townshend Acts, Tea Act, Intolerable Acts).",
+          "Students will recognize the underlying themes of British colonial policies concerning taxation, representation and individual rights that formed the basis of the American colonists' desire for independence."
+        ],
+        "objectives": [
+          "Students will be able to identify key British policies like the Stamp Act and Tea Act.",
+          "Students will be able to explain how these policies led the colonists to declare independence."
+        ],
+        "teacher_friendly": "Create a cause-and-effect chart showing how each British action (like a new tax) led to a colonial reaction (like a protest), escalating the conflict toward independence.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Explain the sequence of events from the Tea Act to the Boston Tea Party to the Intolerable Acts."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "history",
+          "american revolution",
+          "declaration of independence"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.6",
+      "name": "Analyze the ideas and grievances set forth in the Declaration of Independence.",
+      "internal": {
+        "clarifications": [
+          "Students will identify the unalienable rights specifically expressed in the Preamble of the Declaration of Independence (e.g., life, liberty and the pursuit of happiness).",
+          "Students will explain the concept of natural rights as expressed in the Declaration of Independence.",
+          "Students will recognize colonial grievances identified in the Declaration of Independence (e.g., imposing taxes without the consent of the people, suspending trial by jury, limiting judicial powers, quartering soldiers and dissolving legislatures)."
+        ],
+        "objectives": [
+          "Students will be able to identify the three main parts of the Declaration of Independence.",
+          "Students will be able to explain the key ideas in the Preamble (natural rights) and list several grievances."
+        ],
+        "teacher_friendly": "Break down the Declaration into three parts: the statement of rights, the list of complaints against the king, and the official declaration of freedom. Focus on the meaning of 'life, liberty, and the pursuit of happiness.'",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Match grievances from the Declaration, like 'imposing taxes without our consent,' to the historical events that caused them, like the Stamp Act."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "declaration of independence",
+          "natural rights",
+          "grievances"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.7",
+      "name": "Explain how the weaknesses of the Articles of Confederation led to the writing of the U.S. Constitution.",
+      "internal": {
+        "clarifications": [
+          "Students will identify the weaknesses of the government under the Articles of Confederation (i.e., Congress had no power to tax, to regulate trade or to enforce its laws; the national government lacked a national court system [judicial branch] and central leadership [executive branch]; no national armed forces; and changes to the Articles required unanimous consent of the 13 states)."
+        ],
+        "objectives": [
+          "Students will be able to identify the major weaknesses of the Articles of Confederation.",
+          "Students will be able to explain why these weaknesses made a new constitution necessary."
+        ],
+        "teacher_friendly": "Describe the Articles as the country's 'first try' at a government, which failed because the central government was too weak (e.g., it couldn't tax to raise money). Use an analogy like a team with no captain.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Why was the inability to tax a major problem for the government under the Articles?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "history",
+          "articles of confederation",
+          "constitution"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.8",
+      "name": "Explain the purpose of the Preamble to the U.S. Constitution.",
+      "internal": {
+        "clarifications": [
+          "Students will explain how the Preamble serves as an introduction to the U.S. Constitution (e.g., establishes the goals and purposes of government).",
+          "Students will recognize that the intention of the phrase 'We the People' means that government depends on the people for its power and exists to serve them."
+        ],
+        "objectives": [
+          "Students will be able to state the purpose of the Preamble.",
+          "Students will be able to identify the six goals of government listed in the Preamble."
+        ],
+        "teacher_friendly": "Explain the Preamble as the introduction or 'mission statement' for the Constitution. Break down each of the six goals into simpler terms (e.g., 'establish justice' means create a fair legal system).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "What does the phrase 'provide for the common defense' mean in the Preamble?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "constitution",
+          "preamble"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.1.9",
+      "name": "Describe how the U.S. Constitution limits the powers of government through separation of powers, checks and balances, individual rights, rule of law and due process of law.",
+      "internal": {
+        "clarifications": [
+          "Students will explain the concept of limited government in the U.S. Constitution.",
+          "Students will describe and distinguish between separation of powers and checks and balances.",
+          "Students will analyze how government power is limited by separation of powers and/or checks and balances.",
+          "Students will recognize the influence of the U.S. Constitution on the development of other governments."
+        ],
+        "objectives": [
+          "Students will be able to define separation of powers and checks and balances.",
+          "Students will be able to provide examples of how government power is limited."
+        ],
+        "teacher_friendly": "Use a simple analogy: 'separation of powers' gives each branch a different job (legislative makes laws, executive enforces, judicial interprets), and 'checks and balances' gives each branch a way to block the others (like a veto).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "How does the President's ability to veto a law passed by Congress demonstrate checks and balances?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "constitution",
+          "limited government",
+          "separation of powers",
+          "checks and balances"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.1",
+      "name": "Define the term 'citizen,' and explain the constitutional means of becoming a U.S. citizen.",
+      "internal": {
+        "clarifications": [
+          "Students will define citizenship as stated in the 14th Amendment.",
+          "Students will explain the process of becoming a naturalized citizen.",
+          "Students will define permanent residency and explain its role in obtaining citizenship."
+        ],
+        "objectives": [
+          "Students will be able to define citizen according to the 14th Amendment (law of soil, law of blood).",
+          "Students will be able to outline the basic steps of the naturalization process."
+        ],
+        "teacher_friendly": "Explain the two main ways to become a citizen: being born in the U.S. (or to U.S. parents) and going through the naturalization process. Outline the key steps for naturalization (residency, application, test, oath).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "If a child is born in Germany to two U.S. citizen parents, is the child a U.S. citizen? Why?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "citizenship",
+          "14th amendment",
+          "naturalization"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.10",
+      "name": "Explain the process for citizens to address a state or local problem by researching public policy alternatives, identifying appropriate government agencies to address the issue and determining a course of action.",
+      "internal": {
+        "clarifications": [
+          "Students will identify the appropriate level of government to resolve specific problems.",
+          "Students will analyze public policy alternatives to resolve local and state problems."
+        ],
+        "objectives": [
+          "Students will be able to identify the correct level of government (local, state) to address a specific problem.",
+          "Students will be able to outline a plan of action for addressing a public problem."
+        ],
+        "teacher_friendly": "Use a real-world local issue (e.g., a dangerous intersection) and walk students through the steps: Who is in charge (city council?), what are possible solutions (stop sign, traffic light), and how can citizens make it happen (petition, attend meetings)?",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "If your neighborhood park needs new equipment, which level of government should you contact?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "public policy",
+          "local government",
+          "state government",
+          "civic action"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.2",
+      "name": "Differentiate between obligations and responsibilities of U.S. citizenship, and evaluate their impact on society.",
+      "internal": {
+        "clarifications": [
+          "Students will distinguish between an obligation or duty and a responsibility as it relates to citizenship.",
+          "Responsibilities may include, but are not limited to, voting, attending civic meetings, petitioning government and running for office.",
+          "Students will use scenarios to assess specific obligations of citizens."
+        ],
+        "objectives": [
+          "Students will be able to distinguish between civic obligations (must do) and responsibilities (should do).",
+          "Students will be able to provide examples of each."
+        ],
+        "teacher_friendly": "Explain obligations as things required by law (paying taxes, jury duty), and responsibilities as voluntary actions that make society better (voting, volunteering). Emphasize the 'must do' vs. 'should do' distinction.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Is serving on a jury an obligation or a responsibility? What about voting?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "citizenship",
+          "duties",
+          "responsibilities"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.3",
+      "name": "Identify and apply the rights contained in the Bill of Rights and other amendments to the U.S. Constitution.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize that the Bill of Rights comprises the first ten amendments to the U.S. Constitution.",
+          "Students will recognize the five freedoms protected by the First Amendment.",
+          "Students will use scenarios to identify rights protected by the Bill of Rights."
+        ],
+        "objectives": [
+          "Students will be able to identify the five freedoms of the First Amendment.",
+          "Students will be able to identify rights protected in the Bill of Rights through scenarios."
+        ],
+        "teacher_friendly": "Focus on the First Amendment freedoms (religion, assembly, press, petition, speech - RAPPS). Use simple scenarios to help students apply the other amendments in the Bill of Rights.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "If a student newspaper is censored by the principal for being critical, which First Amendment right might be at issue?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "constitution",
+          "bill of rights",
+          "amendments"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.4",
+      "name": "Explain how the U.S. Constitution and the Bill of Rights safeguard individual rights.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize that rights are protected but some rights are limited (e.g., property rights, civil disobedience).",
+          "Students will use scenarios to examine the impact of limiting individual rights."
+        ],
+        "objectives": [
+          "Students will be able to explain that individual rights are not absolute and can be limited.",
+          "Students will be able to analyze scenarios where individual rights might conflict with public safety or the rights of others."
+        ],
+        "teacher_friendly": "Introduce the idea that rights have limits. A classic example is that your right to free speech does not include the right to falsely shout 'Fire!' in a crowded theater because it endangers others.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Can a person protest a war by blocking a major highway? Discuss the limits on the right to assembly."
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "constitution",
+          "bill of rights",
+          "limits on rights"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.5",
+      "name": "Describe the trial process and the role of juries in the administration of justice at the state and federal levels.",
+      "internal": {
+        "clarifications": [
+          "Students will examine the significance of juries in the American legal system.",
+          "Students will explain types of jury trials, how juries are selected and why jury trials are important."
+        ],
+        "objectives": [
+          "Students will be able to explain the importance of juries.",
+          "Students will be able to describe the basic trial process."
+        ],
+        "teacher_friendly": "Explain that a jury of one's peers is a key protection for the accused, ensuring that ordinary citizens, not just government officials, decide guilt or innocence. Outline the basic steps of a trial.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Why is having a jury of citizens considered a cornerstone of the American justice system?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "judicial branch",
+          "trials",
+          "juries"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.6",
+      "name": "Examine the election and voting process at the local, state and national levels.",
+      "internal": {
+        "clarifications": [
+          "Students will explain how elections and voting impact citizens at the local, state and national levels.",
+          "Students will explain the origins of the Republican and Democratic political parties and evaluate their roles in shaping public policy.",
+          "Students will explain how free and fair elections promote trust in democratic institutions and preserve the republic."
+        ],
+        "objectives": [
+          "Students will be able to describe the role of political parties.",
+          "Students will be able to explain the importance of voting and elections in a democracy."
+        ],
+        "teacher_friendly": "Discuss how elections are the primary way citizens influence government. Explain the basic platforms of the two major parties and how they compete to win elections and control policymaking.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Why are elections considered essential for a democracy to function?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "elections",
+          "voting",
+          "political parties"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.7",
+      "name": "Identify the constitutional qualifications required to hold state and national office.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize the qualifications to seek election to local and state political offices."
+        ],
+        "objectives": [
+          "Students will be able to list the constitutional qualifications (age, citizenship, residency) for President, Senator, and Representative."
+        ],
+        "teacher_friendly": "Create a simple chart showing the qualifications (age, residency, citizenship) for President, Senator, and House Representative. Discuss why these qualifications might exist.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Could a 30-year-old who was born in the U.S. and has lived here their whole life run for President? Why or why not?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "government",
+          "elections",
+          "qualifications for office"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.8",
+      "name": "Examine the impact of media, individuals, and interest groups on monitoring and influencing government.",
+      "internal": {
+        "clarifications": [
+          "Students will identify methods used by the media to monitor and hold government accountable (e.g., acting as a watchdog, freedom of the press as contained in the 1st Amendment).",
+          "Students will identify methods used by individuals to monitor, hold accountable and influence the government (e.g., attending civic meetings, peacefully protesting, petitioning government, running for office, voting)."
+        ],
+        "objectives": [
+          "Students will be able to identify how the media acts as a 'watchdog'.",
+          "Students will be able to list ways individuals and interest groups can influence government."
+        ],
+        "teacher_friendly": "Explain that the media, individuals, and groups all act as watchdogs to keep the government in check. Provide examples like investigative journalism (media), lobbying (interest groups), and voting (individuals).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "How can an interest group representing farmers try to influence a new law about agriculture?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "government",
+          "media",
+          "interest groups",
+          "influence"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.2.9",
+      "name": "Analyze media and political communications and identify examples of bias, symbolism and propaganda.",
+      "internal": {
+        "clarifications": [
+          "Students will use scenarios to identify bias, symbolism and propaganda.",
+          "Students will evaluate how bias, symbolism and propaganda can impact public opinion."
+        ],
+        "objectives": [
+          "Students will be able to define and identify bias, symbolism, and propaganda.",
+          "Students will be able to explain how these techniques are used to influence people."
+        ],
+        "teacher_friendly": "Show examples of political ads or cartoons. Define bias (favoring one side), symbolism (using images to represent ideas), and propaganda (one-sided information to persuade). Discuss how to be a critical consumer of media.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Analyze a political cartoon. What symbols are used? What is the cartoonist's bias?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "media",
+          "bias",
+          "symbolism",
+          "propaganda"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.1",
+      "name": "Analyze the advantages of the United States' constitutional republic over other forms of government in safeguarding liberty, freedom and a representative government.",
+      "internal": {
+        "clarifications": [
+          "Students will identify different forms of government based on their political philosophy or organizational structure.",
+          "Students will analyze scenarios describing various forms of government."
+        ],
+        "objectives": [
+          "Students will be able to identify different forms of government (e.g., monarchy, democracy, authoritarianism).",
+          "Students will be able to compare a constitutional republic to other forms of government."
+        ],
+        "teacher_friendly": "Compare and contrast different government types using a simple chart. Highlight how a republic with a constitution protects individual freedoms compared to systems where power is held by one person or a small group.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "How is a citizen's life different in a direct democracy versus an absolute monarchy?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "government systems",
+          "republic",
+          "democracy"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.10",
+      "name": "Identify sources and types of law.",
+      "internal": {
+        "clarifications": [
+          "Students will explain how historical codes of law influenced the United States.",
+          "Students will compare civil, criminal, constitutional and/or military types of law."
+        ],
+        "objectives": [
+          "Students will be able to compare different types of law (civil, criminal, constitutional, military).",
+          "Students will be able to identify sources of American law."
+        ],
+        "teacher_friendly": "Use simple definitions: criminal law (crimes against society), civil law (disputes between people), constitutional law (powers of government), and military law (for the armed forces). Provide clear examples for each.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "A person suing their neighbor over a broken fence is an example of which type of law?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "law",
+          "types of law",
+          "sources of law"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.11",
+      "name": "Analyze the effects of landmark Supreme Court decisions on law, liberty and the interpretation of the U.S. Constitution.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize landmark Supreme Court cases (e.g., Marbury v. Madison; Dred Scott v. Sandford; Plessy v. Ferguson; Brown v. Board of Education; Gideon v. Wainwright; Miranda v. Arizona; In re Gault; United States v. Nixon; Hazelwood v. Kuhlmeier).",
+          "Students will evaluate the impact of each case on society."
+        ],
+        "objectives": [
+          "Students will be able to identify key landmark Supreme Court cases.",
+          "Students will be able to explain the impact of these cases on American society."
+        ],
+        "teacher_friendly": "Focus on a few key cases. For each, explain the story, the Court's decision, and the lasting impact. For example, Marbury v. Madison established judicial review, and Brown v. Board of Education ended school segregation.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "How did the decision in Miranda v. Arizona change police procedures?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "supreme court",
+          "landmark cases",
+          "judicial review"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.12",
+      "name": "Compare the U.S. and Florida constitutions.",
+      "internal": {
+        "clarifications": [
+          "Students will identify the purposes of a constitution (e.g., provides a framework for government, limits government authority, protects individual rights of the people).",
+          "Students will compare the amendment process of the U.S. and Florida Constitutions."
+        ],
+        "objectives": [
+          "Students will be able to identify similarities and differences between the U.S. and Florida constitutions.",
+          "Students will be able to compare the amendment processes for both."
+        ],
+        "teacher_friendly": "Use a Venn diagram to compare the two constitutions. Note similarities (e.g., both have three branches, a bill of rights) and differences (e.g., FL constitution is longer, more specific, and easier to amend).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Which constitution is easier to amend, the U.S. Constitution or the Florida Constitution? Why?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "state government",
+          "constitutions",
+          "florida"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.13",
+      "name": "Explain government obligations to its citizens and the services provided at the local, state and national levels.",
+      "internal": {
+        "clarifications": [
+          "Students will describe and classify specific services provided by local, state and national governments.",
+          "Students will compare the powers and obligations of local, state and national governments."
+        ],
+        "objectives": [
+          "Students will be able to provide examples of services provided by local, state, and national governments."
+        ],
+        "teacher_friendly": "Create a three-column chart for local, state, and federal governments. Have students brainstorm services and place them in the correct column (e.g., local: trash collection, state: driver's licenses, federal: military).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Which level of government is responsible for running public schools?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "federalism",
+          "government services"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.14",
+      "name": "Explain the purpose and function of the Electoral College in electing the President of the United States.",
+      "internal": {
+        "clarifications": [
+          "Students will explain the origin of the Electoral College and the changes made to it by the 12th Amendment."
+        ],
+        "objectives": [
+          "Students will be able to explain how the Electoral College works.",
+          "Students will be able to explain why the Electoral College was created."
+        ],
+        "teacher_friendly": "Explain that the Electoral College is a 'winner-take-all' system in most states, where the popular vote winner gets all of the state's electoral votes. Use a map to show how different states have different numbers of votes.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "How is it possible for a presidential candidate to win the popular vote but lose the election?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "elections",
+          "electoral college",
+          "president"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.15",
+      "name": "Analyze the advantages of capitalism and the free market in the United States over government-controlled economic systems (e.g., socialism and communism) in regard to economic freedom and raising the standard of living for citizens.",
+      "internal": {
+        "clarifications": [
+          "Students will evaluate various economic systems (e.g., capitalism, communism, socialism).",
+          "Students will compare the economic prosperity and opportunity of current nations."
+        ],
+        "objectives": [
+          "Students will be able to compare capitalism, socialism, and communism.",
+          "Students will be able to identify advantages of a free market system."
+        ],
+        "teacher_friendly": "Use a simple comparison: in capitalism, individuals own businesses; in communism, the government owns all businesses. Discuss concepts like competition, profit motive, and economic freedom.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "In which economic system would you have more choices as a consumer? Why?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "economics",
+          "capitalism",
+          "socialism",
+          "communism"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.2",
+      "name": "Explain the advantages of a federal system of government over other systems in balancing local sovereignty with national unity and protecting against authoritarianism.",
+      "internal": {
+        "clarifications": [
+          "Students will apply their understanding of federal, confederal and unitary systems of government.",
+          "Students will compare the organizational structures of systems of government."
+        ],
+        "objectives": [
+          "Students will be able to compare federal, confederal, and unitary systems.",
+          "Students will be able to explain how a federal system divides power."
+        ],
+        "teacher_friendly": "Use diagrams to show power flow: unitary (all power in the central government), confederal (all power in the states), and federal (power is shared between central and state governments).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Why is the United States considered a federal system and not a unitary system?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "government systems",
+          "federalism",
+          "unitary",
+          "confederal"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.3",
+      "name": "Describe the structure and function of the three branches of government established in the U.S. Constitution.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize the structure of the legislative, executive and judicial branches.",
+          "Students will identify the general powers described in Articles I, II and III of the U.S. Constitution."
+        ],
+        "objectives": [
+          "Students will be able to name the three branches of government.",
+          "Students will be able to state the main function and components of each branch."
+        ],
+        "teacher_friendly": "Use a simple tree diagram: Legislative Branch (Congress: House and Senate) makes laws. Executive Branch (President, VP, Cabinet) enforces laws. Judicial Branch (Supreme Court and other federal courts) interprets laws.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Which branch of government has the power to declare war?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "government",
+          "branches of government",
+          "constitution"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.4",
+      "name": "Explain the relationship between state and national governments as written in Article IV of the U.S. Constitution and the 10th Amendment.",
+      "internal": {
+        "clarifications": [
+          "Students will describe the system of federalism as established by the U.S. Constitution.",
+          "Students will compare concurrent powers, enumerated powers, reserved powers and delegated powers as they relate to state and national governments."
+        ],
+        "objectives": [
+          "Students will be able to define enumerated, reserved, and concurrent powers.",
+          "Students will be able to provide examples of each type of power."
+        ],
+        "teacher_friendly": "Use a three-circle Venn diagram to illustrate powers: Enumerated (National only, e.g., print money), Reserved (State only, e.g., schools), and Concurrent (Shared, e.g., taxes).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Is the power to establish a post office an enumerated, reserved, or concurrent power?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "federalism",
+          "constitution",
+          "powers of government"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.5",
+      "name": "Explain the amendment process outlined in Article V of the U.S. Constitution.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize the methods used to propose and ratify amendments to the U.S. Constitution.",
+          "Students will identify the importance of a formal amendment process."
+        ],
+        "objectives": [
+          "Students will be able to describe the two steps of the amendment process: proposal and ratification.",
+          "Students will be able to explain why the process is intentionally difficult."
+        ],
+        "teacher_friendly": "Explain the amendment process as a two-step system: Step 1 is proposal (by 2/3 of Congress or states), and Step 2 is ratification (by 3/4 of states). Emphasize that it's difficult by design to ensure stability.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "What fraction of states must ratify an amendment for it to become part of the Constitution?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "constitution",
+          "amendment process"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.6",
+      "name": "Analyze how the 13th, 14th, 15th, 19th, 24th and 26th Amendments broadened participation in the political process.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize how these amendments expanded civil rights to African Americans, women and young people.",
+          "Students will evaluate the impact these amendments have had on American society."
+        ],
+        "objectives": [
+          "Students will be able to identify which group gained voting rights or citizenship from each listed amendment."
+        ],
+        "teacher_friendly": "Create a chart matching the amendment to the group it helped: 13th (ended slavery), 14th (citizenship), 15th (Black men vote), 19th (women vote), 24th (banned poll taxes), 26th (18-year-olds vote).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Which amendment gave women the right to vote?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "amendments",
+          "voting rights",
+          "civil rights"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.7",
+      "name": "Explain the structure, functions and processes of the legislative branch of government.",
+      "internal": {
+        "clarifications": [
+          "Students will examine the processes of the legislative branch (e.g., how a bill becomes a law, appointment confirmation, committee selection).",
+          "Students will compare local, state and national lawmakers (e.g., city/county commissioners/council members; state legislators [representatives and senators]; and U.S. Congressmen/Congresswomen [representatives and senators])."
+        ],
+        "objectives": [
+          "Students will be able to describe the structure of Congress (House and Senate).",
+          "Students will be able to outline the basic steps of how a bill becomes a law."
+        ],
+        "teacher_friendly": "Use a flowchart to explain the 'how a bill becomes a law' process. Emphasize the bicameral structure of Congress (House of Representatives based on population, Senate with two per state).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "If the House and Senate pass different versions of a bill, what happens next?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "legislative branch",
+          "congress",
+          "how a bill becomes a law"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.8",
+      "name": "Explain the structure, functions and processes of the executive branch of government.",
+      "internal": {
+        "clarifications": [
+          "Students will examine the processes of the executive branch (e.g., executive order, veto, appointments).",
+          "Students will compare and contrast executive authority at the local, state and national levels."
+        ],
+        "objectives": [
+          "Students will be able to identify the main roles and powers of the President.",
+          "Students will be able to describe the makeup of the executive branch (President, VP, Cabinet)."
+        ],
+        "teacher_friendly": "Explain the President's many 'hats' or roles (e.g., Commander-in-Chief, Chief Diplomat). Discuss key powers like issuing executive orders and vetoing legislation.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "What is the President's role as Commander-in-Chief?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "executive branch",
+          "president",
+          "powers"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.3.9",
+      "name": "Explain the structure, functions and processes of the judicial branch of government.",
+      "internal": {
+        "clarifications": [
+          "Students will examine the processes of the judicial branch (e.g., judicial review, court order, writ of certiorari, summary judgment).",
+          "Students will distinguish between the structure, functions and powers of courts at the state and federal levels."
+        ],
+        "objectives": [
+          "Students will be able to describe the structure of the federal court system (District, Appeals, Supreme).",
+          "Students will be able to define judicial review."
+        ],
+        "teacher_friendly": "Use a pyramid diagram to show the three levels of the federal court system, with the Supreme Court at the top. Explain judicial review as the Supreme Court's power to declare laws unconstitutional.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "If a law is passed that violates the First Amendment, what can the Supreme Court do?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "judicial branch",
+          "supreme court",
+          "judicial review"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.4.1",
+      "name": "Explain the relationship between U.S. foreign and domestic policy.",
+      "internal": {
+        "clarifications": [
+          "Students will recognize the difference between domestic and foreign policy.",
+          "Students will define 'national interest' and identify the means available to the national government to pursue the United States' national interest."
+        ],
+        "objectives": [
+          "Students will be able to differentiate between domestic policy (inside the country) and foreign policy (outside the country).",
+          "Students will be able to provide examples of each."
+        ],
+        "teacher_friendly": "Use simple definitions: domestic policy deals with issues at home (like healthcare or education), while foreign policy deals with relationships with other countries (like treaties or trade).",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Is a new law about national parks an example of domestic or foreign policy?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "policy",
+          "foreign policy",
+          "domestic policy"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.4.2",
+      "name": "Describe the United States' and citizen participation in international organizations.",
+      "internal": {
+        "clarifications": [
+          "Students will identify major international organizations in which government plays a role (e.g., North Atlantic Treaty Organization, United Nations, International Court of Justice, World Trade Organization).",
+          "Students will discuss the advantages and disadvantages of U.S. membership in international organizations."
+        ],
+        "objectives": [
+          "Students will be able to identify major international organizations like the UN and NATO.",
+          "Students will be able to explain the purpose of these organizations."
+        ],
+        "teacher_friendly": "Briefly explain the purpose of a few key international organizations: the UN (promotes peace), NATO (military alliance), and WTO (manages trade rules). Discuss why countries join such groups.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "What is the main purpose of the United Nations?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "foreign policy",
+          "international organizations",
+          "un",
+          "nato"
+        ]
+      }
+    },
+    {
+      "code": "SS.7.CG.4.3",
+      "name": "Describe examples of the United States' actions and reactions in international conflicts.",
+      "internal": {
+        "clarifications": [
+          "Students will identify specific examples of and the reasons for United States' involvement in international conflicts.",
+          "Students will identify the different methods used by the United States to deal with international conflict (e.g., diplomacy, espionage, humanitarian efforts, peacekeeping operations, sanctions, war)."
+        ],
+        "objectives": [
+          "Students will be able to identify different tools of foreign policy (e.g., diplomacy, sanctions, military action).",
+          "Students will be able to provide historical examples of U.S. involvement in international conflicts."
+        ],
+        "teacher_friendly": "List the different tools the U.S. can use in foreign policy, from talking (diplomacy) and economic pressure (sanctions) to military force (war). Connect these tools to historical events.",
+        "item_specs": {
+          "eligible_content": "N/A",
+          "stimulus": "N/A",
+          "response_attributes": "N/A",
+          "cognitive_complexity": "N/A"
+        },
+        "examples": [
+          "Placing a trade embargo on another country is an example of what kind of foreign policy tool?"
+        ],
+        "exclusions": [
+          "N/A"
+        ],
+        "crosswalk": {
+          "legacy": "N/A"
+        },
+        "tags": [
+          "civics",
+          "foreign policy",
+          "international conflict"
+        ]
+      }
+    }
+  ]
+}
