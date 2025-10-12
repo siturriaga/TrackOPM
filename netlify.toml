@@ -1,28 +1,14 @@
 [build]
-command = "npm run build"
-publish = "dist"
-
+  command = "npm run build"
+  publish = "dist"
 
 [[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/:splat"
-status = 200
-
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
 
 # SPA fallback
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
-
-
-# Security headers (no unsafe-eval)
-[[headers]]
-for = "/*"
-[headers.values]
-Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://firestore.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com /.netlify/functions; frame-src https://*.firebaseapp.com; worker-src 'self' blob:; object-src 'none'"
-Referrer-Policy = "strict-origin-when-cross-origin"
-X-Content-Type-Options = "nosniff"
-X-Frame-Options = "SAMEORIGIN"
-X-XSS-Protection = "0"
-Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+  from = "/*"
+  to = "/index.html"
+  status = 200
