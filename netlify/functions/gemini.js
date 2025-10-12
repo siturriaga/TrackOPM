@@ -1,28 +1,41 @@
-export const handler = async (event) => {
+export default async (req, context) => {
   try {
-    if (event.httpMethod !== 'POST')
-      return { statusCode: 405, body: 'Method Not Allowed' }
-
-    const { prompt } = JSON.parse(event.body || '{}')
-    if (!prompt) return { statusCode: 400, body: 'Missing prompt' }
-
+    if (req.method !== 'POST') {
+      return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 })
+    }
     const apiKey = process.env.GEMINI_API_KEY
-    const endpoint =
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent'
+    if (!apiKey) {
+      return new Response(JSON.stringify({ error: 'Missing GEMINI_API_KEY' }), { status: 500 })
+    }
 
-    const r = await fetch(`${endpoint}?key=${apiKey}`, {
+    const body = await req.json()
+    const { subject, grade, standardCode, prompt } = body
+
+    const system = `You are Synapse, a teacher co-planner. Create a clear, standards-aligned assignment.
+Subject: ${subject}
+Grade: ${grade}
+Standard: ${standardCode ?? 'N/A'}
+Constraints: Accessibility, clarity, scaffolded steps, differentiation suggestions.`
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }]
+        contents: [{
+          parts: [{ text: `${system}\n\nTeacher notes: ${prompt || 'N/A'}\n\nGenerate:` }]
+        }]
       })
     })
 
-    if (!r.ok) return { statusCode: r.status, body: await r.text() }
-    const json = await r.json()
-    const text = json?.candidates?.[0]?.content?.parts?.[0]?.text || ''
-    return { statusCode: 200, body: JSON.stringify({ text }) }
+    if (!response.ok) {
+      const text = await response.text()
+      return new Response(JSON.stringify({ error: 'Gemini upstream error', detail: text }), { status: 502 })
+    }
+
+    const data = await response.json()
+    const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join('\n') ?? 'No content returned.'
+    return new Response(JSON.stringify({ text }), { status: 200, headers: { 'Content-Type': 'application/json' } })
   } catch (e) {
-    return { statusCode: 500, body: e.message || 'Server error' }
+    return new Response(JSON.stringify({ error: 'Function error', detail: String(e) }), { status: 500 })
   }
 }
