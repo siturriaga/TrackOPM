@@ -1,45 +1,28 @@
 [build]
-  command = ""
-  publish = "."
+command = "npm run build"
+publish = "dist"
 
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
 
-# -------- SPA routing (only the app) --------
 [[redirects]]
-  from = "/app/*"
-  to = "/app/index.html"
-  status = 200
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200
 
-# -------- Global security headers --------
-[[headers]]
-  for = "/*"
-  [headers.values]
-  X-Content-Type-Options = "nosniff"
-  X-Frame-Options        = "DENY"
-  Referrer-Policy        = "strict-origin-when-cross-origin"
-  Permissions-Policy     = "geolocation=(), microphone=(), camera=()"
-  Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
-# -------- CSP for the app (no invalid sources; no unsafe-eval) --------
-[[headers]]
-  for = "/app/*"
-  [headers.values]
-  Content-Security-Policy = """
-    default-src 'self';
-    script-src 'self' https://www.gstatic.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://apis.google.com;
-    connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://*.firebaseio.com https://www.googleapis.com https://www.gstatic.com;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' data: https://lh3.googleusercontent.com;
-    font-src 'self' https://fonts.gstatic.com data:;
-    frame-src https://accounts.google.com;
-    base-uri 'self';
-    form-action 'self';
-  """
+# SPA fallback
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
 
-# -------- Cache standards JSON for speed --------
+
+# Security headers (no unsafe-eval)
 [[headers]]
-  for = "/standards/*"
-  [headers.values]
-  Cache-Control = "public, max-age=86400, immutable"
+for = "/*"
+[headers.values]
+Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://firestore.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com /.netlify/functions; frame-src https://*.firebaseapp.com; worker-src 'self' blob:; object-src 'none'"
+Referrer-Policy = "strict-origin-when-cross-origin"
+X-Content-Type-Options = "nosniff"
+X-Frame-Options = "SAMEORIGIN"
+X-XSS-Protection = "0"
+Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
