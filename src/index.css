@@ -2,11 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-color-scheme: light;
+  color-scheme: light;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 
-html, body, #root { height: 100%; }
-body { @apply bg-white text-gray-900; }
+html, body, #app {
+  min-height: 100%;
+}
