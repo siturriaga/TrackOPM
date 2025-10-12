@@ -19,16 +19,8 @@ export default function Header({
           </div>
         </div>
         <div className="flex gap-2">
-          {onBack && (
-            <Button variant="outline" onClick={onBack}>
-              Back
-            </Button>
-          )}
-          {onExit && (
-            <Button variant="outline" onClick={onExit}>
-              Exit
-            </Button>
-          )}
+          {onBack && <Button variant="outline" onClick={onBack}>Back</Button>}
+          {onExit && <Button variant="outline" onClick={onExit}>Exit</Button>}
         </div>
       </div>
     </header>
