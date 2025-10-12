@@ -1,0 +1,40 @@
+# Synapse — Bridging the Gap in Education
+
+
+## 1) Clone & install
+npm i
+
+
+## 2) Configure environment
+Copy `.env.sample` to Netlify > Site settings > Environment variables:
+- VITE_FIREBASE_API_KEY, VITE_FIREBASE_AUTH_DOMAIN, VITE_FIREBASE_PROJECT_ID
+- VITE_FIREBASE_STORAGE_BUCKET, VITE_FIREBASE_MESSAGING_SENDER_ID, VITE_FIREBASE_APP_ID
+- VITE_FIREBASE_MEASUREMENT_ID (optional)
+- GEMINI_API_KEY (server-only)
+
+
+## 3) Netlify Function setup
+This repo includes `netlify/functions/gemini.js`. Netlify will auto-detect.
+
+
+## 4) Build & run
+npm run dev # local
+npm run build # production bundle (no unsafe-eval)
+
+
+## 5) Deploy on Netlify
+Connect repo → set env vars → Deploy. SPA redirects and CSP are in netlify.toml.
+
+
+## 6) Use
+- Sign in with Google
+- Open Standards Planner
+- Generate with Gemini
+- Save to Firestore (assignments collection)
+- Clear/Back/Exit buttons included
+
+
+## Notes
+- No localStorage; Firestore is the source of truth.
+- CSP is strict (no unsafe-eval). Avoid injecting 3rd-party scripts that require it.
+- If you add Firebase Storage/Hosting/etc., update `connect-src` in CSP accordingly.
