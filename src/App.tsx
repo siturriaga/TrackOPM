@@ -1,15 +1,17 @@
-import React from 'react';
-import Header from './components/Header';
-import Dashboard from './components/Dashboard';
-import AuthGate from './components/AuthGate';
+import React from 'react'
+import AuthGate from './components/AuthGate'
+import Header from './components/Header'
+import Dashboard from './components/Dashboard'
 
-const App: React.FC = () => {
+export default function App() {
   return (
     <AuthGate>
-      <Header />
-      <Dashboard />
+      <div className="min-h-screen">
+        <Header />
+        <main className="mx-auto max-w-6xl px-4 py-6">
+          <Dashboard />
+        </main>
+      </div>
     </AuthGate>
-  );
-};
-
-export default App; // <-- REQUIRED
+  )
+}
