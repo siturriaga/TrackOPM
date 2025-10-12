@@ -1,28 +1,27 @@
-import React from 'react';
-import { Button } from './Buttons';
+import React from 'react'
+import { useAuth } from './AuthGate'
 
-export default function Header({
-  onBack,
-  onExit,
-}: {
-  onBack?: () => void;
-  onExit?: () => void;
-}) {
+export default function Header() {
+  const user = useAuth()
   return (
-    <header className="w-full sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <header className="w-full border-b border-white/30 backdrop-blur bg-white/60">
+      <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img src="/logo.svg" alt="Synapse" className="w-9 h-9" />
+          <img src="/logo.svg" className="h-8 w-8" alt="Synapse logo" />
           <div>
-            <h1 className="text-lg font-semibold tracking-tight">Synapse</h1>
-            <p className="text-xs text-gray-500 -mt-0.5">Bridging the gap in education.</p>
+            <h1 className="font-display text-xl tracking-tight">Synapse</h1>
+            <p className="text-xs text-gray-500 -mt-1">Bridging the Gap in Education</p>
           </div>
         </div>
-        <div className="flex gap-2">
-          {onBack && <Button variant="outline" onClick={onBack}>Back</Button>}
-          {onExit && <Button variant="outline" onClick={onExit}>Exit</Button>}
+        <div className="flex items-center gap-3">
+          {user && (
+            <div className="flex items-center gap-2">
+              {user.photoURL && <img src={user.photoURL} alt={user.displayName ?? 'Teacher'} className="h-8 w-8 rounded-full" />}
+              <span className="text-sm text-gray-700">{user.displayName ?? 'Teacher'}</span>
+            </div>
+          )}
         </div>
       </div>
     </header>
-  );
+  )
 }
