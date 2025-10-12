@@ -1,41 +1,78 @@
-import React from 'react';
+// src/components/AuthGate.tsx
+import React, { useEffect, useState } from 'react';
 import { auth, provider } from '../lib/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged, User } from 'firebase/auth';
 import { Button } from './Buttons';
 
-export default function AuthGate({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = React.useState<User | null>(null);
-  const [loading, setLoading] = React.useState(true);
+export const AuthGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => { setUser(u); setLoading(false); });
-    return () => unsub();
+  // ✅ Watch for authentication state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
   }, []);
 
-  async function googleLogin() { await signInWithPopup(auth, provider); }
-  async function logout() { await signOut(auth); }
+  // ✅ Sign in with Google
+  const handleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error('Error signing in:', error);
+    }
+  };
 
-  if (loading) return <div className="p-8 text-center">Loading…</div>;
+  // ✅ Sign out
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
-  if (!user) {
+  if (loading) {
     return (
-      <div className="min-h-screen grid place-items-center">
-        <div className="max-w-md w-full p-8 rounded-2xl border border-gray-200 text-center">
-          <img src="/logo.svg" alt="logo" className="mx-auto w-16 h-16 mb-3" />
-          <h2 className="text-xl font-semibold">Welcome to Synapse</h2>
-          <p className="text-gray-600 text-sm mb-6">Bridging the gap in education.</p>
-          <Button onClick={googleLogin}>Sign in with Google</Button>
-        </div>
+      <div className="flex items-center justify-center h-screen text-gray-500">
+        Loading...
       </div>
     );
   }
 
-  return (
-    <div>
-      <div className="max-w-6xl mx-auto px-4 py-2 flex justify-end">
-        <Button variant="outline" onClick={logout}>Sign out</Button>
+  // ✅ If user not signed in
+  if (!user) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-50 text-center">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to Synapse Co-Pilot</h1>
+        <p className="text-gray-600 mb-6">Please sign in with your Google account to continue.</p>
+        <Button onClick={handleSignIn}>Sign in with Google</Button>
       </div>
-      {children}
+    );
+  }
+
+  // ✅ If user is signed in
+  return (
+    <div className="min-h-screen flex flex-col">
+      <header className="flex items-center justify-between p-4 bg-blue-600 text-white">
+        <h1 className="text-lg font-semibold">Synapse Co-Pilot</h1>
+        <div className="flex items-center space-x-4">
+          {user.photoURL && (
+            <img
+              src={user.photoURL}
+              alt="User Avatar"
+              className="w-8 h-8 rounded-full border border-white"
+            />
+          )}
+          <span className="text-sm">{user.displayName || user.email}</span>
+          <Button onClick={handleSignOut}>Sign Out</Button>
+        </div>
+      </header>
+
+      <main className="flex-1 bg-white">{children}</main>
     </div>
   );
-}
+};
