@@ -1,6 +1,0 @@
-{
-  "Civics":       { "7": "civics.7.json" },
-  "ELA":          { "6": "ela.6.json", "7": "ela.7.json", "8": "ela.8.json" },
-  "Math":         { "7": "math.7.json", "8": "math.8.json" },
-  "U.S. History": { "6": "us_history.6.json" }
-}
