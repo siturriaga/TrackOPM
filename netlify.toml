@@ -1,5 +1,4 @@
-# This rule is essential for a Single-Page Application (SPA) like React.
-# It ensures that all page requests are handled by your index.html file.
+# This rule is essential for your React single-page application (SPA).
 [[redirects]]
   from = "/*"
   to = "/index.html"
