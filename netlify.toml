@@ -1,34 +1,26 @@
-# /netlify.toml
-[build]
-  command = "npm run build"
-  publish = "dist"
+# This rule is essential for a Single-Page Application (SPA) like React.
+# It ensures that all page requests are handled by your index.html file.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
+# These headers enhance your site's security.
 [[headers]]
   for = "/*"
   [headers.values]
-  Content-Security-Policy = """
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # This Content-Security-Policy (CSP) is configured to allow Firebase services to run securely.
+    Content-Security-Policy = """
     default-src 'self';
-    base-uri 'self';
-    object-src 'none';
-    img-src 'self' data: blob:;
-    font-src 'self' data:;
+    script-src 'self' https://apis.google.com https://www.gstatic.com;
+    connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://www.googleapis.com;
+    frame-src 'self' https://accounts.google.com;
+    img-src 'self' data: https:;
     style-src 'self' 'unsafe-inline';
-    script-src 'self';
-    connect-src 'self'
-      https://identitytoolkit.googleapis.com
-      https://securetoken.googleapis.com
-      https://firestore.googleapis.com
-      https://www.googleapis.com
-      https://oauth2.googleapis.com
-      https://firebaseinstallations.googleapis.com
-      https://firebasestorage.googleapis.com
-      https://firebaseremoteconfig.googleapis.com;
-    frame-src 'self' https://accounts.google.com https://*.firebaseapp.com;
-    child-src 'self' https://accounts.google.com https://*.firebaseapp.com;
-    frame-ancestors 'self';
-    upgrade-insecure-requests;
-  """
-  Referrer-Policy = "strict-origin-when-cross-origin"
-  X-Content-Type-Options = "nosniff"
-  X-Frame-Options = "SAMEORIGIN"
-  X-XSS-Protection = "0"
+    object-src 'none';
+    base-uri 'self';
+    """
