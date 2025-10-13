@@ -4,7 +4,6 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GoogleAuthProvider,
-  signInWithPopup,
   signInWithRedirect,
   getRedirectResult,
   User,
@@ -31,7 +30,7 @@ export default function App(): JSX.Element {
         const user: User | undefined = res?.user ?? undefined;
         if (user) {
           localStorage.setItem("user", JSON.stringify(user));
-          // window.location.href = "/app"; // optional redirect
+          // window.location.href = "/app";
         }
       })
       .catch((e) => console.error("Redirect error:", e));
@@ -39,9 +38,7 @@ export default function App(): JSX.Element {
 
   const handleGoogleSignIn = useCallback(async () => {
     try {
-      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-      if (isMobile) await signInWithRedirect(auth, provider);
-      else await signInWithPopup(auth, provider);
+      await signInWithRedirect(auth, provider); // use redirect everywhere (avoids popup)
     } catch (e) {
       console.error("Auth error:", e);
     }
@@ -49,8 +46,7 @@ export default function App(): JSX.Element {
 
   return (
     <>
-      {/* Your existing landing JSX stays here. Do not remove it. */}
-      {/* Add the button below anywhere in your layout (kept minimal, no placeholders): */}
+      {/* keep your existing landing JSX here */}
       <button
         onClick={handleGoogleSignIn}
         className="fixed top-4 right-4 z-50 px-4 py-2 rounded bg-blue-600 text-white"
