@@ -1,64 +1,16 @@
-<!-- /index.html -->
+<!-- /index.html (root) -->
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>Synapse Co-Pilot</title>
   </head>
   <body>
     <div id="root"></div>
-
-    <!-- Vite entry (TypeScript) -->
     <script type="module" src="/src/main.tsx"></script>
-
-    <!-- Firebase Auth (desktop=popup, mobile=redirect) -->
-    <script type="module">
-      import { initializeApp } from "firebase/app";
-      import {
-        getAuth,
-        GoogleAuthProvider,
-        signInWithPopup,
-        signInWithRedirect,
-        getRedirectResult,
-      } from "firebase/auth";
-
-      const app = initializeApp({
-        apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-        authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-        projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-        storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-        appId: import.meta.env.VITE_FIREBASE_APP_ID,
-        measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-      });
-
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider();
-
-      async function handleGoogleSignIn() {
-        try {
-          if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
-            await signInWithRedirect(auth, provider);   // mobile-safe
-          } else {
-            await signInWithPopup(auth, provider);      // desktop
-          }
-        } catch (err) {
-          console.error("Auth error:", err);
-        }
-      }
-
-      const btn = document.getElementById("googleSignInBtn");
-      if (btn) btn.addEventListener("click", handleGoogleSignIn, { passive: true });
-
-      getRedirectResult(auth)
-        .then((result) => {
-          if (result?.user) {
-            localStorage.setItem("user", JSON.stringify(result.user));
-            // window.location.href = "/app"; // optional redirect after login
-          }
-        })
-        .catch((e) => console.error("Redirect error:", e));
-    </script>
   </body>
 </html>
