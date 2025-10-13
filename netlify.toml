@@ -13,7 +13,7 @@
   to = "/index.html"
   status = 200
 
-# CSP: allow Firebase Auth/Firestore + Google Identity (still blocks eval)
+# CSP: allow Firebase Auth/Firestore + Google Identity (no 'unsafe-eval')
 [[headers]]
   for = "/*"
   [headers.values]
@@ -25,7 +25,6 @@
   style-src 'self' 'unsafe-inline';
   frame-src https://accounts.google.com https://apis.google.com;
   """
-
   Referrer-Policy = "strict-origin-when-cross-origin"
   X-Content-Type-Options = "nosniff"
   X-Frame-Options = "SAMEORIGIN"
