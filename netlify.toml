@@ -1,31 +1,16 @@
-[build]
-  command = "npm run build"
-  publish = "dist"
-  functions = "netlify/functions"
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# CSP: allow Firebase Auth/Firestore + Google Identity (no 'unsafe-eval')
 [[headers]]
   for = "/*"
   [headers.values]
   Content-Security-Policy = """
   default-src 'self';
   script-src 'self' https://apis.google.com https://www.gstatic.com https://accounts.google.com;
-  connect-src 'self' https://firestore.googleapis.com https://www.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://accounts.google.com;
+  connect-src 'self' https://firestore.googleapis.com https://www.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://accounts.google.com https://firebasestorage.googleapis.com;
   img-src 'self' data: https:;
   style-src 'self' 'unsafe-inline';
   frame-src https://accounts.google.com https://apis.google.com;
   """
-  Referrer-Policy = "strict-origin-when-cross-origin"
-  X-Content-Type-Options = "nosniff"
-  X-Frame-Options = "SAMEORIGIN"
-  Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
