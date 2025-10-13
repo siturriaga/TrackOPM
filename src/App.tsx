@@ -1,17 +1,15 @@
-import React from 'react'
-import Header from './components/Header'
-import Dashboard from './components/Dashboard'
-import AuthGate from './components/AuthGate'
+// /src/App.tsx
+import React from "react";
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
-    <div className="min-h-screen bg-slate-50 font-body text-slate-800">
-      <Header />
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        <AuthGate>
-          <Dashboard />
-        </AuthGate>
-      </main>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <button
+        id="googleSignInBtn"
+        className="px-6 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+      >
+        Sign in with Google
+      </button>
     </div>
-  )
+  );
 }
