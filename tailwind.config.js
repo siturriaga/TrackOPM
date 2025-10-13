@@ -1,19 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-content: ["./index.html", "./src/**/*.{ts,tsx}"],
-theme: {
-extend: {
-colors: {
-brandBlue: "#1e40af",
-brandGold: "#d4af37"
-},
-boxShadow: {
-soft: "0 8px 30px rgba(0,0,0,0.08)"
-},
-borderRadius: {
-'2xl': '1rem'
-}
-}
-},
-plugins: []
+  content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        brandIndigo: "#4F46E5",
+        brandSky: "#38BDF8",
+        brandGold: "#FACC15",
+      },
+      fontFamily: {
+        display: ["Poppins", "ui-sans-serif", "system-ui"],
+        body: ["Inter", "ui-sans-serif", "system-ui"],
+      },
+    },
+  },
+  plugins: [],
 }
