@@ -4,7 +4,8 @@ import { useAuth } from './AuthGate'
 import { db } from '../lib/firebase'
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where, doc, deleteDoc } from 'firebase/firestore'
 import { generateWithGemini } from '../lib/api'
-import { listSubjects, listGrades, listStandardsFor } from '../lib/standards'
+import toast from 'react-hot-toast'
+import GenerationPanel from './GenerationPanel'
 
 type Student = { id?: string; name: string; period?: string; level?: string; tags?: string; notes?: string; ownerUid: string; createdAt?: any }
 type Assignment = { id?: string; subject: string; grade: string; standardCode?: string; prompt: string; output?: string; ownerUid: string; createdAt?: any }
@@ -29,6 +30,7 @@ export default function Dashboard() {
 
 /** ROSTER */
 function RosterPanel({ ownerUid }: { ownerUid: string }) {
+  // This component's code is unchanged
   const [students, setStudents] = useState<Student[]>([])
   const [name, setName] = useState('')
   const [period, setPeriod] = useState('')
@@ -106,10 +108,10 @@ function RosterPanel({ ownerUid }: { ownerUid: string }) {
 
 /** TRACKER */
 function TrackerPanel({ ownerUid }: { ownerUid: string }) {
+  // This component's code is unchanged
   const [count, setCount] = useState(0)
   const [studentsCount, setStudentsCount] = useState(0)
 
-  // Derive a simple metric: total students
   useEffect(() => {
     const q = query(collection(db, 'students'), where('ownerUid', '==', ownerUid))
     const unsub = onSnapshot(q, (snap) => setStudentsCount(snap.size))
@@ -143,105 +145,56 @@ function CardStat({ title, value }: { title: string; value: number | string }) {
 
 /** ASSIGNMENTS */
 function AssignmentsPanel({ ownerUid }: { ownerUid: string }) {
-  const subjects = useMemo(() => listSubjects(), [])
-  const [subject, setSubject] = useState(subjects[0] ?? 'Civics')
-  const [grade, setGrade] = useState(listGrades()[0] ?? '7')
-  const [standardCode, setStandardCode] = useState<string | undefined>(undefined)
-  const [availableStandards, setAvailableStandards] = useState<{ code: string; title: string }[]>([])
-  const [prompt, setPrompt] = useState('')
   const [output, setOutput] = useState('')
-  const [saving, setSaving] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [isGenerating, setIsGenerating] = useState(false)
 
-  useEffect(() => {
-    let alive = true
-    ;(async () => {
-      const list = await listStandardsFor(subject, grade)
-      if (alive) {
-        setAvailableStandards(list)
-        setStandardCode(list[0]?.code)
-      }
-    })()
-    return () => { alive = false }
-  }, [subject, grade])
-
-  async function handleGenerate() {
-    setLoading(true)
+  const handleGenerate = async (details: { subject: string; grade: string; standardCode?: string; prompt: string }) => {
+    setIsGenerating(true)
     try {
-      const res = await generateWithGemini({
-        subject,
-        grade,
-        standardCode,
-        prompt
-      })
+      const res = await generateWithGemini(details)
       setOutput(res ?? '')
     } catch (e) {
       setOutput('There was an error generating content. Please try again.')
+      toast.error('Generation failed.')
     } finally {
-      setLoading(false)
+      setIsGenerating(false)
     }
   }
 
-  async function handleSave() {
-    if (!output.trim()) return
-    setSaving(true)
+  const handleSave = async (details: { subject: string; grade: string; standardCode?: string; prompt: string; output: string }) => {
+    if (!details.output.trim()) return
+    
+    const saveData = addDoc(collection(db, 'assignments'), {
+      ...details,
+      ownerUid,
+      createdAt: serverTimestamp(),
+    } as Assignment)
+
+    toast.promise(saveData, {
+      loading: 'Saving assignment...',
+      success: 'Assignment saved successfully!',
+      error: 'Could not save assignment.',
+    })
+
+    setIsSaving(true)
     try {
-      await addDoc(collection(db, 'assignments'), {
-        subject, grade, standardCode, prompt, output, ownerUid, createdAt: serverTimestamp()
-      } as Assignment)
+      await saveData
     } finally {
-      setSaving(false)
+      setIsSaving(false)
     }
   }
-
+  
   return (
-    <div className="rounded-2xl bg-white/80 backdrop-blur p-5 shadow space-y-5">
-      <div className="grid sm:grid-cols-4 gap-3">
-        <div>
-          <label className="block text-xs text-gray-500">Subject</label>
-          <select value={subject} onChange={e=>setSubject(e.target.value)} className="w-full rounded-lg border px-3 py-2">
-            {subjects.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className="block text-xs text-gray-500">Grade</label>
-          <select value={grade} onChange={e=>setGrade(e.target.value)} className="w-full rounded-lg border px-3 py-2">
-            {listGrades().map(g => <option key={g} value={g}>{g}</option>)}
-          </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label className="block text-xs text-gray-500">Standard</label>
-          <select value={standardCode} onChange={e=>setStandardCode(e.target.value)} className="w-full rounded-lg border px-3 py-2">
-            {availableStandards.map(s => <option key={s.code} value={s.code}>{s.code} — {s.title}</option>)}
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-xs text-gray-500">Context / Instructions</label>
-        <textarea value={prompt} onChange={e=>setPrompt(e.target.value)} className="w-full min-h-[90px] rounded-lg border px-3 py-2" placeholder="Describe your class needs, reading level, time available, etc." />
-      </div>
-
-      <div className="flex gap-2">
-        <Button variant="primary" onClick={handleGenerate} >{loading ? 'Generating…' : 'Generate'}</Button>
-        <Button onClick={() => setPrompt('Simplify at lower Lexile and add two scaffolding questions.')}>Add Hints</Button>
-        <Button onClick={() => { setPrompt(''); setOutput('') }}>Clear</Button>
-        <Button onClick={async () => { await navigator.clipboard.writeText(output); }} variant="secondary">Copy</Button>
-        <Button onClick={handleSave} disabled={!output || saving}>{saving ? 'Saving…' : 'Save'}</Button>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-3">
-        <div className="md:col-span-2">
-          <label className="block text-xs text-gray-500">AI Output</label>
-          <div className="min-h-[200px] rounded-lg border p-3 whitespace-pre-wrap">{output || '—'}</div>
-        </div>
-        <aside className="rounded-lg border p-3 bg-white">
-          <h4 className="font-semibold text-sm">Standard details</h4>
-          <p className="text-xs text-gray-600 mt-2">
-            Choose a standard to guide generation. Synapse uses DOE language and clarifications to craft aligned tasks.
-          </p>
-        </aside>
-      </div>
+    <div className="rounded-2xl bg-white/80 backdrop-blur p-5 shadow">
+      <GenerationPanel
+        onGenerate={handleGenerate}
+        onSave={handleSave}
+        isGenerating={isGenerating}
+        isSaving={isSaving}
+        output={output}
+        setOutput={setOutput}
+      />
     </div>
   )
 }
