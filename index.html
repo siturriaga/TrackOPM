@@ -1,57 +1,36 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Synapse — Bridging the Gap in Education</title>
+import { auth } from "./firebaseClientConfig.js";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+} from "firebase/auth";
 
-  <!-- Favicon (optional, but recommended) -->
-  <link rel="icon" href="/favicon.ico" />
+const provider = new GoogleAuthProvider();
 
-  <!-- Fonts (Poppins + Inter) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
-</head>
-<body class="font-body">
-  <!-- Simple marketing hero -->
-  <header style="background: linear-gradient(90deg,#4F46E5,#38BDF8); color: white; padding: 56px 20px;">
-    <div style="max-width: 1100px; margin: 0 auto;">
-      <h1 style="font-family: Poppins, ui-sans-serif, system-ui; font-weight: 600; font-size: 2rem; margin: 0;">
-        Synapse — Bridging the Gap in Education
-      </h1>
-      <p style="margin: 12px 0 24px; max-width: 680px; line-height: 1.5;">
-        Your AI teaching companion for rosters, groups, assignments, and mastery tracking — all in one calm, accessible workspace.
-      </p>
-      <!-- CTA: this is the important bit -->
-      <a href="#app"
-         style="display:inline-block; background:#FACC15; color:#111827; padding:12px 18px; border-radius:12px; font-weight:600; text-decoration:none;">
-        Open the app
-      </a>
-    </div>
-  </header>
+// ---- Single sign-in handler ----
+async function handleGoogleSignIn() {
+  try {
+    if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+      await signInWithRedirect(auth, provider);
+    } else {
+      await signInWithPopup(auth, provider);
+    }
+  } catch (error) {
+    console.error("Auth error:", error);
+  }
+}
 
-  <!-- Optional brief feature strip -->
-  <section style="max-width:1100px;margin:28px auto 40px;padding:0 20px;color:#334155;">
-    <ul style="display:flex; gap:16px; flex-wrap:wrap; list-style:none; padding:0; margin:0;">
-      <li style="flex:1 1 240px; background:#ffffff; border:1px solid #e5e7eb; border-radius:16px; padding:16px;">
-        Quick dashboard overview
-      </li>
-      <li style="flex:1 1 240px; background:#ffffff; border:1px solid #e5e7eb; border-radius:16px; padding:16px;">
-        Roster & groups with AI suggestions
-      </li>
-      <li style="flex:1 1 240px; background:#ffffff; border:1px solid #e5e7eb; border-radius:16px; padding:16px;">
-        Assignment generator & tracker
-      </li>
-    </ul>
-  </section>
+// ---- Attach to existing button ----
+document.getElementById("googleSignInBtn").addEventListener("click", handleGoogleSignIn);
 
-  <!-- React app mount (anchor target) -->
-  <section id="app" style="scroll-margin-top: 80px;">
-    <div id="root"></div>
-  </section>
-
-  <!-- Load the React app -->
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-</html>
+// ---- Handle redirect result ----
+getRedirectResult(auth)
+  .then((result) => {
+    if (result?.user) {
+      console.log("User signed in:", result.user);
+      localStorage.setItem("user", JSON.stringify(result.user));
+      window.location.href = "/app"; // redirect after login
+    }
+  })
+  .catch((error) => console.error("Redirect error:", error));
