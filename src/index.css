@@ -3,13 +3,15 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  --brand-indigo: #4F46E5;
+  --brand-sky: #38BDF8;
+  --brand-gold: #FACC15;
 }
 
-* {
-  -webkit-tap-highlight-color: transparent;
-}
+html, body, #root { height: 100%; }
 
-html, body, #app {
-  min-height: 100%;
-}
+.glass { @apply bg-white/70 backdrop-blur rounded-2xl shadow; }
+.header-gradient { background: linear-gradient(90deg, var(--brand-indigo), var(--brand-sky)); }
+
+.font-display { font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif; }
+.font-body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif; }
